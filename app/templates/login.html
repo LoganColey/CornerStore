@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'signup' %}">Sign Up</a>
+    </nav>
+    <div class="notnav">
+      <div class="loginbox">
+        <h3 class="heading">Log In</h3>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="box">
+            <p class="label">Username:</p>
+            <input
+              type="text"
+              name="username"
+              placeholder=""
+              class="form-control"
+            />
+            <p class="label">Password:</p>
+            <input
+              type="text"
+              name="password"
+              placeholder=""
+              class="form-control"
+            />
+          </div>
+          <button class="loginbtn">Log In</button>
+        </form>
+
+        {{form.errors}}
+      </div>
+    </div>
+  </body>

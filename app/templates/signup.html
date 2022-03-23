@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+
+
+    <style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: white;
+		}
+		.box1{
+			margin-left: 12.5em;
+			width: 65em;
+			background: grey;
+			border: solid 6px darkblue;
+			height: 40em;
+			margin-top: 5em;
+		}
+		.user_card {
+			width: 50em;
+			height:30em;
+			margin-top: 5em;
+			margin-bottom: auto;
+			margin-left: 7em;
+			background: darkblue;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		.tb{
+			margin-left: 17em;
+			height: .5em;
+			
+		}
+		.form_container {
+			margin-top: 20px;
+		}
+
+		.form-title{
+			color: darkblue;
+			text-align: center;
+		}
+		.login_btn {
+			width: 25em;
+			height: 2em;
+			background: blue ;
+			border: None;
+			color: white ;
+			margin-left: 18em;
+		}
+		.login_btn:hover{
+			background: lightblue;
+			color: black;
+		}
+		.login_btn:focus {
+			box-shadow: none ;
+			outline: 1px ;
+		}
+		#form-title {
+        color: red;
+        margin-left: 1.5em;
+      }
+		.login_container {
+			padding-top: .8em;
+			width:em;
+		}
+		.input-group-text {
+			background: #f7ba5b ;
+			color: white ;
+			marg
+			border: 0 ;
+			border-radius: 0.25rem 0 0 0.25rem ;
+		}
+		.mk{
+			color: white;
+			text-decoration: None;
+			margin-left: 20em;
+		}
+		.mk:hover {
+			color: lightblue;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none ;
+			outline: 0px ;
+		}
+		.uname{
+			margin-left: 20em;
+		}
+
+	</style>
+  </head>
+  <body>
+	
+		<div class="d-flex justify-content-center">
+		  <h3 class="form-title">REGISTER USER</h3>
+		</div>
+		<div class="d-flex justify-content-center form_container">
+		  <form method="POST" action="">
+			{% csrf_token %}
+			<div class="box1">
+				<div class="input-group mb-3">
+				
+				<div class="input-group-append">
+					<span class="input-group-text">
+					<i class="fas fa-user">
+				<div class="user_card">						
+				<label>
+					<p class="tb">Username:</p>
+					<p class="uname"> {{form.username}}<p>
+				</label>
+				<div class="input-group mb-3">
+				
+				<div class="input-group-append">
+					<span class="input-group-text"
+					><i class="fas fa-user"></i
+					></span>
+				</div>
+				</div>
+				<div class="input-group mb-2">
+					<div class="input-group-append">
+					<span class="input-group-text"
+						><i class="fas fa-envelope-square"></i
+					></span>
+					</div>
+					<label>
+						<p class="tb">Email Address:</p>
+						<p class="uname"> {{form.email}}</p>
+					</label>
+				</div>
+				<div class="input-group mb-2">
+					<div class="input-group-append">
+					<span class="input-group-text"
+						><i class="fas fa-key"></i
+					></span>
+					</div>
+					<label>
+						<p class="tb">Password:</p>
+						<p class="uname">{{form.password1}}</p>
+					</label>
+				</div>	
+				<div class="input-group mb-2">
+					<div class="input-group-append">
+					<span class="input-group-text"
+						><i class="fas fa-key"></i
+					></span>
+					</div>
+					<label>
+						<p class="tb">Password Confirmation:</p>
+						<p class="uname"> {{form.password2}}<p>
+					</label>
+				</div>		
+				<div class=" mt-3 login_container">
+					<input
+					class=" login_btn"
+					type="submit"
+					value="Create User"
+					/>
+				</div>
+				</form>
+					<div>
+					{{form.errors}}
+					</div>
+							<a class="mk" href="{% url 'login' %}">Already have an account?</a>
+					
+				</div>
+			</div>
+			
+	
+</body>
+</html>
