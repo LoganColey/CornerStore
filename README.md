@@ -10,3 +10,8 @@ Mariann Mccord, Logan Todrick Coley, Rylee Chisholm
 ##Business:
 Logan's mother's store
 
+##Languages:
+Python,HTML,CSS,JS
+
+##Framework:
+Django
