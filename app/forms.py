@@ -9,12 +9,17 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class CreateFoodForm(ModelForm):
+class CreatesmallFoodForm(ModelForm):
     class Meta:
-        model = Food
-        fields = ['name', 'cost', 'sides', 'description', 'image']
+        model = smallFood
+        fields = ['name', 'cost', 'description', 'image']
 
-class CreateCartForm(ModelForm):
+class CreatebigFoodForm(ModelForm):
+    class Meta:
+        model = bigFood
+        fields = ['name', 'cost' , 'description', 'image']
+
+class CreateCart(ModelForm):
     class Meta:
         model = Cart
-        fields = ['food']
+        fields = ['user']

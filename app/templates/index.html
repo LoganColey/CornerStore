@@ -1,44 +1,121 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    {% comment %} <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-      crossorigin="anonymous"
-    /> {% endcomment %}
-    <link rel="stylesheet" href="static/style.css" type="text/css" media="all" />
-    <script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/jquery.nivo.slider.pack.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
-    <title>Index</title>
+    <title>CornerStore</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
   </head>
   <body>
-  <div id="wrapper">
-	  <div class="shell">
-      <div id="header">
-        <h1 id="logo"><a href="#" title="">CornerStore<span>Logan's Mom</span></a></h1>
-      </div>
-
-
-    
-    <div id="nav"
-      <li><a href = "#"</a>Home</li>
-      <li><a href ="food.html"</a>Food</li>
-      <li><a href ="checkout.html"</a> <img src = "cart_checkout.png" alt = "viewing your cart/checking out"> </li>
-    </div>
-
-    <div id="slider">
-      <div class="left-top">&nbsp;</div>
-      <div class="right-top">&nbsp;</div>
-        <div class="slides">
-          <img/>
-          <img/>
-          <img/>
+    <div id="wrapper">
+      <div class="shell">
+  
+        <div id="header">
+          <h1 id="logo"><a href="#" title="">CornerStore<span>Logan's Mom</span></a></h1>
         </div>
-      <div class="left-bottom">&nbsp;</div>
-      <div class="right-bottom">&nbsp;</div>
+  
+        <nav id="navigation">
+          <ul>
+            <li><a href="#" class="active" title="Home"><span>Home</span></a></li>
+            <li><a href="/food.html" title="Food"><span>Food</span></a></li>
+            <li><a href="/checkout.html" title ="Checkout"><span><img src = "{% static 'images/cart_checkout.png' %}" alt = "viewing your cart/checking out"></span></a> </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- END Navigation -->
+      <!-- Slider -->
+  
+      <div class="container">
+        <div id="myCarousel" class="carousel slide">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li class="item1 active"></li>
+            <li class="item2"></li>
+            <li class="item3"></li>
+            <li class="item4"></li>
+          </ol>
+      
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+      
+            <div class="item active">
+                <a href="https://github.com/LoganColey/EverestGameCenter" target="_blank"><img src="{% static 'images/bigchungus.png' %}" width="200" height="250" alt="Arcade" class="center"> </a>
+          
+            </div>
+      
+            <div class="item">
+                <a href="https://github.com/LoganColey/DiceAndMangement" target="_blank"><img src="images/dnm.png" width="200" height="250" alt="DnM" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Dice and Management</h3>
+                <p>A DnD player and monster creator where users can share their creations with other users and comment on their creations.</p>
+              </div>
+            </div>
+          
+            <div class="item">
+                <a href="https://github.com/LoganColey/Unit1" target="_blank"><img src="images/inferno.png" width="200" height="250" alt="Unit1Project" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Asunder</h3>
+                <p>Asunder is my 1st unit project based off of Dante's Inferno but, as a rouge-like rpg.  It was helped made with Rylee Chisholm. Essentially the gameplay boils down to the player going to different floors to gain levels and loot to fight bosses and win.  We never fully completed the game due to the one week period we had to complete it but we are looking forward to finishing it in the future.</p>
+              </div>
+            </div>
+      
+            <div class="item">
+                <a href="https://github.com/LoganColey/Unit2_Project" target="_blank"><img src="images/sz.png" width="200" height="250" alt="Unit2Project" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Pokemon Safari Park</h3>
+                <p>Pokemon Safari Park was a quick Pokemon experience.  You would first pick your starting Pokemon and then go catch pokemon to catch different pokemon and fight at the battle towers to get access to the secret legendary pokemon.  We feel like wwe could do more with the game maybe add a save file and also add evos for pokemon as well.</p>
+              </div>
+            </div>
+        
+          </div>
+      
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      
+      <script>
+      $(document).ready(function(){
+        // Activate Carousel
+        $("#myCarousel").carousel();
+          
+        // Enable Carousel Indicators
+        $(".item1").click(function(){
+          $("#myCarousel").carousel(0);
+        });
+        $(".item2").click(function(){
+          $("#myCarousel").carousel(1);
+        });
+        $(".item3").click(function(){
+          $("#myCarousel").carousel(2);
+        });
+        $(".item4").click(function(){
+          $("#myCarousel").carousel(3);
+        });
+          
+        // Enable Carousel Controls
+        $(".left").click(function(){
+          $("#myCarousel").carousel("prev");
+        });
+        $(".right").click(function(){
+          $("#myCarousel").carousel("next");
+        });
+      });
+      </script>
+    
+
+
+
   </body>
 </html>
