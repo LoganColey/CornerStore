@@ -85,3 +85,15 @@ def bigFoodOrder(request):
             
         context = {"form":form}
         return render(request,'food.html',context)
+
+def food(request):
+    context ={}
+    return render(request,'food.html',context)
+
+def checkout(request):
+    context ={}
+    return render(request,'checkout.html',context)
+
+def mockup(request):
+    context ={}
+    return render(request,'checkout_mockup.html',context)

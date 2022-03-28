@@ -58,5 +58,3 @@ class bigFood(models.Model):
     description = models.CharField(max_length=10000)
     image = models.ImageField(null=True)
     cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
-
-
