@@ -10,7 +10,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
-    <script src="{% static 'script.js' %}"></script>
     <title>Food</title>
   </head>
   <style>
@@ -19,8 +18,16 @@
       color: black;
     }
   </style>
-  <body onload="populatePage()">
-    <div id="Table">
+  <body>
+      <nav class="sticky">
+        <a class="Btn" name="small">Small</a>
+        <a class="Btn" name="big">Big</a>
+        <a class="Btn" name="sides">Sides</a>
+        <a class="Btn" name="salad">Salad</a>
+        <a class="Btn" name="starters">Starters</a>
+      </nav>
+      <div id="content"></div>
     </div>
   </body>
+  <script src="{% static 'script.js' %}"></script>
 </html>
