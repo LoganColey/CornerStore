@@ -1,11 +1,11 @@
 function populatePage() {
-    fetch("big.json")
+    fetch("/static/json/big.json")
       .then((req) => req.json())
       .then((data) => {
       keys = Object.keys(data[0]);
       var table = document.createElement("table");
       var tr = table.insertRow(-1);
-      for (i=0;i<keys.length;i++) {
+      for (i=0;i < keys.length;i++) {
         var th = document.createElement("th");
         th.innerHTML = keys[i];
         tr.appendChild(th);
