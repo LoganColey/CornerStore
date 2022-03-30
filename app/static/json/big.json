@@ -1,14 +1,14 @@
 [
-    {
-        "name":"hamburger steak",
-        "cost":6.5,
-        "side1":null,
-        "side2":null
-    },
-    {
-        "name":"butterflied shrimp",
-        "cost":6.5,
-        "side1":null,
-        "side2": null
-    }
+  {
+    "name": "hamburger steak",
+    "cost": 6.5,
+    "description": "dhfdfkjdd",
+    "image": "images/bigchungus.png"
+  },
+  {
+    "name": "butterflied shrimp",
+    "cost": 6.5,
+    "description": "dfldufoiudfoiufdjnvdf",
+    "image": "images/bfshrimp.jpg"
+  }
 ]
