@@ -10,5 +10,5 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('food/', views.food, name="food"),
     path('cart/', views.checkout, name="checkout"),
-    path('mockup/', views.mockup, name="mock")
+    path('mockup/', views.populateBigFood, name="mock")
 ]

@@ -1,0 +1,14 @@
+[
+    {
+        "name":"hamburger steak",
+        "cost":6.5,
+        "side1":null,
+        "side2":null
+    },
+    {
+        "name":"butterflied shrimp",
+        "cost":6.5,
+        "side1":null,
+        "side2": null
+    }
+]

@@ -9,37 +9,18 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <script src="{% static 'script.js' %}"></script>
     <title>Food</title>
   </head>
-  <body>
-
-    <label>
-      <p >Big Food:</p>
-      <p class="bigfood"> Name:{{form.name}}</p>
-      <input type="text" id="food" name="name">
-
-      <p class="bigfood"> Side 1:{{form.side1}}</p>
-      <p class="bigfood"> {{form.side2}}</p>
-    </label>
-    <button>Enter</button>
-         
-    <label>
-      <p>Small Food:</p>
-      <p class="smallfood"> {{form.name}}</p>
-      <p class="smallfood"> {{form.side}}<p>
-    </label>
-    <button>Enter</button>
-
-
-    <div class="dropdown">
-      <button onclick="dropDown()" class="dropbtn">Dropdown</button>
-      <div id="myDropdown" class="dropdown-content">
-        
-      </div>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+    }
+  </style>
+  <body onload="populatePage()">
+    <div class="Table">
     </div>
-
-
   </body>
-  <script src="dropdowns.js"></script>
 </html>

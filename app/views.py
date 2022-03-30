@@ -10,6 +10,8 @@ from typing import List
 from dataclasses import dataclass
 from .forms import *
 from django.contrib.auth.models import Group
+from json import dumps
+from django.core import serializers
 
 @unauthenticated_user
 def login_page(request):
@@ -87,13 +89,24 @@ def bigFoodOrder(request):
         return render(request,'food.html',context)
 
 def food(request):
-    context ={}
+    cart = Cart.objects.get(user=request.user)
+    form = CreatebigFoodForm()
+    if request.method == "POST":
+        form = CreatebigFoodForm(request.POST)
+        if form.is_valid():
+            if form.side1 == "Baked Potato" or form.side1 == "Loaded Fries":
+                form.price += 1.50
+            if form.side2 == "Baked Potato" or form.side2 == "Loaded Fries":
+                form.price += 1.50
+            form.cart = cart
+            form.save()
+            
+    context = {"form":form}
     return render(request,'food.html',context)
 
 def checkout(request):
     context ={}
     return render(request,'checkout.html',context)
 
-def mockup(request):
-    context ={}
-    return render(request,'checkout_mockup.html',context)
+def populateBigFood(request):
+    return render(request, "food_mockup.html")

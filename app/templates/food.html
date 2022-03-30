@@ -13,33 +13,20 @@
     <title>Food</title>
   </head>
   <body>
-
-    <label>
-      <p >Big Food:</p>
-      <p class="bigfood"> Name:{{form.name}}</p>
-      <input type="text" id="food" name="name">
-
-      <p class="bigfood"> Side 1:{{form.side1}}</p>
-      <p class="bigfood"> {{form.side2}}</p>
-    </label>
-    <button>Enter</button>
-         
-    <label>
-      <p>Small Food:</p>
-      <p class="smallfood"> {{form.name}}</p>
-      <p class="smallfood"> {{form.side}}<p>
-    </label>
-    <button>Enter</button>
+    <form method="POST" action="">
+      {{form.as_p}}
+    </form>
+    
 
 
-    <div class="dropdown">
+    {% comment %} <div class="dropdown">
       <button onclick="dropDown()" class="dropbtn">Dropdown</button>
       <div id="myDropdown" class="dropdown-content">
         
       </div>
-    </div>
+    </div> {% endcomment %}
 
 
   </body>
-  <script src="dropdowns.js"></script>
+  {% comment %} <script src="dropdowns.js"></script> {% endcomment %}
 </html>
