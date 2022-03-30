@@ -1,30 +1,34 @@
-function populatePage() {
-    fetch("/static/json/big.json")
+const foodbox = document.getElementById("content");
+const options = document.querySelectorAll(".Btn");
+
+options.forEach((m) => {
+  m.addEventListener("click", (e) => {
+    console.log(e.target.innerHTML);
+    fetch("/static/json/" + e.target.name + ".json")
       .then((req) => req.json())
       .then((data) => {
-      keys = Object.keys(data[0]);
-      var table = document.createElement("table");
-      var tr = table.insertRow(-1);
-      for (i=0;i < keys.length;i++) {
-        var th = document.createElement("th");
-        th.innerHTML = keys[i];
-        tr.appendChild(th);
-      }
-        for (const item of data) {
-          console.log(item);
-        }
-      for (var i = 0; i < data.length; i++) {
-    
-        tr = table.insertRow(-1);
+        populateContent(data);
+      });
+  });
+});
 
-        for (var j = 0; j < keys.length; j++) {
-            var tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = data[i][keys[j]];
-        }
-      }
-      var divContainer = document.getElementById("Table");
-      divContainer.innerHTML = "";
-      divContainer.appendChild(table);  
-    }
-  )  
+function populateContent(items) {
+  console.log(foodbox.innerHTML);
+  foodbox.innerHTML = "";
+  for (const item of items) {
+    foodbox.insertAdjacentHTML(
+      "beforeend",
+      `
+              <article class = "foodItem" style="background-color: lightgray">
+                <div style="margin-left: 2em; padding-top:3em">
+                    <h2 class="itemName">${item.name}</h2>
+                    <h2 class="itemPrice">${item.cost}</h2>
+                    <img class="images" src="{% static '${item.image}' %}">
+                    <p class="itemDesc">${item.description}</p>
+                    <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
+                </div>
+              </article>
+              `
+    );
+  }
 }
