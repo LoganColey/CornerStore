@@ -1,14 +1,38 @@
 [
   {
-    "name": "hamburger steak",
-    "cost": 6.5,
-    "description": "dhfdfkjdd",
-    "image": "images/bigchungus.png"
+    "name": "Hamburger Steak",
+    "cost": 8.5,
+    "description": "hamburger steak and gravy w/ onions served w/ mash potatoes, fried okra, and yeast roll",
+    "image": "/static/images/bigchungus.png"
   },
   {
-    "name": "butterflied shrimp",
-    "cost": 6.5,
-    "description": "dfldufoiudfoiufdjnvdf",
+    "name": "CFS",
+    "cost": 8.5,
+    "description": "CFS and white peppered gravy served w/ fried okra, mash potatoes, and yeast roll",
+    "image": "images/bfshrimp.jpg"
+  },
+  {
+    "name": "Butterflied Shrimp",
+    "cost": 9.99,
+    "description": "8 golden crisp butterflied shrimp served w/ hush puppies and french fries, and a side salad",
+    "image": "images/bfshrimp.jpg"
+  },
+  {
+    "name": "Popcorn Shrimp",
+    "cost": 9.99,
+    "description": "popcorn shrimp served w/ hush puppies and french fries, and a side salad",
+    "image": "images/bfshrimp.jpg"
+  },
+  {
+    "name": "Chicken Basket",
+    "cost": 7.5,
+    "description": "3 handbattered chicken strips and french fries",
+    "image": "images/bfshrimp.jpg"
+  },
+  {
+    "name": "Popcorn Shrimp Basket",
+    "cost": 7.0,
+    "description": "popcorn shrimp and fries",
     "image": "images/bfshrimp.jpg"
   }
 ]
