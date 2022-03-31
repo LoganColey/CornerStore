@@ -1,10 +1,44 @@
 [
-    {
-        "name":"corn nuggets",
-        "cost":"1.99"
-    },
-    {
-        "name":"tater tots",
-        "cost":"1.99"
-    }
+  {
+    "name": "Corn Nuggets",
+    "cost": 1.99,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Tater Tots",
+    "cost": 1.99,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "French Fries",
+    "cost": 1.99,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Onion Rings",
+    "cost": 1.99,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Fried Okra",
+    "cost": 1.99,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Loaded Baked Potato",
+    "cost": 2.5,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Side Salad",
+    "cost": 2.5,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  }
 ]
