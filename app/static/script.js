@@ -22,11 +22,13 @@ function populateContent(items) {
               <article class = "foodItem" style="background-color: lightgray">
                 <div style="margin-left: 2em; padding-top:3em">
                     <h2 class="itemName">${item.name}</h2>
-                    <h2 class="itemPrice">${item.cost}</h2>
+                    <img src=/static/images/${item.image}></img>
                     <p class="itemDesc">${item.description}</p>
+                    <h2 class="itemPrice">${item.cost}</h2>
                 </div>
               </article>
               `
     );
   }
 }
+
