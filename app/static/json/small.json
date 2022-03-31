@@ -1,12 +1,50 @@
 [
-    {
-        "name":"cheeseburger",
-        "cost":6.5,
-        "side":null
-    },
-    {
-        "name":"hamburger",
-        "cost":6.5,
-        "side":null
-    }
+  {
+    "name": "Cheeseburger",
+    "cost": 6.5,
+    "description": "cheese, mayo, lettuce, and pickle w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Hamburger",
+    "cost": 6.5,
+    "description": "mayo, lettuce, and pickle, w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "BBQ Sandwich",
+    "cost": 6.5,
+    "description": "served on a bun or texas toast w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "BBQ Rib Sandwich",
+    "cost": 6.5,
+    "description": "served on a philly bun w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Chicken Philly",
+    "cost": 7.25,
+    "description": "served on a philly bun w/ onions and bell peppers w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Steak Philly",
+    "cost": 7.25,
+    "description": "served on a philly bun w/ onions and bell peppers w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Club Sandwich",
+    "cost": 8.99,
+    "description": "served on texas toast w/ cajun turkey, cajun roastbeef, or ham w/ cheese, lettuce, tomato, and pickle w/ choice of one side",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "BLT",
+    "cost": 5.5,
+    "description": "bacon served on texas toast w/ lettuce, tomato, and mayo w/ choice of one side",
+    "image": "bigchungus.png"
+  }
 ]
