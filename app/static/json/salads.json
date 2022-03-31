@@ -1,10 +1,26 @@
 [
-    {
-        "name": "ham",
-        "cost": 6.0
-    },
-    {
-        "name":"fried chicken",
-        "cost": 7.5
-    }
+  {
+    "name": "Ham Salad",
+    "cost": 6.0,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Fried Chicken Salad",
+    "cost": 7.5,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Grilled Chicken Salad",
+    "cost": 7.5,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  },
+  {
+    "name": "Shrimp Cobb Salad",
+    "cost": 9.0,
+    "description": "grggr",
+    "image": "bigchungus.png"
+  }
 ]
