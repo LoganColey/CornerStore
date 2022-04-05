@@ -109,4 +109,4 @@ def checkout(request):
     return render(request,'checkout.html',context)
 
 def populateBigFood(request):
-    return render(request, "food_mockup.html")
+    return render(request, "food.html")
