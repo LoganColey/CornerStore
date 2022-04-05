@@ -1,0 +1,219 @@
+[
+  {
+    "name": "Hamburger Steak",
+    "cost": 8.5,
+    "description": "hamburger steak and gravy w/ onions served w/ mash potatoes, fried okra, and yeast roll",
+    "image": "tem.png",
+    "type": "big"
+  },
+  {
+    "name": "CFS",
+    "cost": 8.5,
+    "description": "CFS and white peppered gravy served w/ fried okra, mash potatoes, and yeast roll",
+    "image": "bfshrimp.jpg",
+    "type": "big"
+  },
+  {
+    "name": "Butterflied Shrimp",
+    "cost": 9.99,
+    "description": "8 golden crisp butterflied shrimp served w/ hush puppies and french fries, and a side salad",
+    "image": "bigchungus.png",
+    "type": "big"
+  },
+  {
+    "name": "Popcorn Shrimp",
+    "cost": 9.99,
+    "description": "popcorn shrimp served w/ hush puppies and french fries, and a side salad",
+    "image": "tem.png",
+    "type": "big"
+  },
+  {
+    "name": "Chicken Basket",
+    "cost": 7.5,
+    "description": "3 handbattered chicken strips and french fries",
+    "image": "tem.png",
+    "type": "big"
+  },
+  {
+    "name": "Popcorn Shrimp Basket",
+    "cost": 7.0,
+    "description": "popcorn shrimp and fries",
+    "image": "bfshrimp.jpg",
+    "type": "big"
+  },
+  {
+      "name": "Ham Salad",
+      "cost": 6.0,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "salad"
+    },
+    {
+      "name": "Fried Chicken Salad",
+      "cost": 7.5,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "salad"
+    },
+    {
+      "name": "Grilled Chicken Salad",
+      "cost": 7.5,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "salad"
+    },
+    {
+      "name": "Shrimp Cobb Salad",
+      "cost": 9.0,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "salad"
+    },
+    {
+      "name": "Corn Nuggets",
+      "cost": 1.99,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Tater Tots",
+      "cost": 1.99,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "French Fries",
+      "cost": 1.99,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Onion Rings",
+      "cost": 1.99,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Fried Okra",
+      "cost": 1.99,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Loaded Baked Potato",
+      "cost": 2.5,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Side Salad",
+      "cost": 2.5,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "side"
+    },
+    {
+      "name": "Cheeseburger",
+      "cost": 6.5,
+      "description": "cheese, mayo, lettuce, and pickle w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "Hamburger",
+      "cost": 6.5,
+      "description": "mayo, lettuce, and pickle, w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "BBQ Sandwich",
+      "cost": 6.5,
+      "description": "served on a bun or texas toast w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "BBQ Rib Sandwich",
+      "cost": 6.5,
+      "description": "served on a philly bun w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "Chicken Philly",
+      "cost": 7.25,
+      "description": "served on a philly bun w/ onions and bell peppers w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "Steak Philly",
+      "cost": 7.25,
+      "description": "served on a philly bun w/ onions and bell peppers w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "Club Sandwich",
+      "cost": 8.99,
+      "description": "served on texas toast w/ cajun turkey, cajun roastbeef, or ham w/ cheese, lettuce, tomato, and pickle w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "BLT",
+      "cost": 5.5,
+      "description": "bacon served on texas toast w/ lettuce, tomato, and mayo w/ choice of one side",
+      "image": "bigchungus.png",
+      "type": "small"
+    },
+    {
+      "name": "Cheese Tots",
+      "cost": 3.5,
+      "description": "grggr",
+      "image": "bigchungus.png",
+      "type": "starter"
+    },
+    {
+      "name": "Loaded Fries",
+      "cost": 3.5,
+      "description": "frgtgrf",
+      "image": "bigchungus.png",
+      "type": "starter"
+    },
+    {
+      "name": "Jalapeno Poppers",
+      "cost": 3.0,
+      "description": "frgtgrf",
+      "image": "bigchungus.png",
+      "type": "starter"
+    },
+    {
+      "name": "Fried Pickles",
+      "cost": 3.5,
+      "description": "frgtgrf",
+      "image": "bigchungus.png",
+      "type": "starter"
+    },
+    {
+      "name": "Fried Mushrooms",
+      "cost": 3.0,
+      "description": "frgtgrf",
+      "image": "bigchungus.png",
+      "type": "starter"
+    },
+    {
+      "name": "Queso Chicken Fries",
+      "cost": 7.5,
+      "description": "frgtgrf",
+      "image": "bigchungus.png",
+      "type": "starter"
+    }
+]
