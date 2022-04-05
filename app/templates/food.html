@@ -9,24 +9,41 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
     <title>Food</title>
   </head>
-  <body>
-    <form method="POST" action="">
-      {{form.as_p}}
-    </form>
-    
+  <body onload="populateInitialContent()">
+      <nav class="sticky">
+        <a href="{% url 'home' %}" title="Home">Home</a>
+        <a class="dropbtn" onclick="myFunction()">Menu
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropdown-content" id="myDropdown">
+          <a class="Btn" name="small">Small</a>
+          <a class="Btn" name="big">Big</a>
+          <a class="Btn" name="sides">Sides</a>
+          <a class="Btn" name="salads">Salad</a>
+          <a class="Btn" name="starters">Starters</a>
+        </div>
+        <a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
+      </nav>
+      <div id="content"></div>
 
-
-    {% comment %} <div class="dropdown">
-      <button onclick="dropDown()" class="dropbtn">Dropdown</button>
-      <div id="myDropdown" class="dropdown-content">
-        
-      </div>
-    </div> {% endcomment %}
-
-
+    </div>
   </body>
-  {% comment %} <script src="dropdowns.js"></script> {% endcomment %}
+  <script>
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    window.onclick = function (e) {
+      if (!e.target.matches(".dropbtn")) {
+        var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains("show")) {
+          myDropdown.classList.remove("show");
+        }
+      }
+    };
+  </script>
+  <script src="{% static 'script.js' %}"></script>
 </html>
