@@ -9,38 +9,38 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'food-style.css' %}" />
     <title>Food</title>
   </head>
   <body onload="populateInitialContent()">
-      <nav class="sticky">
-        <a href="{% url 'home' %}" title="Home">Home</a>
-        <a class="dropbtn" onclick="myFunction()">Menu
-          <i class="fa fa-caret-down"></i>
-        </a>
-        <a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
-        <a class="cartbtn" onclick="ticketToggle()">Cart</a>
-      </nav>
-      <div class="dropdown-content" id="myDropdown">
-        <a class="Btn" name="small">Small</a>
-        <a class="Btn" name="big">Big</a>
-        <a class="Btn" name="sides">Sides</a>
-        <a class="Btn" name="salads">Salads</a>
-        <a class="Btn" name="starters">Starters</a>
+    <nav class="sticky">
+      <a href="{% url 'home' %}" title="Home">Home</a>
+      <a class="dropbtn" onclick="myFunction()"
+        >Menu
+        <i class="fa fa-caret-down"></i>
+      </a>
+      <a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
+      <a class="cartbtn" onclick="ticketToggle()">Cart</a>
+    </nav>
+    <div class="dropdown-content" id="myDropdown">
+      <a class="Btn" name="small">Small</a>
+      <a class="Btn" name="big">Big</a>
+      <a class="Btn" name="sides">Sides</a>
+      <a class="Btn" name="salads">Salads</a>
+      <a class="Btn" name="starters">Starters</a>
+    </div>
+    <div class="mainpage">
+      <div id="content"></div>
+      <div class="ticket-content" id="ticketDisplay">
+        <h2>No items in cart</h2>
       </div>
-      <div class="mainpage">
-        <div id="content"></div>
-
-        </div>
-        <div class="ticket-content" id="ticketDisplay">No items in cart
-        </div>
-      </div>
+    </div>
   </body>
   <script>
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
-    
+
     window.onclick = function (e) {
       if (!e.target.matches(".dropbtn")) {
         var myDropdown = document.getElementById("myDropdown");
@@ -49,7 +49,7 @@
         }
       }
     };
-    
+
     function ticketToggle() {
       document.getElementById("ticketDisplay").classList.toggle("show");
     }

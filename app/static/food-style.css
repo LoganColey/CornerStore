@@ -54,12 +54,7 @@ img {
   object-fit: scale down;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
+.dropbtn {
   cursor: pointer;
   font-size: 16px;
   border: none;
@@ -69,11 +64,6 @@ img {
   background-color: inherit;
   font-family: inherit;
   margin: 0;
-}
-
-.dropdown:hover .dropbtn,
-.dropbtn:focus {
-  background-color: red;
 }
 
 .dropdown-content {
@@ -99,7 +89,7 @@ img {
 }
 
 .show {
-  display: block;
+  display: block !important;
 }
 
 .mainpage {
@@ -107,58 +97,21 @@ img {
   grid-template-columns: 66% 34%;
 }
 
-.cartbtn {
-  float: right;
-}
-
 #ticketDisplay {
   float: right;
 }
 
-.ticket {
+.ticket-content {
   background-color: yellow;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
+.cartbtn {
   cursor: pointer;
   font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
   margin: 0;
+  float: right;
 }
 
-.dropdown:hover .dropbtn,
-.dropbtn:focus {
-  background-color: red;
-}
-
-.dropdown-content {
+.ticket-content {
   display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 26px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
 }
