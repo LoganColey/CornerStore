@@ -17,7 +17,7 @@
       "name": "Butterflied Shrimp",
       "cost": 9.99,
       "description": "8 golden crisp butterflied shrimp served w/ hush puppies and french fries, and a side salad",
-      "image": "bigchungus.png",
+      "image": "bfshrimp.jpg",
       "type": "big"
     },
     {
@@ -31,7 +31,7 @@
       "name": "Chicken Basket",
       "cost": 7.5,
       "description": "3 handbattered chicken strips and french fries",
-      "image": "tem.png",
+      "image": "cknbasket.jpg",
       "type": "big"
     },
     {
@@ -150,7 +150,7 @@
         "name": "Chicken Philly",
         "cost": 7.25,
         "description": "served on a philly bun w/ onions and bell peppers w/ choice of one side",
-        "image": "bigchungus.png",
+        "image": "cknsand.jpg",
         "type": "small"
       },
       {
