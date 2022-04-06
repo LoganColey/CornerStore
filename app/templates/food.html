@@ -18,18 +18,18 @@
         <a class="dropbtn" onclick="myFunction()">Menu
           <i class="fa fa-caret-down"></i>
         </a>
-        <div class="dropdown-content" id="myDropdown">
-          <a class="Btn" name="small">Small</a>
-          <a class="Btn" name="big">Big</a>
-          <a class="Btn" name="sides">Sides</a>
-          <a class="Btn" name="salads">Salads</a>
-          <a class="Btn" name="starters">Starters</a>
-        </div>
         <a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
         <a class="cartbtn">Cart</a>
         <div id="ticketDisplay">No items in cart
         </div>
       </nav>
+      <div class="dropdown-content" id="myDropdown">
+        <a class="Btn" name="small">Small</a>
+        <a class="Btn" name="big">Big</a>
+        <a class="Btn" name="sides">Sides</a>
+        <a class="Btn" name="salads">Salads</a>
+        <a class="Btn" name="starters">Starters</a>
+      </div>
       <div id="content"></div>
 
     </div>
