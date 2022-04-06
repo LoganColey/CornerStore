@@ -94,19 +94,20 @@ function populateInitialContent() {
     });
 }
 
-function populateTickets(itemsList) {
-  ticketDisplay.innerHTML = "";
-  for (const item of items) {
-    foodbox.insertAdjacentHTML(
-      "beforeend",
-      `
-                <article class="itemBox">
-                    <h2 class="itemName">${item.name}</h2>
-                    <img src=/static/images/${item.image}></img>
-                    <p class="itemDesc">${item.description}</p>
-                    <h2 class="itemPrice">$ ${item.cost}</h2>
-                </article>
-              `
-    );
+function populateTickets() {
+  if (itemsList.length > 0) {
+    ticketDisplay.innerHTML = "";
+    for (const item of itemsList) {
+      ticketDisplay.insertAdjacentHTML(
+        "beforeend",
+        `
+                  <article class="itemBox">
+                      <h2 class="itemName">${item.name}</h2>
+                      <img src=/static/images/${item.image}></img>
+                      <h2 class="itemPrice">$ ${item.cost}</h2>
+                  </article>
+                `
+      );
+    }
   }
 }
