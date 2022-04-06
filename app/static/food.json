@@ -215,6 +215,20 @@
         "description": "frgtgrf",
         "image": "bigchungus.png",
         "type": "starter"
+      },
+      {
+        "name": "Catfish Plate",
+        "cost": 9.99,
+        "description": "tba",
+        "image": "catfish.png",
+        "type": "seafood"
+      },
+      {
+        "name": "Seafood Combo",
+        "cost": 14.99,
+        "description": "tba",
+        "image": "sfcombo.jpg",
+        "type": "seafood"
       }
   ]
   

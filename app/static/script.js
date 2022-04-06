@@ -1,5 +1,7 @@
 const foodbox = document.getElementById("content");
+const ticketDisplay = document.getElementById("ticketDisplay");
 const options = document.querySelectorAll(".Btn");
+const itemsList = [];
 
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
@@ -90,4 +92,21 @@ function populateInitialContent() {
     .then((data) => {
       populateContent(data);
     });
+}
+
+function populateTickets(itemsList) {
+  ticketDisplay.innerHTML = "";
+  for (const item of items) {
+    foodbox.insertAdjacentHTML(
+      "beforeend",
+      `
+                <article class="itemBox">
+                    <h2 class="itemName">${item.name}</h2>
+                    <img src=/static/images/${item.image}></img>
+                    <p class="itemDesc">${item.description}</p>
+                    <h2 class="itemPrice">$ ${item.cost}</h2>
+                </article>
+              `
+    );
+  }
 }
