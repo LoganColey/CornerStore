@@ -31,9 +31,7 @@
     </div>
     <div class="mainpage">
       <div id="content"></div>
-      <div class="ticket-content" id="ticketDisplay">
-        <h2>No items in cart</h2>
-      </div>
+      <div class="ticket-content show" id="ticketDisplay">No items in cart</div>
     </div>
   </body>
   <script>
@@ -50,7 +48,7 @@
       }
     };
 
-    function ticketToggle() {
+    {% comment %} function ticketToggle() {
       document.getElementById("ticketDisplay").classList.toggle("show");
     }
 
@@ -61,7 +59,7 @@
           ticketDisplay.classList.remove("show");
         }
       }
-    };
+    }; {% endcomment %}
   </script>
   <script src="{% static 'script.js' %}"></script>
 </html>

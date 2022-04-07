@@ -42,12 +42,6 @@ nav a:hover {
   padding-bottom: 5px;
 }
 
-.itemDesc {
-}
-
-.itemPrice {
-}
-
 img {
   width: 75%;
   height: auto;
@@ -88,10 +82,6 @@ img {
   background-color: #ddd;
 }
 
-.show {
-  display: block !important;
-}
-
 .mainpage {
   display: grid;
   grid-template-columns: 66% 34%;
@@ -103,6 +93,7 @@ img {
 
 .ticket-content {
   background-color: yellow;
+  z-index: 1;
 }
 
 .cartbtn {
@@ -112,6 +103,10 @@ img {
   float: right;
 }
 
-.ticket-content {
+/* .ticket-content {
   display: none;
+} */
+
+.show {
+  display: block;
 }
