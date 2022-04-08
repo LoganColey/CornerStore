@@ -19,7 +19,6 @@
         >Menu
         <i class="fa fa-caret-down"></i>
       </a>
-      <a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
       <a class="cartbtn" onclick="ticketToggle()">Cart</a>
     </nav>
     <div class="dropdown-content" id="myDropdown">
@@ -31,7 +30,17 @@
     </div>
     <div class="mainpage">
       <div id="content"></div>
-      <div class="ticket-content show" id="ticketDisplay">No items in cart</div>
+      <div class="ticketSide">
+        <div class="ticket-content show" id="ticketDisplay"></div>
+        <div class="sticky2">
+          <h2 class="total">Total: $0.00</h2>
+          <div class="placeBtn">
+            <button href="{% url 'checkout' %}" title="Checkout">
+              Place Order
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script>

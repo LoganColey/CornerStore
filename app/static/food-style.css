@@ -26,6 +26,13 @@ nav a:hover {
   background-color: red;
 }
 
+.cartbtn {
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0;
+  float: right;
+}
+
 #content {
   background-color: white;
   display: grid;
@@ -87,20 +94,9 @@ img {
   grid-template-columns: 66% 34%;
 }
 
-#ticketDisplay {
-  float: right;
-}
-
 .ticket-content {
-  background-color: yellow;
   z-index: 1;
-}
-
-.cartbtn {
-  cursor: pointer;
-  font-size: 16px;
-  margin: 0;
-  float: right;
+  float: left;
 }
 
 /* .ticket-content {
@@ -109,4 +105,14 @@ img {
 
 .show {
   display: block;
+}
+
+.sticky2 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.ticketSide {
+  background-color: yellow;
 }

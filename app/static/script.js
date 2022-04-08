@@ -2,7 +2,8 @@ const foodbox = document.getElementById("content");
 const ticketDisplay = document.getElementById("ticketDisplay");
 const options = document.querySelectorAll(".Btn");
 const itemsList = [];
-const ticketList = [];
+let total = 0;
+const totalText = document.querySelector(".total");
 
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
@@ -109,49 +110,48 @@ function buttons() {
   }
 }
 
-function loadTicket() {
-  if (ticketList.length > 0) {
-    ticketDisplay.innerHTML = "";
-  }
-}
-
 function AddItem(event) {
   var button = event.target;
   var item_card = button.parentElement;
-  ticketList.push(
-    itemsList.filter(
-      (item) =>
-        item.name == item_card.getElementsByClassName("itemName")[0].innerText
-    )
-  );
-  console.log(ticketList);
-  for (const item of ticketList) {
-    var wholeItem = document.createElement("div");
-    wholeItem.classList.add("whole");
-    wholeItem.insertAdjacentHTML(
-      "beforeend",
-      `<article>
+  var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
+  var item_price_string =
+    item_card.getElementsByClassName("itemPrice")[0].innerText;
+  var item_price = item_price_string.substring(1);
+  var wholeItem = document.createElement("div");
+  wholeItem.classList.add("whole");
+  wholeItem.insertAdjacentHTML(
+    "beforeend",
+    `<article>
+      <div>
         <div>
-          <div>
-            <p class="item_name">${item[0].name}</p>
-          </div>
-          <div>
-            <p class="itemPrice">$${item[0].cost}</p>
-          </div>
-          <button class="removeItem">Remove</button>
+          <p class="item-name">${item_name}</p>
         </div>
-      </article>`
-    );
-  }
+        <div>
+          <p class="item-price">$${item_price}</p>
+        </div>
+        <button class="removeItem">Remove</button>
+      </div>
+    </article>`
+  );
   ticketDisplay.append(wholeItem);
   let buttons = ticketDisplay.getElementsByClassName("removeItem");
   for (let i = 0; i < buttons.length; i++) {
     var variable = buttons[i];
     variable.addEventListener("click", removeItem);
   }
+  total += Number(item_price);
+  totalText.innerHTML = "";
+  totalText.innerHTML = "$" + total.toFixed(2);
 }
 
 function removeItem(event) {
-  var buttonClicked = event.target;
-  buttonClicked.parentElement.parentElement.remove();
+  var button = event.target;
+  var item_card = button.parentElement;
+  var item_price_string =
+    item_card.getElementsByClassName("item-price")[0].innerText;
+  var item_price = item_price_string.substring(1);
+  total -= Number(item_price);
+  totalText.innerHTML = "";
+  totalText.innerHTML = "$" + total.toFixed(2);
+  button.parentElement.parentElement.remove();
 }
