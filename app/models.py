@@ -28,4 +28,12 @@ class closingTill(models.Model):
     month = models.DateTimeField()
     year = models.DateTimeField()
     amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+class dailyLunch(models.Model):
+    entree1 = models.CharField(max_length=100, null=True)
+    entree2 = models.CharField(max_length=100, null=True)
+    side1 = models.CharField(max_length=100, null=True)
+    side2 = models.CharField(max_length=100, null=True)
+    side3 = models.CharField(max_length=100, null=True)
+    bread = models.CharField(max_length=100, null=True)
     
