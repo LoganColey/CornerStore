@@ -10,22 +10,6 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-
-
-SIDES = [
-        ("Fries", "Fries"),
-        ("Spicy Fries", "Spicy Fries"),
-        ("Tater Babies", "Tater Babies"),
-        ("Corn Nuggets", "Corn Nuggets"),
-        ("Fried Mushrooms", "Fried Mushrooms"),
-        ("Mashed Potatoes", "Mashed Potatoes"),
-        ("Fried Okra", "Fried Okra"),
-        ("Salad", "Salad"),
-        ("Onion Rings", "Onion Rings"),
-        ("Loaded Baked Potato", "Loaded Baked Potato"),
-        ("Tater Tots", "Tater Tots")
-]
-
 class CreatesmallFoodForm(ModelForm):
     class Meta:
         model = smallFood
@@ -46,3 +30,13 @@ class CreateCart(ModelForm):
     class Meta:
         model = Cart
         fields = ['user']
+
+class CreateDailyLunch(ModelForm):
+    class Meta:
+        model = dailyLunch
+        fields = '__all__'
+
+class CreateClosingTill(ModelForm):
+    class Meta:
+        model = closingTill
+        fields = '__all__'

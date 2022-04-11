@@ -124,4 +124,7 @@ def populateBigFood(request):
     return render(request, "food.html")
 
 def admin(request):
+    form = CreateDailyLunch
+    if request.method == 'POST':
+        
     return render(request,'admin.html')
