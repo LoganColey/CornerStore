@@ -10,5 +10,6 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('food/', views.populateBigFood, name="food"),
     path('cart/', views.checkout, name="checkout"),
-    path('complete/', views.paymentComplete, name='complete')
+    path('complete/', views.paymentComplete, name='complete'),
+    path('adminpage/', views.admin, name='admin')
 ]

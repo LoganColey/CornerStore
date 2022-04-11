@@ -122,3 +122,6 @@ def paymentComplete(request):
 
 def populateBigFood(request):
     return render(request, "food.html")
+
+def admin(request):
+    return render(request,'admin.html')
