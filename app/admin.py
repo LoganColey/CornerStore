@@ -5,3 +5,5 @@ from .models import *
 admin.site.register(Cart)
 admin.site.register(bigFood)
 admin.site.register(smallFood)
+admin.site.register(dailyLunch)
+admin.site.register(closingTill)
