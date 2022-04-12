@@ -13,5 +13,15 @@
   </head>
   <body>
     <h1>admin</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button>Change Lunch</button>
+    </form>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{till.as_p}}
+      <button></button>
+    </form>
   </body>
 </html>

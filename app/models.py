@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.conf import settings
+from django.utils import timezone
+
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
@@ -24,9 +26,7 @@ class bigFood(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
 
 class closingTill(models.Model):
-    day = models.DateTimeField()
-    month = models.DateTimeField()
-    year = models.DateTimeField()
+    date = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
 
 class dailyLunch(models.Model):

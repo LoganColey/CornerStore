@@ -230,3 +230,4 @@ function removeItem(event) {
   }
   button.parentElement.parentElement.remove();
 }
+
