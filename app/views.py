@@ -12,6 +12,8 @@ from .forms import *
 from django.contrib.auth.models import Group
 from json import dumps
 from django.core import serializers
+from django.http import JsonResponse
+import json 
 
 @unauthenticated_user
 def login_page(request):
@@ -105,8 +107,31 @@ def food(request):
     return render(request,'food.html',context)
 
 def checkout(request):
-    context ={}
+    cart = Cart.objects.get(user=request.user)
+    foods = bigFood.objects.filter(cart=cart)
+    price = 0
+    for food in foods:
+        food.price += price
+    context = {"price":price}
     return render(request,'checkout.html',context)
+
+def paymentComplete(request):
+    body = json.loads(request.body)
+    print('BODY:', body)
+    return JsonResponse('Payment completed!', safe=False)
 
 def populateBigFood(request):
     return render(request, "food.html")
+
+def admin(request):
+    form = CreateDailyLunch()
+    till = CreateClosingTill()
+    if request.method == 'POST':
+        form = CreateDailyLunch(request.POST)
+        if form.is_valid():
+            form.save()
+    if request.method == 'POST':
+        till = CreateClosingTill(request.POST)
+        if till.is_valid():
+            till.save()
+    return render(request,'admin.html')

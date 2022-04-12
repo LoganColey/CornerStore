@@ -10,39 +10,33 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-
-
-SIDES = [
-        ("Fries", "Fries"),
-        ("Spicy Fries", "Spicy Fries"),
-        ("Tater Babies", "Tater Babies"),
-        ("Corn Nuggets", "Corn Nuggets"),
-        ("Fried Mushrooms", "Fried Mushrooms"),
-        ("Mashed Potatoes", "Mashed Potatoes"),
-        ("Fried Okra", "Fried Okra"),
-        ("Salad", "Salad"),
-        ("Onion Rings", "Onion Rings"),
-        ("Loaded Baked Potato", "Loaded Baked Potato"),
-        ("Tater Tots", "Tater Tots")
-]
-
 class CreatesmallFoodForm(ModelForm):
     class Meta:
         model = smallFood
         fields ='__all__'
         exclude = ['cost']
-        side = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
+        side = forms.CharField()
 
 class CreatebigFoodForm(ModelForm):
     class Meta:
         model = bigFood
         fields ='__all__'
         exclude = ['cost']
-        side1 = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
-        side2 = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
+        side1 = forms.CharField()
+        side2 = forms.CharField()
 
 
 class CreateCart(ModelForm):
     class Meta:
         model = Cart
         fields = ['user']
+
+class CreateDailyLunch(ModelForm):
+    class Meta:
+        model = dailyLunch
+        fields = '__all__'
+
+class CreateClosingTill(ModelForm):
+    class Meta:
+        model = closingTill
+        fields = '__all__'

@@ -22,3 +22,19 @@ class bigFood(models.Model):
     description = models.CharField(max_length=10000)
     image = models.ImageField(null=True)
     cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
+
+class closingTill(models.Model):
+    day = models.DateTimeField()
+    month = models.DateTimeField()
+    year = models.DateTimeField()
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+class dailyLunch(models.Model):
+    entree1 = models.CharField(max_length=100, null=True)
+    entree2 = models.CharField(max_length=100, null=True)
+    side1 = models.CharField(max_length=100, null=True)
+    side2 = models.CharField(max_length=100, null=True)
+    side3 = models.CharField(max_length=100, null=True)
+    bread = models.CharField(max_length=100, null=True)
+    dessert = models.CharField(max_length=100, null=True)
+    
