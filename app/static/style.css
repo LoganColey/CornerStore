@@ -13,7 +13,7 @@ html, body { height: 100%; }
 
 a { color: #0252aa; text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
-a img { border: 0; }
+/* a img { border: 0; } */
 
 .cl { display: block; height: 0; font-size: 0; line-height: 0; text-indent: -4000px; clear: both; }
 .notext { font-size: 0; line-height: 0; text-indent: -4000px; }
@@ -43,14 +43,6 @@ textarea { overflow: auto; }
 #navigation ul li a.active, 
 #navigation ul li a.hover {text-decoration: none; }
 
-.review-card {
-  float: left;
-  padding: 0 10px;
-  width: 30%;
-  display: grid;
-  grid-template-columns: 25% 25% 25%;
-}
-
 #main { padding: 0 0 0 4px; width: 955px; }
 #main p { line-height: 18px; color: #9da1aa; padding-bottom: 5px; }
 #main .items { padding: 21px 0 45px 0; width: 100%; }
@@ -59,10 +51,7 @@ textarea { overflow: auto; }
 .large-col .a-link { padding-top: 7px; }
 
 .small-col { float: left; width: 226px; padding-right: 15px; grid-template-columns: 25% 25% 25% }
-.small-col img { float: right; padding: 3px 11px 10px 17px; }
 
-.a-link .btn-gray { background-position: left -86px; height: 31px; line-height: 31px; width: 82px; padding-left: 14px; }
-.a-link .btn-gray span { background-position: right -55px; height: 31px; color: #2f2f2f; }
 
 .carousel-inner > .item > img,
     .carousel-inner > .item > a > img {
@@ -70,10 +59,7 @@ textarea { overflow: auto; }
       margin: auto;
     }
 
-
-
-
-    .foodname {
+  .foodname {
       color: white;
     }
 
