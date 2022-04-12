@@ -15,15 +15,15 @@ class CreatesmallFoodForm(ModelForm):
         model = smallFood
         fields ='__all__'
         exclude = ['cost']
-        side = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
+        side = forms.CharField()
 
 class CreatebigFoodForm(ModelForm):
     class Meta:
         model = bigFood
         fields ='__all__'
         exclude = ['cost']
-        side1 = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
-        side2 = forms.CharField(label="pick a side", widget=forms.Select(choices=SIDES))
+        side1 = forms.CharField()
+        side2 = forms.CharField()
 
 
 class CreateCart(ModelForm):

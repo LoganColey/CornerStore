@@ -124,7 +124,14 @@ def populateBigFood(request):
     return render(request, "food.html")
 
 def admin(request):
-    form = CreateDailyLunch
+    form = CreateDailyLunch()
+    till = CreateClosingTill()
     if request.method == 'POST':
-        
+        form = CreateDailyLunch(request.POST)
+        if form.is_valid():
+            form.save()
+    if request.method == 'POST':
+        till = CreateClosingTill(request.POST)
+        if till.is_valid():
+            till.save()
     return render(request,'admin.html')
