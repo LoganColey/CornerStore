@@ -134,4 +134,5 @@ def admin(request):
         till = CreateClosingTill(request.POST)
         if till.is_valid():
             till.save()
-    return render(request,'admin.html')
+    context = {'form': form, 'till': till}
+    return render(request,'admin.html',context)
