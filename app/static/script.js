@@ -1,9 +1,9 @@
 const foodbox = document.getElementById("content");
 const ticketDisplay = document.getElementById("ticketDisplay");
 const options = document.querySelectorAll(".Btn");
-const itemsList = [];
 let total = 0;
-const totalText = document.querySelector(".total");
+const totalText = document.getElementById("total");
+var dt = new Date();
 
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
@@ -17,6 +17,7 @@ options.forEach((m) => {
               leList.push(item);
             }
           }
+          foodbox.innerHTML = "";
           populateContent(leList);
         });
     } else if (e.target.innerHTML === "Sides") {
@@ -29,6 +30,7 @@ options.forEach((m) => {
               leList.push(item);
             }
           }
+          foodbox.innerHTML = "";
           populateContent(leList);
         });
     } else if (e.target.innerHTML === "Big") {
@@ -41,6 +43,7 @@ options.forEach((m) => {
               leList.push(item);
             }
           }
+          foodbox.innerHTML = "";
           populateContent(leList);
         });
     } else if (e.target.innerHTML === "Salads") {
@@ -53,6 +56,7 @@ options.forEach((m) => {
               leList.push(item);
             }
           }
+          foodbox.innerHTML = "";
           populateContent(leList);
         });
     } else if (e.target.innerHTML === "Starters") {
@@ -65,6 +69,7 @@ options.forEach((m) => {
               leList.push(item);
             }
           }
+          foodbox.innerHTML = "";
           populateContent(leList);
         });
     }
@@ -72,9 +77,11 @@ options.forEach((m) => {
 });
 
 function populateContent(items) {
-  foodbox.innerHTML = "";
+  var itemsbox = document.createElement("div");
+  itemsbox.classList.add("items");
+  foodbox.appendChild(itemsbox);
   for (const item of items) {
-    foodbox.insertAdjacentHTML(
+    itemsbox.insertAdjacentHTML(
       "beforeend",
       `
                 <article class="itemBox">
@@ -94,9 +101,73 @@ function populateInitialContent() {
   fetch("/static/food.json")
     .then((req) => req.json())
     .then((data) => {
-      populateContent(data);
+      var startersHeader = document.createElement("header");
+      startersHeader.innerHTML = "Starters";
+      startersHeader.classList.add("full-width");
+      foodbox.appendChild(startersHeader);
+      var leList = [];
       for (const item of data) {
-        itemsList.push(item);
+        if (item.type == "starter") {
+          leList.push(item);
+        }
+      }
+      populateContent(leList);
+      var burgersHeader = document.createElement("header");
+      burgersHeader.innerHTML = "Burgers and More";
+      burgersHeader.classList.add("full-width");
+      foodbox.appendChild(burgersHeader);
+      var leList = [];
+      for (const item of data) {
+        if (item.type == "small") {
+          leList.push(item);
+        }
+      }
+      populateContent(leList);
+      var platesHeader = document.createElement("header");
+      platesHeader.innerHTML = "Plates";
+      platesHeader.classList.add("full-width");
+      foodbox.appendChild(platesHeader);
+      var leList = [];
+      for (const item of data) {
+        if (item.type == "big") {
+          leList.push(item);
+        }
+      }
+      populateContent(leList);
+      var sidesHeader = document.createElement("header");
+      sidesHeader.innerHTML = "Sides";
+      sidesHeader.classList.add("full-width");
+      foodbox.appendChild(sidesHeader);
+      var leList = [];
+      for (const item of data) {
+        if (item.type == "side") {
+          leList.push(item);
+        }
+      }
+      populateContent(leList);
+      var saladsHeader = document.createElement("header");
+      saladsHeader.innerHTML = "Salads";
+      saladsHeader.classList.add("full-width");
+      foodbox.appendChild(saladsHeader);
+      var leList = [];
+      for (const item of data) {
+        if (item.type == "salad") {
+          leList.push(item);
+        }
+      }
+      populateContent(leList);
+      if (dt.getDay() == 5 || dt.getDay() == 6) {
+        var seafoodHeader = document.createElement("header");
+        seafoodHeader.innerHTML = "Seafood";
+        seafoodHeader.classList.add("full-width");
+        foodbox.appendChild(seafoodHeader);
+        var leList = [];
+        for (const item of data) {
+          if (item.type == "seafood") {
+            leList.push(item);
+          }
+        }
+        populateContent(leList);
       }
     });
   buttons();
@@ -152,7 +223,7 @@ function removeItem(event) {
   var item_price = item_price_string.substring(1);
   total -= Number(item_price);
   totalText.innerHTML = "";
-  if (total == 0) {
+  if (total <= 0) {
     totalText.innerHTML = "$0.00";
   } else {
     totalText.innerHTML = "$" + total.toFixed(2);
