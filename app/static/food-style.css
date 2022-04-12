@@ -1,3 +1,4 @@
+/* Main styling */
 body {
   background-color: white;
   color: black;
@@ -5,6 +6,12 @@ body {
   padding: 0;
 }
 
+.mainpage {
+  display: grid;
+  grid-template-columns: 66% 34%;
+}
+
+/* Nav Bar */
 nav {
   overflow: hidden;
   background-color: #333;
@@ -31,28 +38,6 @@ nav a:hover {
   font-size: 16px;
   margin: 0;
   float: right;
-}
-
-#content {
-  background-color: white;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-}
-
-.itemBox {
-  background-color: light gray;
-  margin: 2em;
-  padding: 3em;
-}
-
-.itemName {
-  padding-bottom: 5px;
-}
-
-img {
-  width: 75%;
-  height: auto;
-  object-fit: scale down;
 }
 
 .dropbtn {
@@ -89,9 +74,27 @@ img {
   background-color: #ddd;
 }
 
-.mainpage {
+/* Menu Display */
+#content {
+  background-color: white;
   display: grid;
-  grid-template-columns: 66% 34%;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.itemBox {
+  background-color: light gray;
+  margin: 2em;
+  padding: 3em;
+}
+
+.itemName {
+  padding-bottom: 5px;
+}
+
+img {
+  width: 75%;
+  height: auto;
+  object-fit: scale down;
 }
 
 .ticket-content {
@@ -99,9 +102,13 @@ img {
   float: left;
 }
 
-/* .ticket-content {
+.ticket-content {
   display: none;
-} */
+}
+
+#checkoutBox {
+  display: none;
+}
 
 .show {
   display: block;

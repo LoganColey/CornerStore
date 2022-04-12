@@ -28,6 +28,15 @@
       <a class="Btn" name="salads">Salads</a>
       <a class="Btn" name="starters">Starters</a>
     </div>
+    <div id="checkoutBox">
+      <div class="totalBox">
+        <h1>$</h1>
+      </div>
+      <div id="paypal-button-container"></div>
+
+      <!-- Include the PayPal JavaScript SDK -->
+      <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+    </div>
     <div class="mainpage">
       <div id="content"></div>
       <div class="ticketSide">
@@ -35,40 +44,70 @@
         <div class="sticky2">
           <h2 class="total">Total: $0.00</h2>
           <div class="placeBtn">
-            <button href="{% url 'checkout' %}" title="Checkout">
-              Place Order
-            </button>
+            <button class="checkoutbtn">Checkout</button>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      paypal
+        .Buttons({
+          // Set up the transaction
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: price,
+                  },
+                },
+              ],
+            });
+          },
+
+          // Finalize the transaction
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+              // Successful capture! For demo purposes:
+              console.log(
+                "Capture result",
+                orderData,
+                JSON.stringify(orderData, null, 2)
+              );
+              var transaction =
+                orderData.purchase_units[0].payments.captures[0];
+              alert(
+                "Transaction " +
+                  transaction.status +
+                  ": " +
+                  transaction.id +
+                  "\n\nSee console for all available details"
+              );
+
+              // Replace the above to show a success message within this page, e.g.
+              // const element = document.getElementById('paypal-button-container');
+              // element.innerHTML = '';
+              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+              // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+          },
+        })
+        .render("#paypal-button-container");
+    </script>
   </body>
   <script>
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function (e) {
-      if (!e.target.matches(".dropbtn")) {
-        var myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains("show")) {
-          myDropdown.classList.remove("show");
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
         }
-      }
-    };
 
-    {% comment %} function ticketToggle() {
-      document.getElementById("ticketDisplay").classList.toggle("show");
-    }
-
-    window.onclick = function (e) {
-      if (!e.target.matches(".cartbtn")) {
-        var ticketDisplay = document.getElementById("ticketDisplay");
-        if (ticketDisplay.classList.contains("show")) {
-          ticketDisplay.classList.remove("show");
+        function openCheckout() {
+          document.getElementById("checkoutBox").classList.toggle("show");
         }
-      }
-    }; {% endcomment %}
+
+        function ticketToggle() {
+          document.getElementById("ticketDisplay").classList.toggle("show");
+        }
+
   </script>
   <script src="{% static 'script.js' %}"></script>
 </html>
