@@ -152,6 +152,10 @@ function removeItem(event) {
   var item_price = item_price_string.substring(1);
   total -= Number(item_price);
   totalText.innerHTML = "";
-  totalText.innerHTML = "$" + total.toFixed(2);
+  if (total == 0) {
+    totalText.innerHTML = "$0.00";
+  } else {
+    totalText.innerHTML = "$" + total.toFixed(2);
+  }
   button.parentElement.parentElement.remove();
 }

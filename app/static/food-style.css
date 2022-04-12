@@ -10,7 +10,7 @@ body {
   display: none !important;
 }
 
-.mainpage {
+.grid {
   display: grid;
   grid-template-columns: 66% 34%;
 }
