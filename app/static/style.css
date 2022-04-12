@@ -15,6 +15,14 @@ a { color: #0252aa; text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
 a img { border: 0; }
 
+.cl { display: block; height: 0; font-size: 0; line-height: 0; text-indent: -4000px; clear: both; }
+.notext { font-size: 0; line-height: 0; text-indent: -4000px; }
+.left, .alignleft { float: left; display: inline; }
+.right, .alignright { float: right; display: inline; }
+.last { padding-right: 0 !important; margin-right: 0 !important; }
+.shell { width: 959px; margin: 0 auto; padding: 0 32px; }
+div{ display: block;}
+
 input, textarea, select { font-size: 12px; font-family: arial, sans-serif; }
 textarea { overflow: auto; }
 
@@ -23,7 +31,7 @@ textarea { overflow: auto; }
 
 #header { width: 100%; font-family: 'Trebuchet MS', Arial, serif; text-align: center; text-transform: uppercase; padding: 31px 0 45px 0; }
 
-#logo { font-weight: normal; padding: 0 0 0 5px; }
+#logo { font-weight: normal; padding: 0 0 0 5px; font-family: 'Handwritten', Arial, serif;}
 #logo a { color: #ebebeb; font-size: 41px; line-height: 41px; }
 #logo a span { display: block; font-size: 11px; line-height: 11px; color: #e01e27; padding-top: 4px; }
 #logo a:hover { text-decoration: none; }
@@ -35,6 +43,26 @@ textarea { overflow: auto; }
 #navigation ul li a.active, 
 #navigation ul li a.hover {text-decoration: none; }
 
+.review-card {
+  float: left;
+  padding: 0 10px;
+  width: 30%;
+  display: grid;
+  grid-template-columns: 25% 25% 25%;
+}
+
+#main { padding: 0 0 0 4px; width: 955px; }
+#main p { line-height: 18px; color: #9da1aa; padding-bottom: 5px; }
+#main .items { padding: 21px 0 45px 0; width: 100%; }
+
+.large-col { float: left; width: 466px; padding: 0 10px 0 0; justify-content: center;}
+.large-col .a-link { padding-top: 7px; }
+
+.small-col { float: left; width: 226px; padding-right: 15px; grid-template-columns: 25% 25% 25% }
+.small-col img { float: right; padding: 3px 11px 10px 17px; }
+
+.a-link .btn-gray { background-position: left -86px; height: 31px; line-height: 31px; width: 82px; padding-left: 14px; }
+.a-link .btn-gray span { background-position: right -55px; height: 31px; color: #2f2f2f; }
 
 .carousel-inner > .item > img,
     .carousel-inner > .item > a > img {
@@ -48,3 +76,10 @@ textarea { overflow: auto; }
     .foodname {
       color: white;
     }
+
+
+  
+
+
+
+
