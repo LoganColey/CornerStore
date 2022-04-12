@@ -50,8 +50,8 @@ textarea { overflow: auto; }
 .large-col { float: left; width: 466px; padding: 0 10px 0 0; justify-content: center;}
 .large-col .a-link { padding-top: 7px; }
 
-.small-col { float: left; width: 226px; padding-right: 15px; grid-template-columns: 25% 25% 25% }
-
+.small-col {width: 226px; padding-right: 15px; display: inline-block;}
+.items {text-align: center;}
 
 .carousel-inner > .item > img,
     .carousel-inner > .item > a > img {
