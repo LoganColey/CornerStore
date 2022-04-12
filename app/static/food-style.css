@@ -6,9 +6,17 @@ body {
   padding: 0;
 }
 
+.hide {
+  display: none !important;
+}
+
 .mainpage {
   display: grid;
   grid-template-columns: 66% 34%;
+}
+
+.show {
+  display: block !important;
 }
 
 /* Nav Bar */
@@ -79,6 +87,7 @@ nav a:hover {
   background-color: white;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
+  z-index: 10;
 }
 
 .itemBox {
@@ -97,21 +106,10 @@ img {
   object-fit: scale down;
 }
 
+/* Cart Display */
 .ticket-content {
   z-index: 1;
   float: left;
-}
-
-.ticket-content {
-  display: none;
-}
-
-#checkoutBox {
-  display: none;
-}
-
-.show {
-  display: block;
 }
 
 .sticky2 {
@@ -122,4 +120,10 @@ img {
 
 .ticketSide {
   background-color: yellow;
+  display: none;
+}
+
+/* Checkout Display */
+#checkoutBox {
+  display: none;
 }
