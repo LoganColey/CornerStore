@@ -190,6 +190,7 @@ function buttons() {
 
 //adding an item to the ticket
 function AddItem(event) {
+  document.querySelector(".checkoutbtn").classList.add("show");
   var button = event.target;
   var item_card = button.parentElement;
   var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
@@ -215,36 +216,52 @@ function AddItem(event) {
   if (item_card.className == "small") {
     let sideDropdown = document.createElement("select");
     wholeItem.append(sideDropdown);
+    sideDropdown.classList.add("sideDrop");
     let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.value = 0;
     sidePlaceholder.innerHTML = "Choose a side";
     sideDropdown.appendChild(sidePlaceholder);
+    let i = 1;
     for (const side of sidesNames) {
       let newSide = document.createElement("option");
       newSide.innerHTML = side;
       sideDropdown.append(newSide);
+      newSide.value = i;
+      i += 1;
     }
+    //big food side dropdowns
   } else if (item_card.className == "big") {
     let sidesDiv = document.createElement("div");
     wholeItem.append(sidesDiv);
     let sideDropdown = document.createElement("select");
+    sideDropdown.classList.add("sideDrop");
     sidesDiv.append(sideDropdown);
     let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.value = 0;
     sidePlaceholder.innerHTML = "Choose a side";
     sideDropdown.appendChild(sidePlaceholder);
+    i = 1;
     for (const side of sidesNames) {
       let newSide = document.createElement("option");
       newSide.innerHTML = side;
       sideDropdown.append(newSide);
+      newSide.value = i;
+      i += 1;
     }
     let sideDropdown2 = document.createElement("select");
     sidesDiv.append(sideDropdown2);
     let sidePlaceholder2 = document.createElement("option");
+    sideDropdown.classList.add("sideDrop");
+    sidePlaceholder.value = 0;
     sidePlaceholder2.innerHTML = "Choose a side";
+    i = 1;
     sideDropdown2.appendChild(sidePlaceholder2);
     for (const side of sidesNames) {
       let newSide = document.createElement("option");
       newSide.innerHTML = side;
       sideDropdown2.append(newSide);
+      newSide.value = i;
+      i += 1;
     }
   }
 
@@ -273,6 +290,7 @@ function removeItem(event) {
   total -= Number(item_price);
   totalText.innerHTML = "";
   if (total <= 0) {
+    document.querySelector(".checkoutbtn").classList.remove("show");
     totalText.innerHTML = "$0.00";
   } else {
     totalText.innerHTML = "$" + total.toFixed(2);
@@ -281,11 +299,32 @@ function removeItem(event) {
 }
 
 function openCheckout() {
-  document.getElementById("checkoutBox").classList.toggle("show");
-  total = document.getElementById("total");
-  document.getElementById("totalBox").innerHTML =
-    "$" + total.innerHTML.substring(1);
-  document.querySelector(".mainpage").classList.toggle("hide");
+  //see if all sides are chosen
+  for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+    console.log(sideDrop.options[sideDrop.selectedIndex].value);
+    if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
+    //   var errorMsg = document.createElement("div");
+    //   errorMsg.innerHTML = "Please select all sides before checking out.";
+    //   document.querySelector(".checkoutbtn").append(errorMsg);
+      //if side is loaded baked potato or side salad, add $2.50 to total
+    } else if (
+      sideDrop.options[sideDrop.selectedIndex].value == 6 ||
+      sideDrop.options[sideDrop.selectedIndex].value == 7
+    ) {
+      console.log("need to add to total");
+      document.getElementById("checkoutBox").classList.toggle("show");
+      total = document.getElementById("total");
+      document.getElementById("totalBox").innerHTML =
+        "$" + total.innerHTML.substring(1);
+      document.querySelector(".mainpage").classList.toggle("hide");
+    } else {
+      document.getElementById("checkoutBox").classList.toggle("show");
+      total = document.getElementById("total");
+      document.getElementById("totalBox").innerHTML =
+        "$" + total.innerHTML.substring(1);
+      document.querySelector(".mainpage").classList.toggle("hide");
+    }
+  }
 }
 
 function ticketToggle() {

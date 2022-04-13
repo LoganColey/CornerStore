@@ -82,6 +82,15 @@ nav a:hover {
   background-color: #ddd;
 }
 
+.checkoutbtn {
+  display: none;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
 /* Menu Display */
 .full-width {
   width: 100%;
