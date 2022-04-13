@@ -300,30 +300,23 @@ function removeItem(event) {
 
 function openCheckout() {
   //see if all sides are chosen
-  for (const sideDrop of document.querySelectorAll(".sideDrop")) {
-    console.log(sideDrop.options[sideDrop.selectedIndex].value);
-    if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
-    //   var errorMsg = document.createElement("div");
-    //   errorMsg.innerHTML = "Please select all sides before checking out.";
-    //   document.querySelector(".checkoutbtn").append(errorMsg);
-      //if side is loaded baked potato or side salad, add $2.50 to total
-    } else if (
-      sideDrop.options[sideDrop.selectedIndex].value == 6 ||
-      sideDrop.options[sideDrop.selectedIndex].value == 7
-    ) {
-      console.log("need to add to total");
-      document.getElementById("checkoutBox").classList.toggle("show");
-      total = document.getElementById("total");
-      document.getElementById("totalBox").innerHTML =
-        "$" + total.innerHTML.substring(1);
-      document.querySelector(".mainpage").classList.toggle("hide");
-    } else {
-      document.getElementById("checkoutBox").classList.toggle("show");
-      total = document.getElementById("total");
-      document.getElementById("totalBox").innerHTML =
-        "$" + total.innerHTML.substring(1);
-      document.querySelector(".mainpage").classList.toggle("hide");
+  if (document.querySelectorAll(".sideDrop") > 0) {
+    let missing = false;
+    for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+      if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
+        missing = true;
+      }
     }
+    if ((missing = true)) {
+      var errorMsg = document.createElement("div");
+      errorMsg.innerHTML = "Please select all sides before checking out.";
+      document.querySelector(".checkoutbtn").append(errorMsg);
+      //if side is loaded baked potato or side salad, add $2.50 to total
+    } else {
+      displayCheckout();
+    }
+  } else {
+    displayCheckout();
   }
 }
 
@@ -335,4 +328,12 @@ function ticketToggle() {
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function displayCheckout() {
+  document.getElementById("checkoutBox").classList.toggle("show");
+  checkoutTotal = document.getElementById("total");
+  document.getElementById("totalBox").innerHTML =
+    "$" + checkoutTotal.innerHTML.substring(1);
+  document.querySelector(".mainpage").classList.toggle("hide");
 }
