@@ -4,8 +4,6 @@ const options = document.querySelectorAll(".Btn");
 let total = 0;
 const totalText = document.getElementById("total");
 var dt = new Date();
-let neededSides = [];
-let sides = [];
 const sidesNames = [];
 
 //makes menu dropdown buttons work
@@ -225,6 +223,29 @@ function AddItem(event) {
       newSide.innerHTML = side;
       sideDropdown.append(newSide);
     }
+  } else if (item_card.className == "big") {
+    let sidesDiv = document.createElement("div");
+    wholeItem.append(sidesDiv);
+    let sideDropdown = document.createElement("select");
+    sidesDiv.append(sideDropdown);
+    let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.innerHTML = "Choose a side";
+    sideDropdown.appendChild(sidePlaceholder);
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown.append(newSide);
+    }
+    let sideDropdown2 = document.createElement("select");
+    sidesDiv.append(sideDropdown2);
+    let sidePlaceholder2 = document.createElement("option");
+    sidePlaceholder2.innerHTML = "Choose a side";
+    sideDropdown2.appendChild(sidePlaceholder2);
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown2.append(newSide);
+    }
   }
 
   ticketDisplay.append(wholeItem);
@@ -259,11 +280,20 @@ function removeItem(event) {
   button.parentElement.parentElement.remove();
 }
 
-// function sideSelection(event) {
-//   var sideDropdown = document.createElement("div");
-//   let i = 0;
-//   for (var name in sidesNames) {
-//     sideDropdown.options[sidesNames.length] = new Option(name, name);
-//   }
-//   sideDropdown.style.display = "none";
-// }
+function openCheckout() {
+  document.getElementById("checkoutBox").classList.toggle("show");
+  total = document.getElementById("total");
+  document.getElementById("totalBox").innerHTML =
+    "$" + total.innerHTML.substring(1);
+  document.querySelector(".mainpage").classList.toggle("hide");
+}
+
+function ticketToggle() {
+  document.getElementById("ticketSide").classList.toggle("show");
+  document.querySelector(".mainpage").classList.toggle("grid");
+  document.getElementById("total").classList.toggle("show");
+}
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
