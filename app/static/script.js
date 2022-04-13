@@ -4,7 +4,11 @@ const options = document.querySelectorAll(".Btn");
 let total = 0;
 const totalText = document.getElementById("total");
 var dt = new Date();
+let neededSides = [];
+let sides = [];
+const sidesNames = [];
 
+//makes menu dropdown buttons work
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
     if (e.target.innerHTML === "Small") {
@@ -76,19 +80,21 @@ options.forEach((m) => {
   });
 });
 
+//creates html for items of certain type
 function populateContent(items) {
   var itemsbox = document.createElement("div");
   itemsbox.classList.add("items");
   foodbox.appendChild(itemsbox);
   for (const item of items) {
+    var roundedCost = item.cost.toFixed(2);
     itemsbox.insertAdjacentHTML(
       "beforeend",
       `
-                <article class="itemBox">
+                <article id="itemBox" class="${item.type}">
                     <h2 class="itemName">${item.name}</h2>
                     <img src=/static/images/${item.image}></img>
                     <p class="itemDesc">${item.description}</p>
-                    <h2 class="itemPrice">$ ${item.cost}</h2>
+                    <h2 class="itemPrice">$ ${roundedCost}</h2>
                     <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
                 </article>
               `
@@ -97,6 +103,7 @@ function populateContent(items) {
   buttons();
 }
 
+//the initialize function of the page
 function populateInitialContent() {
   fetch("/static/food.json")
     .then((req) => req.json())
@@ -141,6 +148,7 @@ function populateInitialContent() {
       var leList = [];
       for (const item of data) {
         if (item.type == "side") {
+          sidesNames.push(item.name);
           leList.push(item);
         }
       }
@@ -173,6 +181,7 @@ function populateInitialContent() {
   buttons();
 }
 
+//makes the add buttons work
 function buttons() {
   var AddItemBtns = document.getElementsByClassName("addListBtn");
   for (let i = 0; i < AddItemBtns.length; i++) {
@@ -181,6 +190,7 @@ function buttons() {
   }
 }
 
+//adding an item to the ticket
 function AddItem(event) {
   var button = event.target;
   var item_card = button.parentElement;
@@ -204,6 +214,23 @@ function AddItem(event) {
       </div>
     </article>`
   );
+  // small food side dropdown creation
+  if (item_card.className == "small") {
+    var side1 = document.createElement("div");
+    side1.innerHTML = "Choose a side";
+    side1.style.border = "1px solid black";
+    var sideDropdown = document.createElement("div");
+    for (const name of sidesNames) {
+      var sideDiv = document.createElement("div");
+      sideDiv.innerHTML = name;
+      sideDropdown.append(sideDiv);
+    }
+    sideDropdown.setAttribute("id", "sideDropdown");
+    side1.onclick = showToggle();
+    sideDropdown.style.display = "none";
+    wholeItem.append(side1);
+    wholeItem.append(sideDropdown);
+  }
   ticketDisplay.append(wholeItem);
   let buttons = ticketDisplay.getElementsByClassName("removeItem");
   for (let i = 0; i < buttons.length; i++) {
@@ -231,3 +258,6 @@ function removeItem(event) {
   button.parentElement.parentElement.remove();
 }
 
+function showToggle() {
+  document.getElementById("sideDropdown").classList.toggle("show");
+}

@@ -58,6 +58,7 @@ def signup(request):
 
 def home(request):
     context ={}
+    print("hellow")
     return render(request,'index.html',context)
 
 
