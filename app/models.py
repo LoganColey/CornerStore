@@ -37,4 +37,6 @@ class dailyLunch(models.Model):
     side3 = models.CharField(max_length=100, null=True)
     bread = models.CharField(max_length=100, null=True)
     dessert = models.CharField(max_length=100, null=True)
+
+
     
