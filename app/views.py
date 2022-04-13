@@ -57,7 +57,8 @@ def signup(request):
 
 
 def home(request):
-    context ={}
+    lunch = dailyLunch.objects.all()
+    context ={'lunch':lunch}
     return render(request,'index.html',context)
 
 
@@ -127,6 +128,8 @@ def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()
     if request.method == 'POST':
+        pastLunch = dailyLunch.objects.all()
+        pastLunch.delete()
         form = CreateDailyLunch(request.POST)
         if form.is_valid():
             form.save()
