@@ -202,7 +202,7 @@ function AddItem(event) {
   wholeItem.classList.add("whole");
   wholeItem.insertAdjacentHTML(
     "beforeend",
-    `<article>
+    `
       <div>
         <div>
           <p class="item-name">${item_name}</p>
@@ -211,31 +211,32 @@ function AddItem(event) {
           <p class="item-price">$${item_price}</p>
         </div>
         <button class="removeItem">Remove</button>
-      </div>
-    </article>`
+      </div>`
   );
   // small food side dropdown creation
   if (item_card.className == "small") {
-    var side1 = document.createElement("div");
-    side1.innerHTML = "Choose a side";
-    side1.style.border = "1px solid black";
-    var sideDropdown = document.createElement("div");
-    for (const name of sidesNames) {
-      var sideDiv = document.createElement("div");
-      sideDiv.innerHTML = name;
-      sideDropdown.append(sideDiv);
-    }
-    sideDropdown.setAttribute("id", "sideDropdown");
-    side1.onclick = showToggle();
-    sideDropdown.style.display = "none";
-    wholeItem.append(side1);
+    let sideDropdown = document.createElement("select");
     wholeItem.append(sideDropdown);
+    let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.innerHTML = "Choose a side";
+    sideDropdown.appendChild(sidePlaceholder);
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown.append(newSide);
+    }
   }
+
   ticketDisplay.append(wholeItem);
   let buttons = ticketDisplay.getElementsByClassName("removeItem");
+  let sideSelectors = ticketDisplay.getElementsByClassName("sideSelector");
   for (let i = 0; i < buttons.length; i++) {
     var variable = buttons[i];
     variable.addEventListener("click", removeItem);
+  }
+  for (let i = 0; i < sideSelectors.length; i++) {
+    var variable = sideSelectors[i];
+    variable.addEventListener("click", sideSelection);
   }
   total += Number(item_price);
   totalText.innerHTML = "";
@@ -258,6 +259,11 @@ function removeItem(event) {
   button.parentElement.parentElement.remove();
 }
 
-function showToggle() {
-  document.getElementById("sideDropdown").classList.toggle("show");
-}
+// function sideSelection(event) {
+//   var sideDropdown = document.createElement("div");
+//   let i = 0;
+//   for (var name in sidesNames) {
+//     sideDropdown.options[sidesNames.length] = new Option(name, name);
+//   }
+//   sideDropdown.style.display = "none";
+// }
