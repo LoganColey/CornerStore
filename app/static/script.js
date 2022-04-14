@@ -300,22 +300,24 @@ function removeItem(event) {
 
 function openCheckout() {
   //see if all sides are chosen
-  if (document.querySelectorAll(".sideDrop") > 0) {
-    let missing = false;
+  console.log(document.querySelectorAll(".sideDrop").length);
+  if (document.querySelectorAll(".sideDrop").length > 0) {
+    var missing = false;
     for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+      console.log(sideDrop.options[sideDrop.selectedIndex].value);
       if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
         missing = true;
       }
     }
-    if ((missing = true)) {
-      var errorMsg = document.createElement("div");
-      errorMsg.innerHTML = "Please select all sides before checking out.";
-      document.querySelector(".checkoutbtn").append(errorMsg);
+    if (missing == true) {
+      document.querySelector(".sidesError").classList.add("show");
       //if side is loaded baked potato or side salad, add $2.50 to total
     } else {
+      document.querySelector(".sidesError").classList.remove("show");
       displayCheckout();
     }
   } else {
+    document.querySelector(".sidesError").classList.remove("show");
     displayCheckout();
   }
 }

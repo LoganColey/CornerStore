@@ -91,6 +91,10 @@ nav a:hover {
   position: sticky;
   top: 0;
 }
+
+.sidesError {
+  display: none;
+}
 /* Menu Display */
 .full-width {
   width: 100%;
