@@ -214,6 +214,7 @@ function AddItem(event) {
   );
   // small food side dropdown creation
   if (item_card.className == "small") {
+    console.log(wholeItem);
     let sideDropdown = document.createElement("select");
     wholeItem.append(sideDropdown);
     sideDropdown.classList.add("sideDrop");
@@ -229,6 +230,8 @@ function AddItem(event) {
       newSide.value = i;
       i += 1;
     }
+    sideDropdown.addEventListener("change", updateTotal);
+
     //big food side dropdowns
   } else if (item_card.className == "big") {
     let sidesDiv = document.createElement("div");
@@ -248,6 +251,7 @@ function AddItem(event) {
       newSide.value = i;
       i += 1;
     }
+    sideDropdown.addEventListener("change", updateTotal);
     let sideDropdown2 = document.createElement("select");
     sidesDiv.append(sideDropdown2);
     let sidePlaceholder2 = document.createElement("option");
@@ -263,6 +267,7 @@ function AddItem(event) {
       newSide.value = i;
       i += 1;
     }
+    sideDropdown2.addEventListener("change", updateTotal);
   }
 
   ticketDisplay.append(wholeItem);
@@ -300,11 +305,9 @@ function removeItem(event) {
 
 function openCheckout() {
   //see if all sides are chosen
-  console.log(document.querySelectorAll(".sideDrop").length);
   if (document.querySelectorAll(".sideDrop").length > 0) {
     var missing = false;
     for (const sideDrop of document.querySelectorAll(".sideDrop")) {
-      console.log(sideDrop.options[sideDrop.selectedIndex].value);
       if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
         missing = true;
       }
@@ -339,4 +342,20 @@ function displayCheckout() {
   document.getElementById("totalBox").innerHTML =
     "$" + checkoutTotal.innerHTML.substring(1);
   document.querySelector(".mainpage").classList.toggle("hide");
+}
+
+function updateTotal() {
+  let addons = 0;
+  if (document.querySelectorAll(".sideDrop").length > 0) {
+    for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+      if (
+        sideDrop.options[sideDrop.selectedIndex].value == 6 ||
+        sideDrop.options[sideDrop.selectedIndex].value == 7
+      ) {
+        addons += 2.5;
+      }
+    }
+    newTotal = total + addons;
+    totalText.innerHTML = "$" + newTotal.toFixed(2);
+  }
 }
