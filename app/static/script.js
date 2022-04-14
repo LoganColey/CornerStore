@@ -326,6 +326,7 @@ function ticketToggle() {
   document.getElementById("total").classList.toggle("show");
 }
 
+//toggle menu
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
