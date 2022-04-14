@@ -29,6 +29,7 @@
       <a class="Btn" name="salads">Salads</a>
       <a class="Btn" name="starters">Starters</a>
     </div>
+    <div class="sidesError">Please select all sides before checkout"</div>
     <div id="checkoutBox">
       <div id="totalBox"></div>
       <div id="paypal-button-container"></div>
@@ -37,8 +38,7 @@
       <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     </div>
     <div class="mainpage">
-      <div id="content">
-      </div>
+      <div id="content"></div>
       <div id="ticketSide">
         <div class="ticket-content" id="ticketDisplay"></div>
         <div class="sticky2">
@@ -95,24 +95,5 @@
         .render("#paypal-button-container");
     </script>
   </body>
-  <script>
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function openCheckout() {
-      document.getElementById("checkoutBox").classList.toggle("show");
-      total = document.getElementById("total");
-      document.getElementById("totalBox").innerHTML =
-        "$" + total.innerHTML.substring(1);
-      document.querySelector(".mainpage").classList.toggle("hide");
-    }
-
-    function ticketToggle() {
-      document.getElementById("ticketSide").classList.toggle("show");
-      document.querySelector(".mainpage").classList.toggle("grid");
-      document.getElementById("total").classList.toggle("show");
-    }
-  </script>
   <script src="{% static 'script.js' %}"></script>
 </html>

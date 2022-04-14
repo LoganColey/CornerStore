@@ -4,7 +4,9 @@ const options = document.querySelectorAll(".Btn");
 let total = 0;
 const totalText = document.getElementById("total");
 var dt = new Date();
+const sidesNames = [];
 
+//makes menu dropdown buttons work
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
     if (e.target.innerHTML === "Small") {
@@ -76,19 +78,21 @@ options.forEach((m) => {
   });
 });
 
+//creates html for items of certain type
 function populateContent(items) {
   var itemsbox = document.createElement("div");
   itemsbox.classList.add("items");
   foodbox.appendChild(itemsbox);
   for (const item of items) {
+    var roundedCost = item.cost.toFixed(2);
     itemsbox.insertAdjacentHTML(
       "beforeend",
       `
-                <article class="itemBox">
+                <article id="itemBox" class="${item.type}">
                     <h2 class="itemName">${item.name}</h2>
                     <img src=/static/images/${item.image}></img>
                     <p class="itemDesc">${item.description}</p>
-                    <h2 class="itemPrice">$ ${item.cost}</h2>
+                    <h2 class="itemPrice">$ ${roundedCost}</h2>
                     <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
                 </article>
               `
@@ -97,6 +101,7 @@ function populateContent(items) {
   buttons();
 }
 
+//the initialize function of the page
 function populateInitialContent() {
   fetch("/static/food.json")
     .then((req) => req.json())
@@ -141,6 +146,7 @@ function populateInitialContent() {
       var leList = [];
       for (const item of data) {
         if (item.type == "side") {
+          sidesNames.push(item.name);
           leList.push(item);
         }
       }
@@ -173,6 +179,7 @@ function populateInitialContent() {
   buttons();
 }
 
+//makes the add buttons work
 function buttons() {
   var AddItemBtns = document.getElementsByClassName("addListBtn");
   for (let i = 0; i < AddItemBtns.length; i++) {
@@ -181,7 +188,9 @@ function buttons() {
   }
 }
 
+//adding an item to the ticket
 function AddItem(event) {
+  document.querySelector(".checkoutbtn").classList.add("show");
   var button = event.target;
   var item_card = button.parentElement;
   var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
@@ -192,7 +201,7 @@ function AddItem(event) {
   wholeItem.classList.add("whole");
   wholeItem.insertAdjacentHTML(
     "beforeend",
-    `<article>
+    `
       <div>
         <div>
           <p class="item-name">${item_name}</p>
@@ -201,14 +210,71 @@ function AddItem(event) {
           <p class="item-price">$${item_price}</p>
         </div>
         <button class="removeItem">Remove</button>
-      </div>
-    </article>`
+      </div>`
   );
+  // small food side dropdown creation
+  if (item_card.className == "small") {
+    let sideDropdown = document.createElement("select");
+    wholeItem.append(sideDropdown);
+    sideDropdown.classList.add("sideDrop");
+    let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.value = 0;
+    sidePlaceholder.innerHTML = "Choose a side";
+    sideDropdown.appendChild(sidePlaceholder);
+    let i = 1;
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown.append(newSide);
+      newSide.value = i;
+      i += 1;
+    }
+    //big food side dropdowns
+  } else if (item_card.className == "big") {
+    let sidesDiv = document.createElement("div");
+    wholeItem.append(sidesDiv);
+    let sideDropdown = document.createElement("select");
+    sideDropdown.classList.add("sideDrop");
+    sidesDiv.append(sideDropdown);
+    let sidePlaceholder = document.createElement("option");
+    sidePlaceholder.value = 0;
+    sidePlaceholder.innerHTML = "Choose a side";
+    sideDropdown.appendChild(sidePlaceholder);
+    i = 1;
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown.append(newSide);
+      newSide.value = i;
+      i += 1;
+    }
+    let sideDropdown2 = document.createElement("select");
+    sidesDiv.append(sideDropdown2);
+    let sidePlaceholder2 = document.createElement("option");
+    sideDropdown2.classList.add("sideDrop");
+    sidePlaceholder2.value = 0;
+    sidePlaceholder2.innerHTML = "Choose a side";
+    i = 1;
+    sideDropdown2.appendChild(sidePlaceholder2);
+    for (const side of sidesNames) {
+      let newSide = document.createElement("option");
+      newSide.innerHTML = side;
+      sideDropdown2.append(newSide);
+      newSide.value = i;
+      i += 1;
+    }
+  }
+
   ticketDisplay.append(wholeItem);
   let buttons = ticketDisplay.getElementsByClassName("removeItem");
+  let sideSelectors = ticketDisplay.getElementsByClassName("sideSelector");
   for (let i = 0; i < buttons.length; i++) {
     var variable = buttons[i];
     variable.addEventListener("click", removeItem);
+  }
+  for (let i = 0; i < sideSelectors.length; i++) {
+    var variable = sideSelectors[i];
+    variable.addEventListener("click", sideSelection);
   }
   total += Number(item_price);
   totalText.innerHTML = "";
@@ -224,6 +290,7 @@ function removeItem(event) {
   total -= Number(item_price);
   totalText.innerHTML = "";
   if (total <= 0) {
+    document.querySelector(".checkoutbtn").classList.remove("show");
     totalText.innerHTML = "$0.00";
   } else {
     totalText.innerHTML = "$" + total.toFixed(2);
@@ -231,3 +298,45 @@ function removeItem(event) {
   button.parentElement.parentElement.remove();
 }
 
+function openCheckout() {
+  //see if all sides are chosen
+  console.log(document.querySelectorAll(".sideDrop").length);
+  if (document.querySelectorAll(".sideDrop").length > 0) {
+    var missing = false;
+    for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+      console.log(sideDrop.options[sideDrop.selectedIndex].value);
+      if (sideDrop.options[sideDrop.selectedIndex].value == 0) {
+        missing = true;
+      }
+    }
+    if (missing == true) {
+      document.querySelector(".sidesError").classList.add("show");
+      //if side is loaded baked potato or side salad, add $2.50 to total
+    } else {
+      document.querySelector(".sidesError").classList.remove("show");
+      displayCheckout();
+    }
+  } else {
+    document.querySelector(".sidesError").classList.remove("show");
+    displayCheckout();
+  }
+}
+
+function ticketToggle() {
+  document.getElementById("ticketSide").classList.toggle("show");
+  document.querySelector(".mainpage").classList.toggle("grid");
+  document.getElementById("total").classList.toggle("show");
+}
+
+//toggle menu
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function displayCheckout() {
+  document.getElementById("checkoutBox").classList.toggle("show");
+  checkoutTotal = document.getElementById("total");
+  document.getElementById("totalBox").innerHTML =
+    "$" + checkoutTotal.innerHTML.substring(1);
+  document.querySelector(".mainpage").classList.toggle("hide");
+}
