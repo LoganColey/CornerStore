@@ -251,8 +251,8 @@ function AddItem(event) {
     let sideDropdown2 = document.createElement("select");
     sidesDiv.append(sideDropdown2);
     let sidePlaceholder2 = document.createElement("option");
-    sideDropdown.classList.add("sideDrop");
-    sidePlaceholder.value = 0;
+    sideDropdown2.classList.add("sideDrop");
+    sidePlaceholder2.value = 0;
     sidePlaceholder2.innerHTML = "Choose a side";
     i = 1;
     sideDropdown2.appendChild(sidePlaceholder2);
