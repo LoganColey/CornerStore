@@ -3,7 +3,7 @@ const ticketDisplay = document.getElementById("ticketDisplay");
 const options = document.querySelectorAll(".Btn");
 let total = 0;
 const totalText = document.getElementById("total");
-var dt = new Date();
+var dt = new Date("December 17, 1995 19:34:00");
 const sidesNames = [];
 
 //makes menu dropdown buttons work
@@ -325,7 +325,7 @@ function openCheckout() {
 }
 
 function ticketToggle() {
-  if (dt.getHours() >= 10 && dt.getHours() < 19) {
+  if (dt.getHours() * 100 + dt.getMinutes() >= 1630 && dt.getHours() < 19) {
     document.getElementById("ticketSide").classList.toggle("show");
     document.querySelector(".mainpage").classList.toggle("grid");
     document.getElementById("total").classList.toggle("show");
