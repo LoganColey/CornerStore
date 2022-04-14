@@ -3,7 +3,7 @@ const ticketDisplay = document.getElementById("ticketDisplay");
 const options = document.querySelectorAll(".Btn");
 let total = 0;
 const totalText = document.getElementById("total");
-var dt = new Date("December 17, 1995 19:34:00");
+var dt = new Date();
 const sidesNames = [];
 
 //makes menu dropdown buttons work
