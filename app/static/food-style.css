@@ -6,10 +6,6 @@ body {
   padding: 0;
 }
 
-.hide {
-  display: none !important;
-}
-
 .grid {
   display: grid;
   grid-template-columns: 66% 34%;
@@ -17,6 +13,10 @@ body {
 
 .show {
   display: block !important;
+}
+
+.hide {
+  display: none !important;
 }
 
 /* Nav Bar */
@@ -93,6 +93,10 @@ nav a:hover {
 }
 
 .sidesError {
+  display: none;
+}
+
+.afterHoursError {
   display: none;
 }
 /* Menu Display */

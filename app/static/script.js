@@ -274,8 +274,7 @@ function AddItem(event) {
   let buttons = ticketDisplay.getElementsByClassName("removeItem");
   let sideSelectors = ticketDisplay.getElementsByClassName("sideSelector");
   for (let i = 0; i < buttons.length; i++) {
-    var variable = buttons[i];
-    variable.addEventListener("click", removeItem);
+    buttons[i].addEventListener("click", removeItem);
   }
   for (let i = 0; i < sideSelectors.length; i++) {
     var variable = sideSelectors[i];
@@ -289,9 +288,9 @@ function AddItem(event) {
 function removeItem(event) {
   var button = event.target;
   var item_card = button.parentElement;
-  var item_price_string =
-    item_card.getElementsByClassName("item-price")[0].innerText;
-  var item_price = item_price_string.substring(1);
+  var item_price = item_card
+    .getElementsByClassName("item-price")[0]
+    .innerText.substring(1);
   total -= Number(item_price);
   totalText.innerHTML = "";
   if (total <= 0) {
@@ -326,14 +325,25 @@ function openCheckout() {
 }
 
 function ticketToggle() {
-  document.getElementById("ticketSide").classList.toggle("show");
-  document.querySelector(".mainpage").classList.toggle("grid");
-  document.getElementById("total").classList.toggle("show");
+  if (dt.getHours() >= 10 && dt.getHours() < 19) {
+    document.getElementById("ticketSide").classList.toggle("show");
+    document.querySelector(".mainpage").classList.toggle("grid");
+    document.getElementById("total").classList.toggle("show");
+  } else {
+    document.querySelector(".afterHoursError").classList.toggle("show");
+  }
 }
 
 //toggle menu
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
+  if (dt.getDay() == 5 || dt.getDay() == 6) {
+    document.getElementById("seafood").classList.remove("hide");
+    document.getElementById("seafood").classList.add("show");
+  } else {
+    document.getElementById("seafood").classList.remove("show");
+    document.getElementById("seafood").classList.add("hide");
+  }
 }
 
 function displayCheckout() {
