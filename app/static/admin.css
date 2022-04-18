@@ -1,0 +1,12 @@
+nav {
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#pageContentDiv {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}

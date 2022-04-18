@@ -9,19 +9,28 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'admin.css' %}" />
     <title>Admin</title>
   </head>
   <body>
-    <h1>admin</h1>
-    <form action="" method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button>Change Lunch</button>
-    </form>
-    <form action="" method="POST">
-      {% csrf_token %}
-      {{till.as_p}}
-      <button></button>
-    </form>
+    <nav>
+      <button id="homeBtn" href="{% url 'home' %}">Home</button>
+      <h1>Welcome Susan</h1>
+    </nav>
+    <div id="pageContentDiv">
+      <div id="dailyLunchForm">
+        <form action="" method="POST">
+          {% csrf_token %} {{form.as_p}}
+          <button>Change Lunch</button>
+        </form>
+        <form action="" method="POST">
+          {% csrf_token %} {{till.as_p}}
+          <button></button>
+        </form>
+      </div>
+      <div id="inputNewFoodForm">new foods here</div>
+      <div id="countTillForm">till</div>
+      <div id="calendarSlot">calendar</div>
+    </div>
   </body>
 </html>
