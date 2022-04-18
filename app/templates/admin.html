@@ -18,19 +18,25 @@
       <h1>Welcome Susan</h1>
     </nav>
     <div id="pageContentDiv">
-      <div id="dailyLunchForm">
+      <div class="adminOption" id="ordersView">View placed orders.</div>
+      <div class="adminOption" id="dailyLunchForm">
         <form action="" method="POST">
           {% csrf_token %} {{form.as_p}}
-          <button>Change Lunch</button>
+          <input type="submit" name="form_type" value="Change Lunch" />
         </form>
         <form action="" method="POST">
           {% csrf_token %} {{till.as_p}}
-          <button></button>
+          <input type="submit" name="form_type" value="Till Out" />
         </form>
       </div>
-      <div id="inputNewFoodForm">new foods here</div>
-      <div id="countTillForm">till</div>
-      <div id="calendarSlot">calendar</div>
+      <div class="adminOption" id="inputNewFoodForm">
+        <form action="" method="POST">
+          {% csrf_token %} {{newFood.as_p}}
+          <input type="submit" name="form_type" value="Add Item" />
+        </form>
+      </div>
+      <div class="adminOption" id="countTillForm">till out</div>
+      <div class="adminOption" id="calendarSlot">calendar</div>
     </div>
   </body>
 </html>

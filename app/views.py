@@ -121,19 +121,28 @@ def paymentComplete(request):
     print('BODY:', body)
     return JsonResponse('Payment completed!', safe=False)
 
-def populateBigFood(request):
-    return render(request, "food.html")
-
 def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()
+    newFood = AddToMenu()
     if request.method == 'POST':
-        form = CreateDailyLunch(request.POST)
-        if form.is_valid():
-            form.save()
-    if request.method == 'POST':
-        till = CreateClosingTill(request.POST)
-        if till.is_valid():
-            till.save()
-    context = {'form': form, 'till': till}
+        if request.POST.get("form_type") == 'Change Lunch':
+            form = CreateDailyLunch(request.POST)
+            if form.is_valid():
+                form.save()
+        elif request.POST.get("form_type") == 'Till Out':
+            till = CreateClosingTill(request.POST)
+            if till.is_valid():
+                till.save()
+        elif request.POST.get("form_type") == 'Add Item':
+            newFood = AddToMenu(request.POST)
+            if newFood.is_valid():
+                newFood.save()
+    context = {'form': form, 'till': till, 'newFood': newFood}
     return render(request,'admin.html',context)
+
+
+def populateMenu(request):
+    menu = menuItem.objects.all()
+    menu = serializers.serialize("json", menu)
+    return render(request, "food.html", {'menu': menu})

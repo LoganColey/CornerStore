@@ -19,6 +19,10 @@ body {
   display: none !important;
 }
 
+.foodimage {
+  height: 8vh;
+}
+
 /* Nav Bar */
 nav {
   overflow: hidden;

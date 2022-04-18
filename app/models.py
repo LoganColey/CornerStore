@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+from email.mime import image
+from re import M
+from tokenize import ContStr
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator 
@@ -41,3 +44,9 @@ class dailyLunch(models.Model):
     bread = models.CharField(max_length=100, null=True)
     dessert = models.CharField(max_length=100, null=True)
 
+class menuItem(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
+    description = models.CharField(max_length=400, null=False)
+    image = models.ImageField(null=False)
+    type = models.CharField(max_length=20)
