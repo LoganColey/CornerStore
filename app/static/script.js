@@ -6,16 +6,25 @@ const totalText = document.getElementById("total");
 var dt = new Date();
 const sidesNames = [];
 
+fetch("/static/food.json")
+  .then((req) => req.json())
+  .then((data) => {
+    for (const item of data) {
+      if (item.type == "side") {
+        sidesNames.push(item.name);
+      }
+    }
+  });
 //makes menu dropdown buttons work
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
-    if (e.target.innerHTML === "Small") {
+    if (e.target.innerHTML === "Burgers and More") {
       foodbox.innerHTML = "";
       fetchingAndPopulating("small", "Burgers and More");
     } else if (e.target.innerHTML === "Sides") {
       foodbox.innerHTML = "";
       fetchingAndPopulating("side", "Sides");
-    } else if (e.target.innerHTML === "Big") {
+    } else if (e.target.innerHTML === "Plates") {
       foodbox.innerHTML = "";
       fetchingAndPopulating("big", "Plates");
     } else if (e.target.innerHTML === "Salads") {
@@ -24,6 +33,9 @@ options.forEach((m) => {
     } else if (e.target.innerHTML === "Starters") {
       foodbox.innerHTML = "";
       fetchingAndPopulating("starter", "Starters");
+    } else if (e.target.innerHTML === "Seafood") {
+      foodbox.innerHTML = "";
+      fetchingAndPopulating("seafood", "Seafood");
     }
   });
 });
@@ -40,6 +52,7 @@ function populateInitialContent() {
   }
 }
 
+//fetch from json and put it on screen and make the buttons work
 function fetchingAndPopulating(foodType, foodName) {
   fetch("/static/food.json")
     .then((req) => req.json())
@@ -216,15 +229,20 @@ function openCheckout() {
   }
 }
 
-// function ticketToggle() {
-//   if (dt.getHours() * 100 + dt.getMinutes() >= 1630 && dt.getHours() < 19) {
-//     document.getElementById("ticketSide").classList.toggle("show");
-//     document.querySelector(".mainpage").classList.toggle("grid");
-//     document.getElementById("total").classList.toggle("show");
-//   } else {
-//     document.querySelector(".afterHoursError").classList.toggle("show");
-//   }
-// }
+function ticketToggle() {
+  //   if (dt.getHours() * 100 + dt.getMinutes() >= 1630 && dt.getHours() < 19) {
+  //     document.getElementById("ticketSide").classList.toggle("show");
+  //     document.querySelector(".mainpage").classList.toggle("grid");
+  //     document.getElementById("total").classList.toggle("show");
+  //   } else {
+  //     document.querySelector(".afterHoursError").classList.toggle("show");
+  //   }
+  // }
+
+  document.getElementById("ticketSide").classList.toggle("show");
+  document.querySelector(".mainpage").classList.toggle("grid");
+  document.getElementById("total").classList.toggle("show");
+}
 
 //toggle menu
 function myFunction() {
