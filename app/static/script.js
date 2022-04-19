@@ -5,6 +5,7 @@ let total = 0;
 const totalText = document.getElementById("total");
 var dt = new Date();
 const sidesNames = [];
+console.log(players);
 
 fetch("/static/food.json")
   .then((req) => req.json())

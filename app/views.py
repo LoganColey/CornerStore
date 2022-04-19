@@ -14,6 +14,7 @@ from json import dumps
 from django.core import serializers
 from django.http import JsonResponse
 import json 
+from django.core.files import File
 
 @unauthenticated_user
 def login_page(request):
@@ -143,6 +144,9 @@ def admin(request):
 
 
 def populateMenu(request):
-    menu = menuItem.objects.all()
-    menu = serializers.serialize("json", menu)
-    return render(request, "food.html", {'menu': menu})
+    f = open('app/static/test.json', 'w')
+    testfile = File(f)
+    testfile.write('Welcome to this country')
+    testfile.close
+    f.close
+    return render(request, "food.html")
