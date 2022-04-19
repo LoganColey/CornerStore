@@ -142,11 +142,12 @@ def admin(request):
     context = {'form': form, 'till': till, 'newFood': newFood}
     return render(request,'admin.html',context)
 
-
 def populateMenu(request):
-    f = open('app/static/test.json', 'w')
-    testfile = File(f)
-    testfile.write('Welcome to this country')
-    testfile.close
-    f.close
+    with open('app/static/food.json', 'a') as f:
+        f.truncate(0)
+        f.write("[")
+        for item in menuItem.objects.all():
+            f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"},')
+        f.write("]")
+        f.close
     return render(request, "food.html")

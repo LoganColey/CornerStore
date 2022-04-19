@@ -5,17 +5,18 @@ let total = 0;
 const totalText = document.getElementById("total");
 var dt = new Date();
 const sidesNames = [];
-console.log(players);
 
 fetch("/static/food.json")
   .then((req) => req.json())
   .then((data) => {
+    console.log(data);
     for (const item of data) {
       if (item.type == "side") {
         sidesNames.push(item.name);
       }
     }
   });
+
 //makes menu dropdown buttons work
 options.forEach((m) => {
   m.addEventListener("click", (e) => {
@@ -58,6 +59,7 @@ function fetchingAndPopulating(foodType, foodName) {
   fetch("/static/food.json")
     .then((req) => req.json())
     .then((data) => {
+      console.log(data);
       var platesHeader = document.createElement("header");
       platesHeader.innerHTML = foodName;
       platesHeader.classList.add("full-width");
@@ -120,7 +122,6 @@ function AddItem(event) {
   );
   // small food side dropdown creation
   if (item_card.className == "small") {
-    console.log(wholeItem);
     let sideDropdown = document.createElement("select");
     wholeItem.append(sideDropdown);
     sideDropdown.classList.add("sideDrop");
