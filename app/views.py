@@ -146,8 +146,14 @@ def populateMenu(request):
     with open('app/static/food.json', 'a') as f:
         f.truncate(0)
         f.write("[")
-        for item in menuItem.objects.all():
-            f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"},')
+        menu = menuItem.objects.all()
+        index = menuItem.objects.all().count()
+        print(index)
+        for item in menu:
+            f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
+            if item.id != 10:
+              f.write(",")
+            print(item.id)
         f.write("]")
         f.close
     return render(request, "food.html")

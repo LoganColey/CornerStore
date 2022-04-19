@@ -80,7 +80,7 @@ function fetchingAndPopulating(foodType, foodName) {
           `
                     <article id="itemBox" class="${item.type}">
                         <h2 class="itemName">${item.name}</h2>
-                        <img src=/static/images/${item.image}></img>
+                        <img src=/static/images/bigchungus.png></img>
                         <p class="itemDesc">${item.description}</p>
                         <h2 class="itemPrice">$ ${roundedCost}</h2>
                         <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
