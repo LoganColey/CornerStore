@@ -48,5 +48,12 @@ class menuItem(models.Model):
     name = models.CharField(max_length=100, null=False)
     cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
     description = models.CharField(max_length=400, null=False)
-    image = models.ImageField(null=False)
+    image = models.ImageField(null=True)
     type = models.CharField(max_length=20)
+
+class event(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    description = models.CharField(max_length=1000, null=False)
+    day = models.CharField(max_length=100, null=False)
+    month = models.CharField(max_length=100, null=False)
+    year  = models.IntegerField(validators=[MinValueValidator(2022),MaxValueValidator(2030)])

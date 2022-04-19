@@ -1,33 +1,33 @@
-const date = new Date();
+date = new Date();
 
-const renderCalendar = () => {
+renderCalendar = () => {
   date.setDate(1);
 
-  const monthDays = document.querySelector(".days");
+  let monthDays = document.querySelector(".days");
 
-  const lastDay = new Date(
+  let lastDay = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDate();
 
-  const prevLastDay = new Date(
+  let prevLastDay = new Date(
     date.getFullYear(),
     date.getMonth(),
     0
   ).getDate();
 
-  const firstDayIndex = date.getDay();
+  let firstDayIndex = date.getDay();
 
-  const lastDayIndex = new Date(
+  let lastDayIndex = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDay();
 
-  const nextDays = 7 - lastDayIndex - 1;
+  let nextDays = 7 - lastDayIndex - 1;
 
-  const months = [
+  let months = [
     "January",
     "February",
     "March",
