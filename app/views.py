@@ -136,7 +136,7 @@ def admin(request):
             if till.is_valid():
                 till.save()
         elif request.POST.get("form_type") == 'Add Item':
-            newFood = AddToMenu(request.POST)
+            newFood = AddToMenu(request.POST, request.FILES)
             if newFood.is_valid():
                 newFood.save()
     context = {'form': form, 'till': till, 'newFood': newFood}

@@ -44,4 +44,4 @@ class CreateClosingTill(ModelForm):
 class AddToMenu(ModelForm):
     class Meta:
         model = menuItem
-        fields = ['name', 'cost','description','type']
+        fields = '__all__'
