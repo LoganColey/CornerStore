@@ -147,11 +147,9 @@ def populateMenu(request):
         f.truncate(0)
         f.write("[")
         menu = menuItem.objects.all()
-        index = menuItem.objects.all().count()
-        print(index)
         for item in menu:
             f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
-            if item.id != 10:
+            if item.id != menuItem.objects.all().last().id:
               f.write(",")
             print(item.id)
         f.write("]")
