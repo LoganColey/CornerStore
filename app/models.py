@@ -22,6 +22,9 @@ class smallFood(models.Model):
     image = models.ImageField(null=True)
     cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
 
+    def __str__(self) -> str:
+           return self.name
+
 class bigFood(models.Model):
     name = models.CharField(max_length=100, null=True)
     cost = models.DecimalField(max_digits=6, decimal_places=2)
@@ -30,6 +33,9 @@ class bigFood(models.Model):
     description = models.CharField(max_length=10000)
     image = models.ImageField(null=True)
     cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
+
+    def __str__(self) -> str:
+           return self.name
 
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
@@ -44,6 +50,9 @@ class dailyLunch(models.Model):
     bread = models.CharField(max_length=100, null=True)
     dessert = models.CharField(max_length=100, null=True)
 
+    def __str__(self) -> str:
+           return self.name
+
 class menuItem(models.Model):
     name = models.CharField(max_length=100, null=False)
     cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
@@ -51,9 +60,15 @@ class menuItem(models.Model):
     image = models.ImageField(upload_to='images')
     type = models.CharField(max_length=20)
 
+    def __str__(self) -> str:
+           return self.name
+
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
     day = models.CharField(max_length=100, null=False)
     month = models.CharField(max_length=100, null=False)
     year  = models.IntegerField(validators=[MinValueValidator(2022),MaxValueValidator(2030)])
+
+    def __str__(self) -> str:
+           return self.name
