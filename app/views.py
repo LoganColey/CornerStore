@@ -125,6 +125,7 @@ def paymentComplete(request):
 def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()
+    createEvent = CreateEvent()
     newFood = AddToMenu()
     if request.method == 'POST':
         if request.POST.get("form_type") == 'Change Lunch':
@@ -139,7 +140,11 @@ def admin(request):
             newFood = AddToMenu(request.POST)
             if newFood.is_valid():
                 newFood.save()
-    context = {'form': form, 'till': till, 'newFood': newFood}
+        elif request.POST.get("form_type") == "Event":
+            createEvent = CreateEvent(request.POST)
+            if createEvent.is_valid():
+                createEvent.save()
+    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
     return render(request,'admin.html',context)
 
 def populateMenu(request):

@@ -45,3 +45,8 @@ class AddToMenu(ModelForm):
     class Meta:
         model = menuItem
         fields = ['name', 'cost','description','type']
+
+class CreateEvent(ModelForm):
+    class Meta:
+        model = event
+        fields = '__all__'
