@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>CornerStore</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="shell">
+  
+        <div id="header">
+          <h1 id="logo"><a href="#" title="">CornerStore<span>Susan</span></a></h1>
+        </div>
+  
+        <nav id="navigation">
+          <ul>
+            <li><a href="#" class="active" title="Home"><span>Home</span></a></li>
+            <li><a href="{% url 'food' %}" title="Food"><span>Food</span></a></li>
+            <li><a href="{% url 'checkout' %}" title ="Checkout"><span>Checkout</span></a> </li>
+          </ul>
+        </nav>
+        <hr class="nav-underline">
+      </div>
+      <!-- END Navigation -->
+      <!-- Slider -->
+  
+      <div class="container">
+        <div id="myCarousel" class="carousel slide">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li class="item1 active"></li>
+            <li class="item2"></li>
+            <li class="item3"></li>
+            <li class="item4"></li>
+          </ol>
+      
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+      
+            <div class="item active">
+                <a href="https://github.com/LoganColey/EverestGameCenter" target="_blank"><img src="{% static 'images/bigchungus.png' %}" width="200" height="250" alt="Arcade" class="center"> </a>
+          
+            </div>
+      
+            <div class="item">
+                <a href="https://github.com/LoganColey/DiceAndMangement" target="_blank"><img src="images/dnm.png" width="200" height="250" alt="DnM" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Dice and Management</h3>
+                <p>A DnD player and monster creator where users can share their creations with other users and comment on their creations.</p>
+              </div>
+            </div>
+          
+            <div class="item">
+                <a href="https://github.com/LoganColey/Unit1" target="_blank"><img src="images/inferno.png" width="200" height="250" alt="Unit1Project" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Asunder</h3>
+                <p>Asunder is my 1st unit project based off of Dante's Inferno but, as a rouge-like rpg.  It was helped made with Rylee Chisholm. Essentially the gameplay boils down to the player going to different floors to gain levels and loot to fight bosses and win.  We never fully completed the game due to the one week period we had to complete it but we are looking forward to finishing it in the future.</p>
+              </div>
+            </div>
+      
+            <div class="item">
+                <a href="https://github.com/LoganColey/Unit2_Project" target="_blank"><img src="images/sz.png" width="200" height="250" alt="Unit2Project" class="center"> </a>
+              <div class="carousel-caption">
+                <h3>Pokemon Safari Park</h3>
+                <p>Pokemon Safari Park was a quick Pokemon experience.  You would first pick your starting Pokemon and then go catch pokemon to catch different pokemon and fight at the battle towers to get access to the secret legendary pokemon.  We feel like wwe could do more with the game maybe add a save file and also add evos for pokemon as well.</p>
+              </div>
+            </div>
+        
+          </div>
+      
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      
+      <script>
+      $(document).ready(function(){
+        // Activate Carousel
+        $("#myCarousel").carousel();
+          
+        // Enable Carousel Indicators
+        $(".item1").click(function(){
+          $("#myCarousel").carousel(0);
+        });
+        $(".item2").click(function(){
+          $("#myCarousel").carousel(1);
+        });
+        $(".item3").click(function(){
+          $("#myCarousel").carousel(2);
+        });
+        $(".item4").click(function(){
+          $("#myCarousel").carousel(3);
+        });
+          
+        // Enable Carousel Controls
+        $(".left").click(function(){
+          $("#myCarousel").carousel("prev");
+        });
+        $(".right").click(function(){
+          $("#myCarousel").carousel("next");
+        });
+      });
+      </script>
+    
+
+
+
+  </body>
+</html>
