@@ -28,6 +28,10 @@
           {% csrf_token %} {{till.as_p}}
           <input type="submit" name="form_type" value="Till Out" />
         </form>
+        <form action="" method="POST">
+          {% csrf_token %} {{createEvent.as_p}}
+          <input type="submit" name="form_type" value="Event" />
+        </form>
       </div>
       <div class="adminOption" id="inputNewFoodForm">
         <form action="" method="POST">

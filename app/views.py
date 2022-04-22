@@ -1,15 +1,20 @@
+from ast import Return
 from django.shortcuts import render, redirect
+from django.http import HttpRequest
 from app.decorators import unauthenticated_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import *
+from typing import List
+from dataclasses import dataclass
 from .forms import *
 from django.contrib.auth.models import Group
+from json import dumps
+from django.core import serializers
 from django.http import JsonResponse
-import json
-noOrdersButton = create_isActive(False)
-
-
+import json 
+from django.core.files import File
 
 @unauthenticated_user
 def login_page(request):
@@ -27,7 +32,7 @@ def login_page(request):
                 messages.info(request, 'Username or password is incorrect.')
         context = {}
         return render(request, 'login.html', context)
-
+    
 def logoutUser(request):
     logout(request)
     return redirect('login')
@@ -51,19 +56,79 @@ def signup(request):
     context = {'form':form}
     return render(request, 'signup.html', context)
 
+@login_required(login_url='login')
 def home(request):
     context ={}
-    print("hellow")
     return render(request,'index.html',context)
+
+@login_required(login_url='login')
+def smallFoodOrder(request):
+    cart = Cart.objects.get(user=request.user)
+    form = CreatesmallFoodForm()
+    if request.method == "POST":
+        form = CreatesmallFoodForm(request.POST)
+        if form.is_valid():
+            if form.side == "Baked Potato" or form.side == "Loaded Fries":
+                form.price += 1.50
+            form.cart = cart
+            form.save()
+        context = {"form":form}
+        return render(request,'food.html',context)
+
+@login_required(login_url='login')
+def bigFoodOrder(request):
+    cart = Cart.objects.get(user=request.user)
+    form = CreatebigFoodForm()
+    if request.method == "POST":
+        form = CreatebigFoodForm(request.POST)
+        if form.is_valid():
+            if form.side1 == "Baked Potato" or form.side1 == "Loaded Fries":
+                form.price += 1.50
+            if form.side2 == "Baked Potato" or form.side2 == "Loaded Fries":
+                form.price += 1.50
+            form.cart = cart
+            form.save()
+            
+        context = {"form":form}
+        return render(request,'food.html',context)
+
+@login_required(login_url='login')
+def food(request):
+    cart = Cart.objects.get(user=request.user)
+    form = CreatebigFoodForm()
+    if request.method == "POST":
+        form = CreatebigFoodForm(request.POST)
+        if form.is_valid():
+            if form.side1 == "Baked Potato" or form.side1 == "Loaded Fries":
+                form.price += 1.50
+            if form.side2 == "Baked Potato" or form.side2 == "Loaded Fries":
+                form.price += 1.50
+            form.cart = cart
+            form.save()
+            
+    context = {"form":form}
+    return render(request,'food.html',context)
+
+@login_required(login_url='login')
+def checkout(request):
+    cart = Cart.objects.get(user=request.user)
+    foods = bigFood.objects.filter(cart=cart)
+    price = 0
+    for food in foods:
+        food.price += price
+    context = {"price":price}
+    return render(request,'checkout.html',context)
 
 def paymentComplete(request):
     body = json.loads(request.body)
     print('BODY:', body)
     return JsonResponse('Payment completed!', safe=False)
 
+@login_required(login_url='login')
 def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()
+    createEvent = CreateEvent()
     newFood = AddToMenu()
     if request.method == 'POST':
         if request.POST.get("form_type") == 'Change Lunch':
@@ -75,33 +140,26 @@ def admin(request):
             if till.is_valid():
                 till.save()
         elif request.POST.get("form_type") == 'Add Item':
-            newFood = AddToMenu(request.POST, request.FILES)
+            newFood = AddToMenu(request.POST)
             if newFood.is_valid():
                 newFood.save()
-            with open('app/static/food.json', 'a') as f:
-                f.truncate(0)
-                f.write("[")
-                menu = menuItem.objects.all()
-                for item in menu:
-                    f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
-                    if item.id != menuItem.objects.all().last().id:
-                        f.write(",")
-                    f.write("]")
-                    f.close
-    context = {'form': form, 'till': till, 'newFood': newFood}
+        elif request.POST.get("form_type") == "Event":
+            createEvent = CreateEvent(request.POST)
+            if createEvent.is_valid():
+                createEvent.save()
+    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
     return render(request,'admin.html',context)
 
 def populateMenu(request):
-    if noOrdersButton.isActive == True:
-        return render(request, "noOrders.html")
-    else:
-        return render(request, "food.html")
-
-def turnOffOrders(request):
-    if noOrdersButton.isActive == True:
-        noOrdersButton.isActive = False
-    else:
-        noOrdersButton.isActive = True
-    noOrdersButton.save()
-    print(noOrdersButton.isActive)
-    return render(request, 'admin.html')
+    with open('app/static/food.json', 'a') as f:
+        f.truncate(0)
+        f.write("[")
+        menu = menuItem.objects.all()
+        for item in menu:
+            f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
+            if item.id != menuItem.objects.all().last().id:
+              f.write(",")
+            print(item.id)
+        f.write("]")
+        f.close
+    return render(request, "food.html")

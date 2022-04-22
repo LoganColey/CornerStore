@@ -21,13 +21,43 @@
           <i class="fas fa-angle-right next"></i>
         </div>
         <div class="weekdays">
-          <div>Sun</div>
-          <div>Mon</div>
-          <div>Tue</div>
-          <div>Wed</div>
-          <div>Thu</div>
-          <div>Fri</div>
-          <div>Sat</div>
+          {% for event in events%}
+            {% if event.name == "Sunday"%}
+              <div>Sun</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Monday"%}
+              <div>Mon</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Tuesday"%}
+              <div>Tue</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Wednesday"%}
+              <div>Wed</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Thursday"%}
+              <div>Thu</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Friday"%}
+              <div>Fri</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+            {% if event.name == "Saturday"%}
+              <div>Sat</div>
+              <p>{event.name}</p>
+              <p>{event.description}</p>
+            {% endif %}
+          {% endfor %}
         </div>
         <div class="days"></div>
       </div>
