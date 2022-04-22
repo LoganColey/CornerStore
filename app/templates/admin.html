@@ -25,22 +25,23 @@
           <a href="{% url 'turnOffOrders' %}">On</a>
         </button>
         <form action="" method="POST">
-          {% csrf_token %} {{till.as_p}}
-          <input type="submit" name="form_type" value="Till Out" />
-        </form>
-        <form action="" method="POST">
           {% csrf_token %} {{createEvent.as_p}}
           <input type="submit" name="form_type" value="Event" />
         </form>
       </div>
       <div class="adminOption" id="inputNewFoodForm">
+        <h1>
         <form action="" method="POST">
           {% csrf_token %} {{newFood.as_p}}
           <input type="submit" name="form_type" value="Add Item" />
         </form>
       </div>
-      <div class="adminOption" id="countTillForm">till out</div>
-      <div class="adminOption" id="calendarSlot">calendar</div>
+      <div class="adminOption" id="countTillForm">
+        <h1>Closing Till</h1>
+        <form action="" method="POST">
+        {% csrf_token %} {{till.as_p}}
+        <input type="submit" name="form_type" value="Till Out" />
+      </form></div>
     </div>
   </body>
 </html>
