@@ -56,13 +56,12 @@ def signup(request):
     context = {'form':form}
     return render(request, 'signup.html', context)
 
-
+@login_required(login_url='login')
 def home(request):
     context ={}
-    print("hellow")
     return render(request,'index.html',context)
 
-
+@login_required(login_url='login')
 def smallFoodOrder(request):
     cart = Cart.objects.get(user=request.user)
     form = CreatesmallFoodForm()
@@ -76,6 +75,7 @@ def smallFoodOrder(request):
         context = {"form":form}
         return render(request,'food.html',context)
 
+@login_required(login_url='login')
 def bigFoodOrder(request):
     cart = Cart.objects.get(user=request.user)
     form = CreatebigFoodForm()
@@ -92,6 +92,7 @@ def bigFoodOrder(request):
         context = {"form":form}
         return render(request,'food.html',context)
 
+@login_required(login_url='login')
 def food(request):
     cart = Cart.objects.get(user=request.user)
     form = CreatebigFoodForm()
@@ -108,6 +109,7 @@ def food(request):
     context = {"form":form}
     return render(request,'food.html',context)
 
+@login_required(login_url='login')
 def checkout(request):
     cart = Cart.objects.get(user=request.user)
     foods = bigFood.objects.filter(cart=cart)
@@ -122,6 +124,7 @@ def paymentComplete(request):
     print('BODY:', body)
     return JsonResponse('Payment completed!', safe=False)
 
+@login_required(login_url='login')
 def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()

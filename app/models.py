@@ -66,7 +66,7 @@ class menuItem(models.Model):
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
-    day = models.CharField(max_length=100, null=False)
+    day = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(31)])
     month = models.CharField(max_length=100, null=False)
     year  = models.IntegerField(validators=[MinValueValidator(2022),MaxValueValidator(2030)])
 
