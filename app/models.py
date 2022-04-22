@@ -1,14 +1,8 @@
 from __future__ import unicode_literals
-from email.mime import image
-from re import M
-from tokenize import ContStr
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.conf import settings
 from django.utils import timezone
-from django.core.exceptions import ValidationError
-from django.urls import reverse
 
 
 class Cart(models.Model):
@@ -49,10 +43,10 @@ class event(models.Model):
 
     def __str__(self) -> str:
            return self.name
-
+    
 class noOrdersModel(models.Model):
     isActive = models.BooleanField()
-    
+
 def create_isActive(isActive):
     noOrdersButton = noOrdersModel(isActive=isActive)
     noOrdersButton.save()

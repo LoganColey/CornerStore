@@ -1,20 +1,14 @@
-from ast import Return
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
 from app.decorators import unauthenticated_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
-from typing import List
-from dataclasses import dataclass
 from .forms import *
 from django.contrib.auth.models import Group
-from json import dumps
-from django.core import serializers
 from django.http import JsonResponse
 import json 
-from django.core.files import File
+noOrdersButton = create_isActive(False)
 
 @unauthenticated_user
 def login_page(request):
@@ -61,64 +55,6 @@ def home(request):
     context ={}
     return render(request,'index.html',context)
 
-@login_required(login_url='login')
-def smallFoodOrder(request):
-    cart = Cart.objects.get(user=request.user)
-    form = CreatesmallFoodForm()
-    if request.method == "POST":
-        form = CreatesmallFoodForm(request.POST)
-        if form.is_valid():
-            if form.side == "Baked Potato" or form.side == "Loaded Fries":
-                form.price += 1.50
-            form.cart = cart
-            form.save()
-        context = {"form":form}
-        return render(request,'food.html',context)
-
-@login_required(login_url='login')
-def bigFoodOrder(request):
-    cart = Cart.objects.get(user=request.user)
-    form = CreatebigFoodForm()
-    if request.method == "POST":
-        form = CreatebigFoodForm(request.POST)
-        if form.is_valid():
-            if form.side1 == "Baked Potato" or form.side1 == "Loaded Fries":
-                form.price += 1.50
-            if form.side2 == "Baked Potato" or form.side2 == "Loaded Fries":
-                form.price += 1.50
-            form.cart = cart
-            form.save()
-            
-        context = {"form":form}
-        return render(request,'food.html',context)
-
-@login_required(login_url='login')
-def food(request):
-    cart = Cart.objects.get(user=request.user)
-    form = CreatebigFoodForm()
-    if request.method == "POST":
-        form = CreatebigFoodForm(request.POST)
-        if form.is_valid():
-            if form.side1 == "Baked Potato" or form.side1 == "Loaded Fries":
-                form.price += 1.50
-            if form.side2 == "Baked Potato" or form.side2 == "Loaded Fries":
-                form.price += 1.50
-            form.cart = cart
-            form.save()
-            
-    context = {"form":form}
-    return render(request,'food.html',context)
-
-@login_required(login_url='login')
-def checkout(request):
-    cart = Cart.objects.get(user=request.user)
-    foods = bigFood.objects.filter(cart=cart)
-    price = 0
-    for food in foods:
-        food.price += price
-    context = {"price":price}
-    return render(request,'checkout.html',context)
-
 def paymentComplete(request):
     body = json.loads(request.body)
     print('BODY:', body)
@@ -142,6 +78,16 @@ def admin(request):
         elif request.POST.get("form_type") == 'Add Item':
             newFood = AddToMenu(request.POST)
             if newFood.is_valid():
+                with open('app/static/food.json', 'a') as f:
+                    f.truncate(0)
+                    f.write("[")
+                    menu = menuItem.objects.all()
+                    for item in menu:
+                        f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
+                        if item.id != menuItem.objects.all().last().id:
+                            f.write(",")
+                    f.write("]")
+                    f.close
                 newFood.save()
         elif request.POST.get("form_type") == "Event":
             createEvent = CreateEvent(request.POST)
@@ -151,15 +97,16 @@ def admin(request):
     return render(request,'admin.html',context)
 
 def populateMenu(request):
-    with open('app/static/food.json', 'a') as f:
-        f.truncate(0)
-        f.write("[")
-        menu = menuItem.objects.all()
-        for item in menu:
-            f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
-            if item.id != menuItem.objects.all().last().id:
-              f.write(",")
-            print(item.id)
-        f.write("]")
-        f.close
-    return render(request, "food.html")
+    if noOrdersButton.isActive == True:
+        return render(request, "noOrders.html")
+    else:
+        return render(request, "food.html")
+
+def turnOffOrders(request):
+    if noOrdersButton.isActive == True:
+        noOrdersButton.isActive = False
+    else:
+        noOrdersButton.isActive = True
+    noOrdersButton.save()
+    print(noOrdersButton.isActive)
+    return render(request, 'admin.html')
