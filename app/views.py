@@ -110,3 +110,8 @@ def turnOffOrders(request):
     noOrdersButton.save()
     print(noOrdersButton.isActive)
     return redirect('admin')
+
+def tillView(request):
+    tills = closingTill.objects.all()
+    context = {'tills': tills}
+    return render(request, "till.html", context)
