@@ -10,26 +10,10 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class CreatesmallFoodForm(ModelForm):
-    class Meta:
-        model = smallFood
-        fields ='__all__'
-        exclude = ['cost']
-        side = forms.CharField()
-
-class CreatebigFoodForm(ModelForm):
-    class Meta:
-        model = bigFood
-        fields ='__all__'
-        exclude = ['cost']
-        side1 = forms.CharField()
-        side2 = forms.CharField()
-
-
-class CreateCart(ModelForm):
-    class Meta:
-        model = Cart
-        fields = ['user']
+# class CreateCart(ModelForm):
+#     class Meta:
+#         model = Cart
+#         fields = ['user']
 
 class CreateDailyLunch(ModelForm):
     class Meta:

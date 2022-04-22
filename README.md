@@ -1,7 +1,7 @@
 # CornerStore
 
 ##Description:
-A website built for the CornerStore that allows customers to order food from the store along with making diffrent requests that can be asked from
+A website built for the CornerStore that allows customers to order food from the store along with making different requests that can be asked from
 the store.  The website will also host a management system for inventory, keep track of the money made in a day, and display a Daily Menu.
 
 ##Members:

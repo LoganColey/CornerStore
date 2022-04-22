@@ -9,13 +9,12 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'style_mockup.css' %}" type="text/css" media="all" />
-    <title>Check Out</title>
+    <title>Login</title>
   </head>
   <body>
-      <nav>
-          <div>Hello</div>
-          <div>Nav Button</div>
-      </nav>
+    <nav>
+      <a href="{% url 'home' %}" title="Home">Home</a>
+    </nav>
+    <h1>Sorry, we are not taking online orders at this time.</h1>
   </body>
 </html>

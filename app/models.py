@@ -1,41 +1,9 @@
 from __future__ import unicode_literals
-from email.mime import image
-from re import M
-from tokenize import ContStr
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.conf import settings
 from django.utils import timezone
-from django.core.exceptions import ValidationError
-from django.urls import reverse
-
-
-class Cart(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
-
-class smallFood(models.Model):
-    name = models.CharField(max_length=100, null=True) 
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
-    side = models.CharField(max_length=100,null=True)
-    description = models.CharField(max_length=10000)
-    image = models.ImageField(null=True)
-    cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
-
-    def __str__(self) -> str:
-           return self.name
-
-class bigFood(models.Model):
-    name = models.CharField(max_length=100, null=True)
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
-    side1 = models.CharField(max_length=100, null=True)
-    side2 = models.CharField(max_length=100, null=True)
-    description = models.CharField(max_length=10000)
-    image = models.ImageField(null=True)
-    cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
-
-    def __str__(self) -> str:
-           return self.name
+from django.contrib.auth.models import User
 
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
@@ -66,9 +34,19 @@ class menuItem(models.Model):
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
-    day = models.CharField(max_length=100, null=False)
-    month = models.CharField(max_length=100, null=False)
-    year  = models.IntegerField(validators=[MinValueValidator(2022),MaxValueValidator(2030)])
 
     def __str__(self) -> str:
            return self.name
+    
+class noOrdersModel(models.Model):
+    isActive = models.BooleanField()
+
+def create_isActive(isActive):
+    noOrdersButton = noOrdersModel(isActive=isActive)
+    noOrdersButton.save()
+    return noOrdersButton
+
+class Cart(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
+    items = models.ForeignKey(menuItem, on_delete=models.CASCADE)
+    cost = models.IntegerField(max_length=100)

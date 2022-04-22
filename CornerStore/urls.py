@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/', views.logoutUser, name="logout"),
     path('home/', views.home, name='home'),
     path('food/', views.populateMenu, name="food"),
-    path('checkout/', views.checkout, name="checkout"),
     path('complete/', views.paymentComplete, name='complete'),
-    path('adminpage/', views.admin, name='admin')
+    path('adminpage/', views.admin, name='admin'),
+    path('turnofforders/', views.turnOffOrders, name='turnOffOrders')
 ]
