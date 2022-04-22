@@ -3,10 +3,8 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
 
-
-class Cart(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
@@ -36,7 +34,6 @@ class menuItem(models.Model):
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
-    date = models.DateField(null=True)
 
     def __str__(self) -> str:
            return self.name
@@ -48,3 +45,8 @@ def create_isActive(isActive):
     noOrdersButton = noOrdersModel(isActive=isActive)
     noOrdersButton.save()
     return noOrdersButton
+
+class Cart(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
+    items = models.ForeignKey(menuItem, on_delete=models.CASCADE)
+    cost = models.IntegerField(max_length=100)
