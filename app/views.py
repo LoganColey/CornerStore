@@ -109,4 +109,4 @@ def turnOffOrders(request):
         noOrdersButton.isActive = True
     noOrdersButton.save()
     print(noOrdersButton.isActive)
-    return render(request, 'admin.html')
+    return redirect('admin')

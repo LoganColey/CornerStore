@@ -7,7 +7,6 @@ from django.utils import timezone
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
-
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
