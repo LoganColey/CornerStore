@@ -14,29 +14,6 @@ from django.urls import reverse
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
 
-class smallFood(models.Model):
-    name = models.CharField(max_length=100, null=True) 
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
-    side = models.CharField(max_length=100,null=True)
-    description = models.CharField(max_length=10000)
-    image = models.ImageField(null=True)
-    cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
-
-    def __str__(self) -> str:
-           return self.name
-
-class bigFood(models.Model):
-    name = models.CharField(max_length=100, null=True)
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
-    side1 = models.CharField(max_length=100, null=True)
-    side2 = models.CharField(max_length=100, null=True)
-    description = models.CharField(max_length=10000)
-    image = models.ImageField(null=True)
-    cart = models.ForeignKey(Cart,on_delete=models.PROTECT, null=True)
-
-    def __str__(self) -> str:
-           return self.name
-
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
@@ -57,7 +34,7 @@ class menuItem(models.Model):
     name = models.CharField(max_length=100, null=False)
     cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
     description = models.CharField(max_length=400, null=False)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(null=True)
     type = models.CharField(max_length=20)
 
     def __str__(self) -> str:
@@ -72,3 +49,11 @@ class event(models.Model):
 
     def __str__(self) -> str:
            return self.name
+
+class noOrdersModel(models.Model):
+    isActive = models.BooleanField()
+    
+def create_isActive(isActive):
+    noOrdersButton = noOrdersModel(isActive=isActive)
+    noOrdersButton.save()
+    return noOrdersButton

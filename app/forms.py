@@ -1,30 +1,12 @@
-from xml.etree.ElementInclude import include
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from app.models import *
-from django import forms
 
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
-class CreatesmallFoodForm(ModelForm):
-    class Meta:
-        model = smallFood
-        fields ='__all__'
-        exclude = ['cost']
-        side = forms.CharField()
-
-class CreatebigFoodForm(ModelForm):
-    class Meta:
-        model = bigFood
-        fields ='__all__'
-        exclude = ['cost']
-        side1 = forms.CharField()
-        side2 = forms.CharField()
-
 
 class CreateCart(ModelForm):
     class Meta:
@@ -44,4 +26,4 @@ class CreateClosingTill(ModelForm):
 class AddToMenu(ModelForm):
     class Meta:
         model = menuItem
-        fields = '__all__'
+        fields = ['name', 'cost','description','type']

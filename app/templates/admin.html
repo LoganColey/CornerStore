@@ -14,16 +14,16 @@
   </head>
   <body>
     <nav>
-      <button id="homeBtn" href="{% url 'home' %}">Home</button>
+      <a href="{% url 'home' %}" title="Home">Home</a>
       <h1>Welcome Susan</h1>
     </nav>
     <div id="pageContentDiv">
       <div class="adminOption" id="ordersView">View placed orders.</div>
       <div class="adminOption" id="dailyLunchForm">
-        <form action="" method="POST">
-          {% csrf_token %} {{form.as_p}}
-          <input type="submit" name="form_type" value="Change Lunch" />
-        </form>
+        <h1>Online Orders:</h1>
+        <button class="noOrdersBtn">
+          <a href="{% url 'turnOffOrders' %}">On</a>
+        </button>
         <form action="" method="POST">
           {% csrf_token %} {{till.as_p}}
           <input type="submit" name="form_type" value="Till Out" />
