@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'food-style.css' %}" />
     <title>Food</title>
   </head>
-  <body onload="populateInitialContent()">
+  <body>
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
       <a class="dropbtn" onclick="myFunction()"
@@ -23,12 +23,15 @@
       <a class="cartbtn" onclick="ticketToggle()">Cart</a>
     </nav>
     <div class="dropdown-content" id="myDropdown">
-      <a class="Btn" name="small">Burgers and More</a>
-      <a class="Btn" name="big">Plates</a>
-      <a class="Btn" name="sides">Sides</a>
-      <a class="Btn" name="salads">Salads</a>
-      <a class="Btn" name="starters">Starters</a>
-      <a class="Btn" name="seafood" id="seafood">Seafood</a>
+      <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
+      <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}"
+        >Burgers and More</a
+      >
+      <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
+      <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
+      <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
+      <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
+      <a class="Btn" name="seafood" href="{% url 'sortmenu' "seafood" %}">Seafood</a>
     </div>
     <div class="sidesError">Please select all sides before checkout</div>
     <div class="afterHoursError">
@@ -38,12 +41,25 @@
       <h1 id="totalBox"></h1>
       <h1>Your order will be ready in about 45 minutes!</h1>
       <div id="paypal-button-container"></div>
-
       <!-- Include the PayPal JavaScript SDK -->
       <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     </div>
     <div class="mainpage">
-      <div id="content"></div>
+      <div id="content">
+        {% for item in menu %}
+        <div id="itemBox" class="{{item.type}}">
+          <h2 class="itemName">{{item.name}}</h2>
+          <p class="itemDesc">{{item.description}}</p>
+          <h2 class="itemPrice">$ {{item.cost}}</h2>
+          <button
+            style="width: 60px; height: 20px; font-size: 14px"
+            class="addListBtn"
+          >
+            +
+          </button>
+        </div>
+        {% endfor %}
+      </div>
       <div id="ticketSide">
         <div class="ticket-content" id="ticketDisplay"></div>
         <div class="sticky2">

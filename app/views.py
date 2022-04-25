@@ -8,6 +8,9 @@ from .forms import *
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
 import json 
+import datetime
+
+currentDate = datetime.datetime.now()
 noOrdersButton = create_isActive(False)
 
 @unauthenticated_user
@@ -101,7 +104,8 @@ def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
     else:
-        return render(request, "food.html")
+        menu = menuItem.objects.all()
+        return render(request, "food.html",{"menu": menu})
 
 def turnOffOrders(request):
     if noOrdersButton.isActive == True:
@@ -110,9 +114,12 @@ def turnOffOrders(request):
         noOrdersButton.isActive = True
     noOrdersButton.save()
     print(noOrdersButton.isActive)
-    return redirect('admin')
+    return redirect(request, 'admin')
 
 def tillView(request):
     tills = closingTill.objects.all()
     context = {'tills': tills}
     return render(request, "till.html", context)
+
+def sortMenu(request, type):
+    return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})

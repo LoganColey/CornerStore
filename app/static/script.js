@@ -43,57 +43,57 @@ options.forEach((m) => {
 });
 
 //the initialize function of the page
-function populateInitialContent() {
-  fetchingAndPopulating("starter", "Starters");
-  fetchingAndPopulating("small", "Burgers and More");
-  fetchingAndPopulating("big", "Plates");
-  fetchingAndPopulating("side", "Sides");
-  fetchingAndPopulating("salad", "Salads");
-  if (dt.getDay() == 5 || dt.getDay() == 6) {
-    fetchingAndPopulating("seafood", "Seafood");
-  }
-}
+// function populateInitialContent() {
+//   fetchingAndPopulating("starter", "Starters");
+//   fetchingAndPopulating("small", "Burgers and More");
+//   fetchingAndPopulating("big", "Plates");
+//   fetchingAndPopulating("side", "Sides");
+//   fetchingAndPopulating("salad", "Salads");
+//   if (dt.getDay() == 5 || dt.getDay() == 6) {
+//     fetchingAndPopulating("seafood", "Seafood");
+//   }
+// }
 
 //fetch from json and put it on screen and make the buttons work
-function fetchingAndPopulating(foodType, foodName) {
-  fetch("/static/food.json")
-    .then((req) => req.json())
-    .then((data) => {
-      console.log(data);
-      var platesHeader = document.createElement("header");
-      platesHeader.innerHTML = foodName;
-      platesHeader.classList.add("full-width");
-      foodbox.appendChild(platesHeader);
-      var leList = [];
-      for (const item of data) {
-        if (item.type == foodType) {
-          leList.push(item);
-        }
-      }
-      var itemsbox = document.createElement("div");
-      itemsbox.classList.add("items");
-      foodbox.appendChild(itemsbox);
-      for (const item of leList) {
-        var roundedCost = item.cost.toFixed(2);
-        itemsbox.insertAdjacentHTML(
-          "beforeend",
-          `
-                    <article id="itemBox" class="${item.type}">
-                        <h2 class="itemName">${item.name}</h2>
-                        <p class="itemDesc">${item.description}</p>
-                        <h2 class="itemPrice">$ ${roundedCost}</h2>
-                        <button style="width: 60px; height: 20px; font-size: 14px;"class="addListBtn">+</button>
-                    </article>
-                  `
-        );
-      }
-      var AddItemBtns = document.getElementsByClassName("addListBtn");
-      for (let i = 0; i < AddItemBtns.length; i++) {
-        var button = AddItemBtns[i];
-        button.addEventListener("click", AddItem);
-      }
-    });
-}
+// function fetchingAndPopulating(foodType, foodName) {
+//   fetch("/static/food.json")
+//     .then((req) => req.json())
+//     .then((data) => {
+//       console.log(data);
+//       var platesHeader = document.createElement("header");
+//       platesHeader.innerHTML = foodName;
+//       platesHeader.classList.add("full-width");
+//       foodbox.appendChild(platesHeader);
+//       var leList = [];
+//       for (const item of data) {
+//         if (item.type == foodType) {
+//           leList.push(item);
+//         }
+//       }
+//       var itemsbox = document.createElement("div");
+//       itemsbox.classList.add("items");
+//       foodbox.appendChild(itemsbox);
+//       for (const item of leList) {
+//         var roundedCost = item.cost.toFixed(2);
+//         itemsbox.insertAdjacentHTML(
+//           "beforeend",
+//           `
+//                     <article id="itemBox" class="${item.type}">
+//                         <h2 class="itemName">${item.name}</h2>
+//                         <p class="itemDesc">${item.description}</p>
+//                         <h2 class="itemPrice">$ ${roundedCost}</h2>
+//                         <button style="width: 60px; height: 20px; font-size: 14px;"class="addListBtn">+</button>
+//                     </article>
+//                   `
+//         );
+//       }
+//       var AddItemBtns = document.getElementsByClassName("addListBtn");
+//       for (let i = 0; i < AddItemBtns.length; i++) {
+//         var button = AddItemBtns[i];
+//         button.addEventListener("click", AddItem);
+//       }
+//     });
+// }
 
 //adding an item to the ticket
 function AddItem(event) {
