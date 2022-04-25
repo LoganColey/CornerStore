@@ -55,7 +55,8 @@ def signup(request):
 
 @login_required(login_url='login')
 def home(request):
-    context ={}
+    events = event.objects.all()
+    context ={"events": events}
     return render(request,'index.html',context)
 
 def paymentComplete(request):

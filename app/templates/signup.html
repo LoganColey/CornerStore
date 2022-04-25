@@ -3,9 +3,10 @@
 <html>
   <head>
     <title>Register</title>
-
+	<link rel="stylesheet" href="{% static 'style.css' %}"/>
 
     <style>
+		
 		body,
 		html {
 			margin: 0;
@@ -13,24 +14,23 @@
 		}
 
 		.user_card {
-			width: 50em;
+			background-image: url(images/signup-pic.jpeg);
+			width: 30em;
 			height:30em;
 			margin-top: 5em;
-			margin-bottom: auto;
+			margin-bottom: none;
 			margin-left: 7em;
 			text-align: center;
 			display: flex;
 			justify-content: left;
 			flex-direction: column;
-			{% comment %} border: 2px solid red; {% endcomment %}
+			border: 2px solid white; 
 			padding: 20px;
 			padding-right: 30em;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			border-radius: 25px;
-			clip-path: url();
-			clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 
 		}
 		.tb{
@@ -43,8 +43,9 @@
 		}
 
 		.form-title{
-			color: black;
-			text-align: center;
+			color: white;
+			text-align: right;
+			font-size: ;
 		}
 		.login_btn {
 			width: 25em;
@@ -63,9 +64,10 @@
 			box-shadow: none ;
 			outline: 1px ;
 		}
-		#form-title {
-        color: red;
-        margin-left: 1.5em;
+		.form-title {
+        text-align: left;
+		font-size: 30px;
+		font-style: Apple Chancery, cursive;
       }
 		.login_container {
 			padding-top: .8em;
@@ -75,14 +77,14 @@
 			font-size: 15px;
 			background: #f7ba5b ;
 			color: darkgray ;
-			marg
 			border: 0 ;
 			border-radius: 0.25rem 0 0 0.25rem ;
 		}
+
 		.mk{
-			color: white;
+			color: darkgray;
 			text-decoration: None;
-			margin-left: 20em;
+			{% comment %} margin-left: 20em; {% endcomment %}
 		}
 		.mk:hover {
 			color: lightblue;
@@ -106,12 +108,12 @@
 			{% csrf_token %}
 			<div class="box1">
 				<div class="input-group mb-3">
-				
+				<h3 class="form-title">REGISTER USER</h3>
 				<div class="input-group-append">
 					<span class="input-group-text">
 					<i class="fas fa-user">
 				<div class="user_card">	
-				<h3 class="form-title">REGISTER USER</h3>					
+									
 				<label>
 					<p class="tb">Username:</p>
 					<p class="uname"> {{form.username}}<p>
@@ -124,6 +126,7 @@
 					></span>
 				</div>
 				</div>
+				
 				<div class="input-group mb-2">
 					<div class="input-group-append">
 					<span class="input-group-text"
