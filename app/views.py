@@ -104,7 +104,10 @@ def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
     else:
-        menu = menuItem.objects.all()
+        if currentDate.weekday() != 4 and currentDate.weekday() != 5:
+            menu = menuItem.objects.exclude(type="seafood")
+        else: 
+            menu = menuItem.objects.all()
         return render(request, "food.html",{"menu": menu})
 
 def turnOffOrders(request):
