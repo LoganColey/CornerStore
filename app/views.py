@@ -130,18 +130,15 @@ def tillView(request):
 def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
+
 @admin_only
->>>>>>> Stashed changes
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
     redirect(admin)
-=======
+
 def addToCart(request, itemname):
     item = menuItem.objects.get(name=itemname)
     print(item)
     return render(request, "food.html", {"menu": menuItem.objects.all()})
->>>>>>> Stashed changes
+
