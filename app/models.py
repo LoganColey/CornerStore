@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator 
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -21,23 +20,13 @@ class dailyLunch(models.Model):
     def __str__(self) -> str:
            return self.name
 
-class menuItem(models.Model):
-    name = models.CharField(max_length=100, null=False)
-    cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
-    description = models.CharField(max_length=400, null=False)
-    image = models.ImageField(null=True)
-    type = models.CharField(max_length=20)
-
-    def __str__(self) -> str:
-           return self.name
-
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
 
     def __str__(self) -> str:
            return self.name
-    
+
 class noOrdersModel(models.Model):
     isActive = models.BooleanField()
 
@@ -48,5 +37,16 @@ def create_isActive(isActive):
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
-    items = models.ForeignKey(menuItem, on_delete=models.CASCADE)
-    cost = models.IntegerField(max_length=100)
+    cost = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+
+class menuItem(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    cost = models.DecimalField(max_digits=50, decimal_places=2,null=False)
+    description = models.CharField(max_length=400, null=False)
+    image = models.ImageField(null=True)
+    type = models.CharField(max_length=20)
+
+class cartItem(models.Model):
+    name = models.CharField(max_length=100,null=False)
+    cost = models.DecimalField(max_digits=50, null=False,decimal_places=2)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
