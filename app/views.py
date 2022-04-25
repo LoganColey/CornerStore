@@ -104,10 +104,7 @@ def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
     else:
-        if currentDate:
-            menu = menuItem.objects.filter(type!="seafood")
-        else:
-            menu = menuItem.objects.all()
+        menu = menuItem.objects.all()
         return render(request, "food.html",{"menu": menu})
 
 def turnOffOrders(request):

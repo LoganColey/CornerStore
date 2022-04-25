@@ -42,6 +42,9 @@ class event(models.Model):
 class noOrdersModel(models.Model):
     isActive = models.BooleanField()
 
+    def __str__(self) -> str:
+           return self.isActive
+
 def create_isActive(isActive):
     noOrdersButton = noOrdersModel(isActive=isActive)
     noOrdersButton.save()
