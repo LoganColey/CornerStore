@@ -126,3 +126,8 @@ def tillView(request):
 
 def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
+
+def deleteEvent(request):
+    events = event.objects.all()
+    events.delete()
+    redirect(admin)
