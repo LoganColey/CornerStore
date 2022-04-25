@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from app.decorators import unauthenticated_user
+from app.decorators import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -24,7 +24,7 @@ def login_page(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('admin')
             else:
                 messages.info(request, 'Username or password is incorrect.')
         context = {}
@@ -65,6 +65,7 @@ def paymentComplete(request):
     return JsonResponse('Payment completed!', safe=False)
 
 @login_required(login_url='login')
+@admin_only
 def admin(request):
     form = CreateDailyLunch()
     till = CreateClosingTill()
@@ -110,6 +111,7 @@ def populateMenu(request):
             menu = menuItem.objects.all()
         return render(request, "food.html",{"menu": menu})
 
+@admin_only
 def turnOffOrders(request):
     if noOrdersButton.isActive == True:
         noOrdersButton.isActive = False
@@ -119,6 +121,7 @@ def turnOffOrders(request):
     print(noOrdersButton.isActive)
     return redirect(request, 'admin')
 
+@admin_only
 def tillView(request):
     tills = closingTill.objects.all()
     context = {'tills': tills}
@@ -128,6 +131,10 @@ def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+@admin_only
+>>>>>>> Stashed changes
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
