@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="{% static 'food-style.css' %}" />
     <title>Food</title>
   </head>
-  <body>
+  <body onload="checkDateTime()">
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a class="dropbtn" onclick="myFunction()"
-        >Menu
+      <a class="dropbtn" onclick="myFunction()">Menu
         <i class="fa fa-caret-down"></i>
       </a>
       <a class="checkoutbtn" onclick="openCheckout()">Checkout</a>
@@ -31,7 +30,6 @@
       <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
       <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
       <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
-      <a class="Btn" name="seafood" href="{% url 'sortmenu' "seafood" %}">Seafood</a>
     </div>
     <div class="sidesError">Please select all sides before checkout</div>
     <div class="afterHoursError">
@@ -52,8 +50,7 @@
           <p class="itemDesc">{{item.description}}</p>
           <h2 class="itemPrice">$ {{item.cost}}</h2>
           <button
-            style="width: 60px; height: 20px; font-size: 14px"
-            class="addListBtn"
+            style="width: 60px; height: 20px; font-size: 14px" type="submit" href="{% url 'addToCart' item.name %}"
           >
             +
           </button>

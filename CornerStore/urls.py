@@ -13,5 +13,9 @@ urlpatterns = [
     path('adminpage/', views.admin, name='admin'),
     path('turnofforders/', views.turnOffOrders, name='turnOffOrders'),
     path('sortmenu/<type>/', views.sortMenu, name='sortmenu'),
+<<<<<<< Updated upstream
     path('deleteEvent', views.deleteEvent, name="deleteEvent")
+=======
+    path('addtocart/<itemname>/', views.addToCart, name='addToCart')
+>>>>>>> Stashed changes
 ]
