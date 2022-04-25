@@ -34,6 +34,7 @@ class menuItem(models.Model):
 class event(models.Model):
     name = models.CharField(max_length=100, null=False)
     description = models.CharField(max_length=1000, null=False)
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self) -> str:
            return self.name
@@ -48,5 +49,4 @@ def create_isActive(isActive):
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True)
-    items = models.ForeignKey(menuItem, on_delete=models.CASCADE)
-    cost = models.IntegerField(max_length=100)
+    cost = models.IntegerField(default=0)
