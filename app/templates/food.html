@@ -45,6 +45,7 @@
     <div class="mainpage">
       <div id="content">
         {% for item in menu %}
+<<<<<<< Updated upstream
          <div id="itemBox" class="{{item.type}}">
             <h2 class="itemName">{{item.name}}</h2>
             <p class="itemDesc">{{item.description}}</p>
@@ -52,6 +53,14 @@
             <button class="noOrdersBtn">
               <a href="{% url 'addToCart' item.name %}">Add to Cart</a>
             </button>
+=======
+        <div id="itemBox" class="{{item.type}}">
+          <h2 class="itemName">{{item.name}}</h2>
+          <p class="itemDesc">{{item.description}}</p>
+          <h2 class="itemPrice">$ {{item.cost}}</h2>
+          <button type="button" id="add-button" value="{{item.name}}">Add to
+            Cart</button>
+>>>>>>> Stashed changes
         </div>
         {% endfor %}
       </div>
