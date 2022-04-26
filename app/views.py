@@ -7,7 +7,7 @@ from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
-import json 
+import json
 import datetime
 
 currentDate = datetime.datetime.now()
@@ -42,9 +42,9 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            cart = Cart()
-            cart.user = user
-            cart.save()
+            # cart = Cart()
+            # cart.user = user
+            # cart.save()
 
             group = Group.objects.get(name="user")
             user.groups.add(group)
@@ -101,15 +101,21 @@ def admin(request):
     context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
     return render(request,'admin.html',context)
 
-def populateMenu(request):
-    if noOrdersButton.isActive == True:
-        return render(request, "noOrders.html")
-    else:
-        if currentDate.weekday() != 4 and currentDate.weekday() != 5:
-            menu = menuItem.objects.exclude(type="seafood")
-        else: 
-            menu = menuItem.objects.all()
-        return render(request, "food.html",{"menu": menu})
+def tillView(request):
+    tills = closingTill.objects.all()
+    context = {'tills': tills}
+    return render(request, "till.html", context)
+
+@admin_only
+def deleteEvent(request):
+    events = event.objects.all()
+    events.delete()
+    return redirect(request,'admin')
+
+# RYLEE'S CODE
+
+def sortMenu(request, type):
+    return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
 
 @admin_only
 def turnOffOrders(request):
@@ -121,24 +127,23 @@ def turnOffOrders(request):
     print(noOrdersButton.isActive)
     return redirect(request, 'admin')
 
-@admin_only
-def tillView(request):
-    tills = closingTill.objects.all()
-    context = {'tills': tills}
-    return render(request, "till.html", context)
-
-def sortMenu(request, type):
-    return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
-
-
-@admin_only
-def deleteEvent(request):
-    events = event.objects.all()
-    events.delete()
-    redirect(admin)
+def populateMenu(request):
+    if noOrdersButton.isActive == True:
+        return render(request, "noOrders.html")
+    return render(request, "food.html",{"menu": checkDate(), "cart": cartItem.objects.all()})
 
 def addToCart(request, itemname):
-    item = menuItem.objects.get(name=itemname)
-    print(item)
-    return render(request, "food.html", {"menu": menuItem.objects.all()})
+    itemFromMenu = menuItem.objects.get(name=itemname)
+    create_cart((cartItem.objects.all().count() + 1), request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
+    return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
 
+def removeFromCart(request, itemid):
+    cartItem.objects.get(id=itemid).delete()
+    return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
+
+def checkDate() :
+    if currentDate.weekday() != 4 and currentDate.weekday() != 5:
+        menu = menuItem.objects.exclude(type="seafood")
+    else: 
+        menu = menuItem.objects.all()
+    return menu

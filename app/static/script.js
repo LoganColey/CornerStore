@@ -17,58 +17,58 @@ function checkDateTime() {
   }
 }
 
-fetch("/static/food.json")
-  .then((req) => req.json())
-  .then((data) => {
-    console.log(data);
-    for (const item of data) {
-      if (item.type == "side") {
-        sidesNames.push(item.name);
-      }
-    }
-  });
+// fetch("/static/food.json")
+//   .then((req) => req.json())
+//   .then((data) => {
+//     console.log(data);
+//     for (const item of data) {
+//       if (item.type == "side") {
+//         sidesNames.push(item.name);
+//       }
+//     }
+//   });
 
-//makes menu dropdown buttons work
-options.forEach((m) => {
-  m.addEventListener("click", (e) => {
-    if (e.target.innerHTML === "Burgers and More") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("small", "Burgers and More");
-    } else if (e.target.innerHTML === "Sides") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("side", "Sides");
-    } else if (e.target.innerHTML === "Plates") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("big", "Plates");
-    } else if (e.target.innerHTML === "Salads") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("salad", "Salads");
-    } else if (e.target.innerHTML === "Starters") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("starter", "Starters");
-    } else if (e.target.innerHTML === "Seafood") {
-      foodbox.innerHTML = "";
-      fetchingAndPopulating("seafood", "Seafood");
-    }
-  });
-});
+// //makes menu dropdown buttons work
+// options.forEach((m) => {
+//   m.addEventListener("click", (e) => {
+//     if (e.target.innerHTML === "Burgers and More") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("small", "Burgers and More");
+//     } else if (e.target.innerHTML === "Sides") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("side", "Sides");
+//     } else if (e.target.innerHTML === "Plates") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("big", "Plates");
+//     } else if (e.target.innerHTML === "Salads") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("salad", "Salads");
+//     } else if (e.target.innerHTML === "Starters") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("starter", "Starters");
+//     } else if (e.target.innerHTML === "Seafood") {
+//       foodbox.innerHTML = "";
+//       fetchingAndPopulating("seafood", "Seafood");
+//     }
+//   });
+// });
 
-function removeItem(event) {
-  var button = event.target;
-  var item_card = button.parentElement;
-  var item_price = item_card
-    .getElementsByClassName("item-price")[0]
-    .innerText.substring(1);
-  total -= Number(item_price);
-  totalText.innerHTML = "";
-  if (total <= 0) {
-    document.querySelector(".checkoutbtn").classList.remove("show");
-    totalText.innerHTML = "$0.00";
-  } else {
-    totalText.innerHTML = "$" + total.toFixed(2);
-  }
-  button.parentElement.parentElement.remove();
-}
+// function removeItem(event) {
+//   var button = event.target;
+//   var item_card = button.parentElement;
+//   var item_price = item_card
+//     .getElementsByClassName("item-price")[0]
+//     .innerText.substring(1);
+//   total -= Number(item_price);
+//   totalText.innerHTML = "";
+//   if (total <= 0) {
+//     document.querySelector(".checkoutbtn").classList.remove("show");
+//     totalText.innerHTML = "$0.00";
+//   } else {
+//     totalText.innerHTML = "$" + total.toFixed(2);
+//   }
+//   button.parentElement.parentElement.remove();
+// }
 
 function openCheckout() {
   //see if all sides are chosen
@@ -120,18 +120,18 @@ function displayCheckout() {
   document.querySelector(".mainpage").classList.toggle("hide");
 }
 
-function updateTotal() {
-  let addons = 0;
-  if (document.querySelectorAll(".sideDrop").length > 0) {
-    for (const sideDrop of document.querySelectorAll(".sideDrop")) {
-      if (
-        sideDrop.options[sideDrop.selectedIndex].value == 6 ||
-        sideDrop.options[sideDrop.selectedIndex].value == 7
-      ) {
-        addons += 2.5;
-      }
-    }
-    newTotal = total + addons;
-    totalText.innerHTML = "$" + newTotal.toFixed(2);
-  }
-}
+// function updateTotal() {
+//   let addons = 0;
+//   if (document.querySelectorAll(".sideDrop").length > 0) {
+//     for (const sideDrop of document.querySelectorAll(".sideDrop")) {
+//       if (
+//         sideDrop.options[sideDrop.selectedIndex].value == 6 ||
+//         sideDrop.options[sideDrop.selectedIndex].value == 7
+//       ) {
+//         addons += 2.5;
+//       }
+//     }
+//     newTotal = total + addons;
+//     totalText.innerHTML = "$" + newTotal.toFixed(2);
+//   }
+// }
