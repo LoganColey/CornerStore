@@ -106,20 +106,17 @@ def tillView(request):
     context = {'tills': tills}
     return render(request, "till.html", context)
 
-
-
-
+@admin_only
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
-    redirect(admin)
+    return redirect(request,'admin')
 
 
 # RYLEE'S CODE
 
 def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
-
 
 @admin_only
 def turnOffOrders(request):
@@ -141,13 +138,6 @@ def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
     create_cart(request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
     return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
-
-
-
-def addToCart(request, itemName):
-    cart = Cart(request)
-    cart.add(itemName)
-    return render(request, "food.html", {"menu": checkDate()})
 
 def checkDate() :
     if currentDate.weekday() != 4 and currentDate.weekday() != 5:
