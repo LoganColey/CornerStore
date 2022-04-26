@@ -52,13 +52,14 @@ def create_isActive(isActive):
     return noOrdersButton
 
 class cartItem(models.Model):
+    id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     cost = models.IntegerField(default=0)
     name = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=20, null=True)
 
-def create_cart(user, cost, name, type):
-    new_cart = cartItem(user=user,name=name,cost=cost, type=type)
+def create_cart(id, user, cost, name, type):
+    new_cart = cartItem(id=id, user=user,name=name,cost=cost, type=type)
     new_cart.save()
     return new_cart
 

@@ -112,7 +112,6 @@ def deleteEvent(request):
     events.delete()
     return redirect(request,'admin')
 
-
 # RYLEE'S CODE
 
 def sortMenu(request, type):
@@ -131,13 +130,15 @@ def turnOffOrders(request):
 def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
-
     return render(request, "food.html",{"menu": checkDate(), "cart": cartItem.objects.all()})
 
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
-    create_cart(request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
-    print(cartItem.objects.all())
+    create_cart((cartItem.objects.all().count() + 1), request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
+    return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
+
+def removeFromCart(request, itemid):
+    cartItem.objects.get(id=itemid).delete()
     return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
 
 def checkDate() :
