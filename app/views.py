@@ -105,6 +105,20 @@ def tillView(request):
     tills = closingTill.objects.all()
     context = {'tills': tills}
     return render(request, "till.html", context)
+<<<<<<< Updated upstream
+=======
+
+def deleteEvent(request):
+    events = event.objects.all()
+    events.delete()
+    redirect(admin)
+
+
+# RYLEES CODE
+
+def sortMenu(request, type):
+    return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
+>>>>>>> Stashed changes
 
 def deleteEvent(request):
     events = event.objects.all()
@@ -130,6 +144,7 @@ def turnOffOrders(request):
 def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
+<<<<<<< Updated upstream
     return render(request, "food.html",{"menu": checkDate(), "cart": cartItem.objects.all()})
 
 def addToCart(request, itemname):
@@ -137,9 +152,51 @@ def addToCart(request, itemname):
     create_cart(request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
     return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
 
+=======
+    if request.method == 'POST':
+        form = createCartItem(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request, "food.html",{"menu": checkDate()})
+
+def addToCart(request, itemName):
+    cart = Cart(request)
+    cart.add(itemName)
+    return render(request, "food.html", {"menu": checkDate()})
+
+>>>>>>> Stashed changes
 def checkDate() :
     if currentDate.weekday() != 4 and currentDate.weekday() != 5:
         menu = menuItem.objects.exclude(type="seafood")
     else: 
         menu = menuItem.objects.all()
     return menu
+<<<<<<< Updated upstream
+=======
+
+
+
+def basket_add(request):
+    basket = Basket(request)
+    if request.POST.get("action") == "post":
+        product_id = int(request.POST.get("productid"))
+        product_qty = int(request.POST.get("productqty"))
+        product = get_object_or_404(Product, id=product_id)
+        basket.add(product=product, qty=product_qty)
+
+        basketqty = basket.__len__()
+        response = JsonResponse({"qty": basketqty})
+        return response
+
+
+def basket_delete(request):
+    basket = Basket(request)
+    if request.POST.get("action") == "post":
+        product_id = int(request.POST.get("productid"))
+        basket.delete(product=product_id)
+
+        basketqty = basket.__len__()
+        baskettotal = basket.get_total_price()
+        response = JsonResponse({"qty": basketqty, "subtotal": baskettotal})
+        return response
+>>>>>>> Stashed changes
