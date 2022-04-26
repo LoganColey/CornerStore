@@ -45,14 +45,14 @@
     <div class="mainpage">
       <div id="content">
         {% for item in menu %}
-         <div id="itemBox" class="{{item.type}}">
+          <div id="itemBox" class="{{item.type}}">
             <h2 class="itemName">{{item.name}}</h2>
             <p class="itemDesc">{{item.description}}</p>
             <h2 class="itemPrice">$ {{item.cost}}</h2>
             <button>
               <a href="{% url 'addToCart' item.name %}">Add to Cart</a></button>
+          </div>
         {% endfor %}
-      </div>
       <div id="ticketSide">
         <div class="ticket-content" id="ticketDisplay">
           {% for item in cart %}
