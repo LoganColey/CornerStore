@@ -10,19 +10,13 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-<<<<<<< Updated upstream
-=======
-# class CreateCart(ModelForm):
-#     class Meta:
-#         model = Cart
-#         fields = ['user']
 
 class createCartItem(ModelForm):
     class Meta:
         model = menuItem
         fields = ['name', 'cost', 'type']
 
->>>>>>> Stashed changes
+
 class CreateDailyLunch(ModelForm):
     class Meta:
         model = dailyLunch

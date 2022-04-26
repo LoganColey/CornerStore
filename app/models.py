@@ -54,8 +54,6 @@ def create_isActive(isActive):
 class cartItem(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     cost = models.IntegerField(default=0)
-<<<<<<< Updated upstream
-
     name = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=20, null=True)
 
@@ -64,7 +62,3 @@ def create_cart(user, cost, name, type):
     new_cart.save()
     return new_cart
 
-=======
-    name = models.CharField(max_length=100, null=False)
-    type = models.CharField(max_length=20)
->>>>>>> Stashed changes
