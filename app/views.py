@@ -135,7 +135,7 @@ def sortMenu(request, type):
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
-    redirect(admin)
+    return redirect(request,'admin')
 
 def addToCart(request, itemname):
     item = menuItem.objects.get(name=itemname)
