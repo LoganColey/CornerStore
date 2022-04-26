@@ -40,24 +40,23 @@
             <li class="item1 active"></li>
             <li class="item2"></li>
             <li class="item3"></li>
-            <li class="item4"></li>
           </ol>
       
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
       
             <div class="item active">
-                <img src="{% static 'images/storefront.jpg' %}" width="200" height="250" alt="Arcade" class="center"> 
+                <img src="{% static 'images/storefront.jpg' %}" width="200" height="250" alt="Storefront" class="center"> 
           
             </div>
       
             <div class="item">
-                <img src="{% static 'images/inside-store.jpg' %}" width="200" height="250" alt="DnM" class="center"> 
+                <img src="{% static 'images/inside-store.jpg' %}" width="200" height="250" alt="Inside of store" class="center"> 
               
             </div>
           
             <div class="item">
-                <img src="{% static 'images/dad-pic.jpeg' %}" width="200" height="250" alt="Unit1Project" class="dad-pic">
+                <img src="{% static 'images/dad-pic.jpeg' %}" width="200" height="250" alt="Owner of store" class="dad-pic">
               </div>
             </div>
         
@@ -90,9 +89,6 @@
         $(".item3").click(function(){
           $("#myCarousel").carousel(2);
         });
-        $(".item4").click(function(){
-          $("#myCarousel").carousel(3);
-        });
           
         // Enable Carousel Controls
         $(".left").click(function(){
@@ -107,12 +103,12 @@
       <div id="main">
         <div class="items">
           <div class="large-col">
-            <h2>Who We Are?</h2>
+            <h2 class = "home-sections">Who We Are?</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id molestie enim. Suspendisse consequat urna non ante gravida euismod. In in nibh nulla. Vestibulum at tellus viverra nulla aliquam pulvinar. Maecenas nulla arcu, venenatis et ultrices id, tincidunt ut nisl. Etiam augue lectus,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id molestie enim. Suspendisse consequat urna non ante gravida euismod. In in nibh nulla. Stibulum at tellus viverra nulla aliquam pulvinar. Maecenas nulla arcu, venenatis et ultrices id, tincidunt ut nisl. Maecenas nulla arcu, venenatis et ultrices id, tincidunt ut nisl. Etiam augue lectus,Lorem ipsum dolor</p>
-            <img src="images/cornerstore-staff.jpeg" alt="Coley Family">
+            <img src="{% static 'images/cornerstore-staff.jpeg' %}" alt="Coley Family">
           </div>
           <div class="large-col-last">
-            <h2>Today's Special</h2>
+            <h2 class = "home-sections">Today's Special</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id molestie enim. Suspendisse consequat urna non ante gravida euismod. In in nibh nulla. Vestibulum at tellus viverra nulla aliquam pulvinar.</p>
             
             <p class="a-link"><a href="#" class="btn-red" title="Order"><span>Order</span></a></p>					
@@ -120,21 +116,18 @@
           <div class="cl">&nbsp;</div>
         </div>
         <div class="items">
-          <div class="rewiew-box">
-            <div class="small-col">
+            <div class="small-col1">
               <h3>Danny says</h3>
               <p>"Great place to eat, great food, great prices and super friendly service. We love the Coleys."</p>
             </div>
           </div>
         <div class="items">
-          <div class="rewiew-box">
-            <div class="small-col">
+            <div class="small-col2">
               <h3>Rodney says</h3>
               <p>"Best frog legs I've had in a while. I will be back!"</p>
             </div>
           </div>
-          <div class="rewiew-box">
-            <div class="small-col last">
+            <div class="small-col3">
               <h3>Matt-Kat says</h3>
               <p>"Good food and freshly made on every order."</p>
             </div>
@@ -147,9 +140,6 @@
       <p>{{event.description}}</p>
       <p>{{event.date}}</p>
     {% endfor %}
-
-
-
 
   </body>
 </html>

@@ -5,7 +5,7 @@ body {
     line-height: 1.3;
     font-family: arial, sans-serif;
     color: white;
-    background-color: #000;
+    background-color: black;
     min-width: 1023px;
 }
 p{
@@ -49,7 +49,7 @@ textarea { overflow: auto; }
 #header { width: 100%; font-family: 'Trebuchet MS', Arial, serif; text-align: center; text-transform: uppercase; padding: 31px 0 45px 0; }
 
 #logo { font-weight: normal; padding: 0 0 0 5px; font-family: 'Handwritten', Arial, serif;}
-#logo a { color: #ebebeb; font-size: 41px; line-height: 41px; }
+#logo a { color: #ebebeb; font-size: 41px; line-height: 41px;  list-style: none;}
 #logo a span { display: block; font-size: 11px; line-height: 11px; color: #e01e27; padding-top: 4px; }
 #logo a:hover { text-decoration: none; }
 
@@ -81,18 +81,63 @@ textarea { overflow: auto; }
 }
 .large-col .a-link { padding-top: 7px; }
 
-/* .small-col { 
+.large-col .img{
+  width:1%;
+}
+
+.small-col1 { 
   border-radius: 15px 50px;
   width: 226px; 
   padding-right: 15px; 
   box-shadow: 0 6px 8px 0 purple;
   transition: 0.3s;
-  background-color: whitesmoke;
+  background-color: #000;
   border: solid 2px purple; 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(100px, auto);
-} */
+  justify-content: center;
+  align-content: center;
+  grid-auto-flow: column;
+}
+
+.small-col2 { 
+  border-radius: 15px 50px;
+  width: 226px; 
+  padding-right: 15px; 
+  box-shadow: 0 6px 8px 0 purple;
+  transition: 0.3s;
+  background-color: #000;
+  border: solid 2px purple; 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  justify-content: center;
+  align-content: center;
+  grid-auto-flow: column;
+}
+
+.small-col3 { 
+  border-radius: 15px 50px;
+  width: 226px; 
+  padding-right: 15px; 
+  box-shadow: 0 6px 8px 0 purple;
+  transition: 0.3s;
+  background-color: #000;
+  border: solid 2px purple; 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  justify-content: center;
+  align-content: center;
+  grid-auto-flow: column;
+}
+
+
+
+.home-sections{
+  padding-top: 10px;
+}
 
 .items {
   text-align: center;
@@ -101,9 +146,14 @@ textarea { overflow: auto; }
   width: 30%;
 }
 
+.family{
+  width: 25%;
+}
+
 .carousel-inner > .item > img,
     .carousel-inner > .item > a > img {
       width: 70%;
+      height: auto;
       margin: auto;
     }
 
@@ -111,9 +161,8 @@ textarea { overflow: auto; }
       color: white;
     }
 
-/* .dad-pic{
-  height: 10px;
-} */
+
+
 
 
 

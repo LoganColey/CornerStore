@@ -1,6 +1,6 @@
 /* Main styling */
 body {
-  background-color: white;
+  background-color:white;
   color: black;
   margin: 0;
   padding: 0;
@@ -42,7 +42,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: red;
+  background-color:red;
 }
 
 .cartbtn {
@@ -116,10 +116,20 @@ nav a:hover {
   z-index: 10;
 }
 
-.itemBox {
-  background-color: light gray;
+#itemBox {
+  background-color: white;
   margin: 2em;
   padding: 3em;
+  border: solid 2px red;
+  text-align: center;
+}
+
+#content{
+  display: grid;
+  column-gap: 50px;
+  grid-template-columns: auto auto auto;
+  background-color: white;
+  padding: 10px;
 }
 
 .itemName {
