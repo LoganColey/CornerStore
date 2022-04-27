@@ -130,16 +130,16 @@ def turnOffOrders(request):
 def populateMenu(request):
     if noOrdersButton.isActive == True:
         return render(request, "noOrders.html")
-    return render(request, "food.html",{"menu": checkDate(), "cart": cartItem.objects.all()})
+    return render(request, "food.html",{"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
     create_cart((cartItem.objects.all().count() + 1), request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
-    return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
+    return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def removeFromCart(request, itemid):
     cartItem.objects.get(id=itemid).delete()
-    return render(request, 'food.html', {"menu": checkDate(), "cart": cartItem.objects.all()})
+    return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def checkDate() :
     if currentDate.weekday() != 4 and currentDate.weekday() != 5:

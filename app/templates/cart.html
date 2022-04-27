@@ -18,7 +18,7 @@
       <a class="dropbtn" onclick="myFunction()">Menu
         <i class="fa fa-caret-down"></i>
       </a>
-      <a class="cartbtn" onclick="ticketToggle()">Cart: {{cartNum}}</a>
+      <a class="checkoutbtn" onclick="openCheckout()">Checkout</a>
     </nav>
     <div class="dropdown-content" id="myDropdown">
       <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
@@ -30,17 +30,28 @@
       <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
       <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
     </div>
-    <div class="mainpage">
-      <div id="content">
-        {% for item in menu %}
-          <div id="itemBox" class="{{item.type}}">
+      <div id="ticketSide">
+        <div class="ticket-content" id="ticketDisplay">
+          {% for item in cart %}
+          <div class="ticketItem">
             <h2 class="itemName">{{item.name}}</h2>
-            <p class="itemDesc">{{item.description}}</p>
-            <h2 class="itemPrice">$ {{item.cost}}</h2>
+            {% if item.type == "big"%}
+            <button>add in the dropdown</button><button>add in the dropdown</button>
+            {% endif %}
+            {% if item.type == "small"%}
+            <button>Add in the dropdown</button>
+            {% endif %}
+            <h2 class="itemPrice">{{item.cost}}</h2>
             <button>
-              <a href="{% url 'addToCart' item.name %}">Add to Cart</a></button>
+              <a href="{% url 'removeFromCart' item.id %}">Remove</a>
+            </button>
           </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
+        <div class="sticky2">
+          <h2 id="total">Total: $0.00</h2>
+          <div class="placeBtn"></div>
+        </div>
       </div>
     </div>
   </body>

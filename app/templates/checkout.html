@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
+    <title>Food</title>
+  </head>
+  <body onload="checkDateTime()">
+    <nav class="sticky">
+      <a href="{% url 'home' %}" title="Home">Home</a>
+      <a class="checkoutbtn" onclick="openCheckout()">Checkout</a>
+      <a class="cartbtn" onclick="ticketToggle()">Cart</a>
+    </nav>
+    <div class="dropdown-content" id="myDropdown">
+      <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
+      <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}"
+        >Burgers and More</a
+      >
+      <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
+      <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
+      <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
+      <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
+    </div>
+    <div class="afterHoursError">
+      We do not take online orders after 7 PM. Sorry for the inconvenience.
+    </div>
+    <div id="checkoutBox">
+      <h1 id="totalBox"></h1>
+      <h1>Your order will be ready in about 45 minutes!</h1>
+      <div id="paypal-button-container"></div>
+      <!-- Include the PayPal JavaScript SDK -->
+      <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+    </div>
+    <script>
+      paypal
+        .Buttons({
+          // Set up the transaction
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: document
+                      .getElementById("total")
+                      .innerHTML.substring(1),
+                  },
+                },
+              ],
+            });
+          },
+
+          // Finalize the transaction
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+              // Successful capture! For demo purposes:
+              console.log(
+                "Capture result",
+                orderData,
+                JSON.stringify(orderData, null, 2)
+              );
+              var transaction =
+                orderData.purchase_units[0].payments.captures[0];
+              alert(
+                "Transaction " +
+                  transaction.status +
+                  ": " +
+                  transaction.id +
+                  "\n\nSee console for all available details"
+              );
+
+              // Replace the above to show a success message within this page, e.g.
+              // const element = document.getElementById('paypal-button-container');
+              // element.innerHTML = '';
+              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+              // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+          },
+        })
+        .render("#paypal-button-container");
+    </script>
+  </body>
+  <script src="{% static 'script.js' %}"></script>
+</html>
