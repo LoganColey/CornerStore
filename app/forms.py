@@ -5,11 +5,28 @@ from django.contrib.auth.models import User
 from app.models import *
 from django import forms
 
+SIDES = [('--Choose a Side--',
+    (
+    ('corn nuggets', 'Corn Nuggets'),
+    ('tater tots', 'Tater Tots'),
+    ('french fries', 'French Fries'),
+    ('onion rings', 'Onion Rings'),
+    ('fried okra', 'Fried Okra'),
+    ('loaded baked potato', 'Loaded Baked Potato'),
+    ('side salad', 'Side Salad'),
+    ),)]
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+class sideForm(ModelForm):
+    class Meta:
+        model = sideModel
+        fields = ['side']
+    side = forms.CharField(label='Choose a side', widget=forms.Select(choices=SIDES))
+        
 
 class createCartItem(ModelForm):
     class Meta:

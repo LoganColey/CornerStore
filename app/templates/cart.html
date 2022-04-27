@@ -9,49 +9,33 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
     <title>Cart</title>
   </head>
-  <body onload="checkDateTime()">
+  <body>
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a class="dropbtn" onclick="myFunction()">Menu
-        <i class="fa fa-caret-down"></i>
-      </a>
-      <a class="checkoutbtn" onclick="openCheckout()">Checkout</a>
+      <a href="{% url 'food' %}">Menu</a>
     </nav>
-    <div class="dropdown-content" id="myDropdown">
-      <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
-      <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}"
-        >Burgers and More</a
-      >
-      <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
-      <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
-      <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
-      <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
-    </div>
-      <div id="ticketSide">
-        <div class="ticket-content" id="ticketDisplay">
-          {% for item in cart %}
-          <div class="ticketItem">
-            <h2 class="itemName">{{item.name}}</h2>
-            {% if item.type == "big"%}
-            <button>add in the dropdown</button><button>add in the dropdown</button>
-            {% endif %}
-            {% if item.type == "small"%}
-            <button>Add in the dropdown</button>
-            {% endif %}
-            <h2 class="itemPrice">{{item.cost}}</h2>
-            <button>
-              <a href="{% url 'removeFromCart' item.id %}">Remove</a>
-            </button>
-          </div>
-          {% endfor %}
+      <div class="ticket-content" id="ticketDisplay">
+        {% for item in cart %}
+        <div class="ticketItem">
+          <h2 class="itemName">{{item.name}}</h2>
+          {% if item.type == "big"%}
+          <button>add in the dropdown</button><button>add in the dropdown</button>
+          {% endif %}
+          {% if item.type == "small"%}
+          <button>Add in the dropdown</button>
+          {% endif %}
+          <h2 class="itemPrice">{{item.cost}}</h2>
+          <button>
+            <a href="{% url 'removeFromCart' item.id %}">Remove</a>
+          </button>
         </div>
-        <div class="sticky2">
-          <h2 id="total">Total: $0.00</h2>
-          <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
-        </div>
+        {% endfor %}
+      </div>
+      <div>
+        <h2 id="total">Total: ${{total}}</h2>
+        <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
       </div>
     </div>
   </body>

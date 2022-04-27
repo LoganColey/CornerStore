@@ -63,3 +63,8 @@ def create_cart(id, user, cost, name, type):
     new_cart.save()
     return new_cart
 
+
+class sideModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    cartItem = models.ForeignKey(cartItem, on_delete=models.CASCADE, null=True)
+    option = models.CharField(max_length=50, null=True)
