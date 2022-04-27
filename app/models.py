@@ -1,10 +1,18 @@
 from __future__ import unicode_literals
-from tkinter import CASCADE
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator 
-from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
+
+SIDES = [('--Choose a Side--',
+    (
+    ('corn nuggets', 'Corn Nuggets'),
+    ('tater tots', 'Tater Tots'),
+    ('french fries', 'French Fries'),
+    ('onion rings', 'Onion Rings'),
+    ('fried okra', 'Fried Okra'),
+    ('loaded baked potato', 'Loaded Baked Potato'),
+    ('side salad', 'Side Salad'),
+    ),)]
 
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
@@ -54,7 +62,7 @@ def create_isActive(isActive):
 class cartItem(models.Model):
     id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
-    cost = models.IntegerField(default=0)
+    cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
     name = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=20, null=True)
 
@@ -63,8 +71,7 @@ def create_cart(id, user, cost, name, type):
     new_cart.save()
     return new_cart
 
-
 class sideModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     cartItem = models.ForeignKey(cartItem, on_delete=models.CASCADE, null=True)
-    option = models.CharField(max_length=50, null=True)
+    option = models.CharField(max_length=200, null=True,choices=SIDES)

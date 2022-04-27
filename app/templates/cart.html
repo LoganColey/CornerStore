@@ -24,7 +24,12 @@
           <button>add in the dropdown</button><button>add in the dropdown</button>
           {% endif %}
           {% if item.type == "small"%}
-          <button>Add in the dropdown</button>
+          <form method="POST" action="">
+            {%csrf_token%}
+              <p>{{form.option}}</p>
+              <input class="inp" type="submit" value="Add Side">
+            </div>
+          </form>
           {% endif %}
           <h2 class="itemPrice">{{item.cost}}</h2>
           <button>

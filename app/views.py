@@ -153,34 +153,20 @@ def checkDate() :
     return menu
 
 def cart(request) :
+    form = createSide()
+    context = {'form': form}
+    if request.method == "POST":
+        form = createSide(request.POST)
+        if form.is_valid():
+                side = form.save()
+                side.user = request.user
+                side.save()
     cart = cartItem.objects.all()
     total = 0
     for item in cart:
         total += item.cost
-    return render(request, 'cart.html', {"cart": cart, "total": total})
+        print(item.cost)
+    return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(total)})
 
 def checkout(request) :
     return render(request, "checkout.html")
-
-
-
-
-
-
-def create(request):
-    if request.GET:
-        form = CreatePokemonForm(request.GET)
-        if form.is_valid():
-            creator = form.cleaned_data['creator']
-            name = form.cleaned_data['name']
-            height = form.cleaned_data['height']
-            weight = form.cleaned_data['weight']
-            region = form.cleaned_data['region']
-            description = form.cleaned_data['description']
-            type1 = form.cleaned_data['type1']     
-            type2 = form.cleaned_data['type2']
-            creation = create_mon(creator, name, height, weight, region, description, type1, type2)
-            return render(request, "create.html", {"form": form, "creation": creation})
-    else:
-        form=CreatePokemonForm()
-    return render(request, "create.html", {"form":form})
