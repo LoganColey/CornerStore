@@ -13,6 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   </head>
     <body>
+      <nav>
+        <a href="{% url 'home' %}" title="Home">Home</a>
+        <a href="{% url 'deleteEvent' %}">Delete Events</a>
+        <a href="{% url 'tillView' %}">View Tills</a>
+  
+        <h1>Welcome Susan</h1>
+      </nav>
       
       {% for till in tills%}
         <div id="itemBox" class="{{item.type}}">
