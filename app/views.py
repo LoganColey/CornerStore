@@ -165,4 +165,15 @@ def checkout(request) :
 
 def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
-    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count()})
+    bigFood = createBig()
+    smallFood = createSmall()
+    if request.POST.get("form_type") == 'big':
+        bigFood = createBig(request.POST)
+        if bigFood.is_valid():
+            bigFood.user = request.user
+            
+    elif request.POST.get("form_type") == 'small':
+        smallFood = createSmall(request.POST)
+        if smallFood.is_valid():
+            smallFood.save()
+    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})

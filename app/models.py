@@ -60,13 +60,23 @@ def create_isActive(isActive):
     return noOrdersButton
 
 class cartItem(models.Model):
+    SIDES = [('--Choose a Side--',
+    (
+    ('corn nuggets', 'Corn Nuggets'),
+    ('tater tots', 'Tater Tots'),
+    ('french fries', 'French Fries'),
+    ('onion rings', 'Onion Rings'),
+    ('fried okra', 'Fried Okra'),
+    ('loaded baked potato', 'Loaded Baked Potato'),
+    ('side salad', 'Side Salad'),
+    ),)]
     id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
     name = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=20, null=True)
-    side1 = models.CharField(max_length=20, null=True)
-    side2 = models.CharField(max_length=20, null=True)
+    side1 = models.CharField(max_length=20, null=True,choices=SIDES)
+    side2 = models.CharField(max_length=20, null=True,choices=SIDES)
 
 def create_cart(id, user, cost, name, type):
     new_cart = cartItem(id=id, user=user,name=name,cost=cost, type=type)
