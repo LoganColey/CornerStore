@@ -26,13 +26,13 @@
           <h2 class="itemPrice">$ {{item.cost}}</h2>
           {% if item.type == "small" %}
           <form action="" method="POST">
-            {%csrf_token%}{{form.option}}
+            {%csrf_token%}{{newSide.option}}
             <input type="submit" name="form_type" value="Add to Cart" />
           </form>
           {% elif item.type == "big"%}
-          <form action="" method="POST">{% csrf_token %} {{form.option}}</form>
+          <form action="" method="POST">{% csrf_token %} {{newSide.option}}</form>
           <form action="" method="POST">
-            {% csrf_token %} {{form.option}}
+            {% csrf_token %} {{newSide.option}}
             <input type="submit" name="form_type" value="Add to Cart" />
           </form>
           {% else %}

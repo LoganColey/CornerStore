@@ -72,6 +72,16 @@ def create_cart(id, user, cost, name, type):
     return new_cart
 
 class sideModel(models.Model):
+    SIDES = [('--Choose a Side--',
+    (
+    ('corn nuggets', 'Corn Nuggets'),
+    ('tater tots', 'Tater Tots'),
+    ('french fries', 'French Fries'),
+    ('onion rings', 'Onion Rings'),
+    ('fried okra', 'Fried Okra'),
+    ('loaded baked potato', 'Loaded Baked Potato'),
+    ('side salad', 'Side Salad'),
+    ),)]
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     cartItem = models.ForeignKey(cartItem, on_delete=models.CASCADE, null=True)
     option = models.CharField(max_length=200, null=True,choices=SIDES)

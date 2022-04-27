@@ -167,10 +167,10 @@ def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
     newSide = createSide()
     if request.method == 'POST':
-        form = createSide(request.POST)
-        if form.is_valid():
-            side = form.save()
+        newSide = createSide(request.POST)
+        if newSide.is_valid():
+            side = newSide.save()
             side.user= request.user
             side.cartItem = menuItem.objects.get(name=itemname)
             side.save()
-    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count()})
+    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(), 'newSide': newSide})
