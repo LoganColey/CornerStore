@@ -87,8 +87,8 @@ class cartItem(models.Model):
     side1 = models.CharField(max_length=20, null=True,choices=SIDES)
     side2 = models.CharField(max_length=20, null=True,choices=SIDES)
 
-def createCartItem(id, user, cost, name, type):
-    new_cart = cartItem(id=id, user=user,name=name,cost=cost, type=type)
+def createCartItem(id, user, cost, name, type,side1,side2):
+    new_cart = cartItem(id=id, user=user,name=name,cost=cost, type=type,side1=side1,side2=side2)
     new_cart.save()
     return new_cart
 
