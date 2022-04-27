@@ -18,7 +18,7 @@
       <a class="dropbtn" onclick="myFunction()">Menu
         <i class="fa fa-caret-down"></i>
       </a>
-      <a class="cartbtn" onclick="ticketToggle()">Cart: {{cartNum}}</a>
+      <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
     </nav>
     <div class="dropdown-content" id="myDropdown">
       <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>

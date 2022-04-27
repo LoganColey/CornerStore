@@ -147,3 +147,9 @@ def checkDate() :
     else: 
         menu = menuItem.objects.all()
     return menu
+
+def cart(request) :
+    return render(request, 'cart.html', {"cart": cartItem.objects.all()})
+
+def checkout(request) :
+    return render(request, "checkout.html")

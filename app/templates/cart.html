@@ -10,7 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
-    <title>Food</title>
+    <title>Cart</title>
   </head>
   <body onload="checkDateTime()">
     <nav class="sticky">
@@ -50,7 +50,7 @@
         </div>
         <div class="sticky2">
           <h2 id="total">Total: $0.00</h2>
-          <div class="placeBtn"></div>
+          <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
         </div>
       </div>
     </div>

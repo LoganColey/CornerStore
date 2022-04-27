@@ -9,25 +9,12 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
-    <title>Food</title>
+    <title>Checkout</title>
   </head>
-  <body onload="checkDateTime()">
+  <body>
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a class="checkoutbtn" onclick="openCheckout()">Checkout</a>
-      <a class="cartbtn" onclick="ticketToggle()">Cart</a>
     </nav>
-    <div class="dropdown-content" id="myDropdown">
-      <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
-      <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}"
-        >Burgers and More</a
-      >
-      <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
-      <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
-      <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
-      <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
-    </div>
     <div class="afterHoursError">
       We do not take online orders after 7 PM. Sorry for the inconvenience.
     </div>
@@ -86,5 +73,4 @@
         .render("#paypal-button-container");
     </script>
   </body>
-  <script src="{% static 'script.js' %}"></script>
 </html>
