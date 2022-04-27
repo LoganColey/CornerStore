@@ -15,6 +15,7 @@ urlpatterns = [
     path('sortmenu/<type>/', views.sortMenu, name='sortmenu'),
     path('deleteEvent', views.deleteEvent, name="deleteEvent"),
     path('addtocart/<itemname>/', views.addToCart, name='addToCart'),
-    path('removefromcart/<itemid>/', views.removeFromCart, name='removeFromCart')
+    path('removefromcart/<itemid>/', views.removeFromCart, name='removeFromCart'),
+    path('tillview', views.tillView,name='tillView')
 
 ]
