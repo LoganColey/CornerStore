@@ -7,11 +7,6 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
-class createSide(ModelForm):
-    class Meta:
-        model = sideModel
-        fields =['option']
         
 class createCartItem(ModelForm):
     class Meta:
@@ -37,3 +32,13 @@ class CreateEvent(ModelForm):
     class Meta:
         model = event
         fields = '__all__'
+
+class createBig(ModelForm):
+    class Meta:
+        model = cartItem
+        fields = ['side1', 'side2']
+
+class createSmall(ModelForm):
+    class Meta:
+        model = cartItem
+        fields = ['side1']
