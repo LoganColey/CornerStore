@@ -153,14 +153,6 @@ def checkDate() :
     return menu
 
 def cart(request) :
-    form = createSide()
-    context = {'form': form}
-    if request.method == "POST":
-        form = createSide(request.POST)
-        if form.is_valid():
-                side = form.save()
-                side.user = request.user
-                side.save()
     cart = cartItem.objects.all()
     total = 0
     for item in cart:
@@ -170,3 +162,15 @@ def cart(request) :
 
 def checkout(request) :
     return render(request, "checkout.html")
+
+def itemPage(request, itemname):
+    item = menuItem.objects.get(name=itemname)
+    newSide = createSide()
+    if request.method == 'POST':
+        form = createSide(request.POST)
+        if form.is_valid():
+            side = form.save()
+            side.user= request.user
+            side.cartItem = menuItem.objects.get(name=itemname)
+            side.save()
+    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count()})

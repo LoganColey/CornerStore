@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'food-style.css' %}" />
+    <title>Food</title>
+  </head>
+  <body>
+    <nav class="sticky">
+      <a href="{% url 'home' %}" title="Home">Home</a>
+      <a class="Btn" name="all" href="{% url 'food' %}">X</a>
+      <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
+    </nav>
+    <div class="mainpage">
+      <div id="content">
+        <div id="itemBox" class="{{item.type}}">
+          <h2 class="itemName">{{item.name}}</h2>
+          <p class="itemDesc">{{item.description}}</p>
+          <h2 class="itemPrice">$ {{item.cost}}</h2>
+          {% if item.type == "small" %}
+          <form action="" method="POST">
+            {%csrf_token%}{{form.option}}
+            <input type="submit" name="form_type" value="Add to Cart" />
+          </form>
+          {% elif item.type == "big"%}
+          <form action="" method="POST">{% csrf_token %} {{form.option}}</form>
+          <form action="" method="POST">
+            {% csrf_token %} {{form.option}}
+            <input type="submit" name="form_type" value="Add to Cart" />
+          </form>
+          {% else %}
+          <a href="{% url 'addToCart' item.name %}">Add to Cart</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>
+

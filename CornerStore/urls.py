@@ -18,5 +18,6 @@ urlpatterns = [
     path('removefromcart/<itemid>/', views.removeFromCart, name='removeFromCart'),
     path('tillview', views.tillView,name='tillView'),
     path('cart/', views.cart, name='cart'),
-    path('checkout/', views.checkout, name='checkout')
+    path('checkout/', views.checkout, name='checkout'),
+    path('item/<itemname>/', views.itemPage, name="item")
 ]
