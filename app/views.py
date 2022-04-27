@@ -42,13 +42,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            # cart = Cart()
-            # cart.user = user
-            # cart.save()
-
             group = Group.objects.get(name="user")
             user.groups.add(group)
             messages.success(request, 'Account was created for ' + username)
+            createCart((Cart.objects.all().count()+1), user)
             return redirect('login')
     context = {'form':form}
     return render(request, 'signup.html', context)
@@ -134,7 +131,7 @@ def populateMenu(request):
 
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
-    create_cart((cartItem.objects.all().count() + 1), request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
+    createCartItem((cartItem.objects.all().count() + 1), Cart.objects.get(user=request.user), itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def removeFromCart(request, itemid):
@@ -151,6 +148,14 @@ def checkDate() :
     else: 
         menu = menuItem.objects.all()
     return menu
+
+def removeFromCart(request, itemid):
+    cartItem.objects.get(id=itemid).delete()
+    cart = cartItem.objects.all()
+    total = 0
+    for item in cart:
+        total += item.cost
+    return render(request, 'cart.html', {"cart": cart, "total": total})
 
 def cart(request) :
     cart = cartItem.objects.all()
