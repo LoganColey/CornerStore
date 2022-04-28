@@ -53,6 +53,7 @@ class noOrdersModel(models.Model):
 
 class Cart(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=1000, null=True,default="unpaid")
 
 class cartItem(models.Model):
     SIDES = [('--Choose a Side--',

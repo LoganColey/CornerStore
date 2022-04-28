@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.template import context
 from app.decorators import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -59,9 +60,15 @@ def home(request):
     return render(request,'index.html',context)
 
 def paymentComplete(request):
+    # if request.method == 'POST':
+    cart = Cart.objects.get(user=request.user)
+    cart.status = "paid"
+    cart.save()
     body = json.loads(request.body)
-    print('BODY:', body)
-    return JsonResponse('Payment completed!', safe=False)
+    print("its hitting here")
+        # print('BODY:', body)
+        # return JsonResponse('Payment completed!', safe=False)
+    return redirect('home')
 
 @login_required(login_url='login')
 @admin_only
@@ -87,7 +94,8 @@ def admin(request):
             createEvent = CreateEvent(request.POST)
             if createEvent.is_valid():
                 createEvent.save()
-    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
+    
+    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent, 'noOrdersButton': noOrdersButton, 'paidOrders': Cart.objects.filter(status="paid")}
     return render(request,'admin.html',context)
 
 def tillView(request):
@@ -117,13 +125,10 @@ def turnOffOrders(request):
     else:
         noOrdersButton.isActive = True
     noOrdersButton.save()
-    print(noOrdersButton.isActive)
     context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
     return render(request,'admin.html',context)
 
 def populateMenu(request):
-    if noOrdersButton.isActive == True:
-        return render(request, "noOrders.html")
     return render(request, "food.html",{"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def addToCart(request, itemname):
@@ -151,15 +156,30 @@ def checkDate() :
     return menu
 
 def cart(request) :
-    cart = cartItem.objects.all()
+    cart = cartItem.objects.filter(cart=Cart.objects.get(user=request.user))
     total = 0
     for item in cart:
         total += item.cost
-        print(item.cost)
-    return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(total)})
+    return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(total), "isActive": noOrdersButton})
 
 def checkout(request) :
-    return render(request, "checkout.html")
+    cart = cartItem.objects.filter(cart=Cart.objects.get(user=request.user))
+    userCart = Cart.objects.get(user=request.user)
+    total = 0
+    cartid = userCart.id
+    for item in cart:
+        total += item.cost
+    if request.method == "POST":
+        cart = Cart.objects.get(user=request.user)
+        cart.status = "paid"
+        cart.save()
+        return redirect('home')
+    context = {"total":total,"cartid":cartid}
+    return render(request, "checkout.html",context)
+
+
+
+
 
 def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
@@ -192,3 +212,8 @@ def itemPage(request, itemname):
                 new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})
+
+def orderAdmin(request):
+    carts = Cart.objects.filter(status="paid")
+    context = {"carts": carts}
+    return render("orderadmin.html",context)

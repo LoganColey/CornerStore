@@ -35,8 +35,27 @@
       </div>
       <div>
         <h2 id="total">Total: ${{total}}</h2>
+        {% if isActive.isActive == False %}
         <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
+        {% else %}
+        <p>Sorry, we are not taking online orders at this time.</p>
+        {% endif %}
       </div>
     </div>
   </body>
+  <script>
+    var dt = new Date();
+
+    function checkDateTime() {
+      console.log(dt.getDay())
+      if (dt.getDay() != 5 && dt.getDay() != 6) {
+        document.getElementById("myDropdown").insertAdjacentHTML(
+          "beforeend",
+          `
+            <a class="Btn" name="seafood" href="{% url 'sortmenu' "seafood" %}">Seafood</a>
+          `
+        );
+      }
+    }
+  </script>
 </html>

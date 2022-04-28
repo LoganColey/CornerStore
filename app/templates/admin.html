@@ -22,10 +22,17 @@
     </nav>
     <div id="pageContentDiv">
       <div class="adminOption" id="ordersView">View placed orders.</div>
+      {% for order in paidOrders %}
+      <h1>:P</h1>
+      {% endfor %}
       <div class="adminOption" id="dailyLunchForm">
         <h1>Online Orders:</h1>
         <button class="noOrdersBtn">
-          <a href="{% url 'turnOffOrders' %}">On</a>
+          {% if noOrdersButton.isActive == True %}
+          <a href="{% url 'turnOffOrders' %}">Not taking online orders</a>
+          {% else %}
+          <a href="{% url 'turnOffOrders' %}">Taking online orders</a>
+          {%endif%}
         </button>
         <form action="" method="POST">
           {% csrf_token %} {{createEvent.as_p}}

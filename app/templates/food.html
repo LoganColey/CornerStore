@@ -18,7 +18,9 @@
       <a class="dropbtn" onclick="myFunction()">Menu
         <i class="fa fa-caret-down"></i>
       </a>
+      {% if cartNum > 0 %}
       <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
+      {% endif %}
     </nav>
     <div class="dropdown-content" id="myDropdown">
       <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
