@@ -9,9 +9,10 @@ from django.contrib.auth.models import Group
 from django.http import JsonResponse
 import json
 import datetime
+from decimal import *
 
 currentDate = datetime.datetime.now()
-noOrdersButton = create_isActive(False)
+noOrdersButton = noOrdersModel.objects.get(id=1)
 
 @unauthenticated_user
 def login_page(request):
@@ -107,13 +108,18 @@ def sortMenu(request, type):
 
 @admin_only
 def turnOffOrders(request):
+    form = CreateDailyLunch()
+    till = CreateClosingTill()
+    createEvent = CreateEvent()
+    newFood = AddToMenu()
     if noOrdersButton.isActive == True:
         noOrdersButton.isActive = False
     else:
         noOrdersButton.isActive = True
     noOrdersButton.save()
     print(noOrdersButton.isActive)
-    return redirect(request, 'admin')
+    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
+    return render(request,'admin.html',context)
 
 def populateMenu(request):
     if noOrdersButton.isActive == True:
@@ -167,10 +173,11 @@ def itemPage(request, itemname):
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
             if new_cart_item.side1 == "Side Salad" or new_cart_item.side1 == "Loaded Baked Potato":
-                new_cart_item.cost += 2.50
+                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                new_cart_item.save()
             if new_cart_item.side2 == "Side Salad" or new_cart_item.side2 == "Loaded Baked Potato":
-                new_cart_item.cost += 2.50
-            new_cart_item.save()
+                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
     elif request.POST.get("form_type") == 'small':
@@ -180,8 +187,8 @@ def itemPage(request, itemname):
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
-            if new_cart_item.side1 == "Side Salad" or new_cart_item.side1 == "Loaded Baked Potato":
-                new_cart_item.cost += 2.50
+            if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
+                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})

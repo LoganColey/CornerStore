@@ -51,14 +51,6 @@ class event(models.Model):
 class noOrdersModel(models.Model):
     isActive = models.BooleanField()
 
-    def __str__(self) -> str:
-           return self.isActive
-
-def create_isActive(isActive):
-    noOrdersButton = noOrdersModel(isActive=isActive)
-    noOrdersButton.save()
-    return noOrdersButton
-
 class Cart(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
 
