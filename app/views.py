@@ -45,7 +45,7 @@ def signup(request):
             group = Group.objects.get(name="user")
             user.groups.add(group)
             messages.success(request, 'Account was created for ' + username)
-            createCart((Cart.objects.all().count()+1), user)
+            createCart( user)
             return redirect('login')
     context = {'form':form}
     return render(request, 'signup.html', context)
@@ -80,16 +80,6 @@ def admin(request):
         elif request.POST.get("form_type") == 'Add Item':
             newFood = AddToMenu(request.POST)
             if newFood.is_valid():
-                with open('app/static/food.json', 'a') as f:
-                    f.truncate(0)
-                    f.write("[")
-                    menu = menuItem.objects.all()
-                    for item in menu:
-                        f.write('{"name":"' + item.name + '", "cost":' + str(item.cost) +', "description": "' + item.description + '", "image":"none", "type": "' + item.type + '"}')
-                        if item.id != menuItem.objects.all().last().id:
-                            f.write(",")
-                    f.write("]")
-                    f.close
                 newFood.save()
         elif request.POST.get("form_type") == "Event":
             createEvent = CreateEvent(request.POST)
@@ -131,7 +121,8 @@ def populateMenu(request):
 
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
-    createCart((cartItem.objects.filter(request.user).count() + 1), request.user, itemFromMenu.cost, itemFromMenu.name, itemFromMenu.type)
+    new_cart_item = cartItem(cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
+    new_cart_item.save()
     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 def removeFromCart(request, itemid):
@@ -149,8 +140,6 @@ def checkDate() :
         menu = menuItem.objects.all()
     return menu
 
-
-
 def cart(request) :
     cart = cartItem.objects.all()
     total = 0
@@ -166,18 +155,17 @@ def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
     bigFood = createBig()
     smallFood = createSmall()
-    newID = cartItem.objects.filter().count() + 1
     if request.POST.get("form_type") == 'big':
         bigFood = createBig(request.POST)
         if bigFood.is_valid():
             bigFood.save()
             print(bigFood)
-            createCartItem(newID,request.user,item.name,item.cost,item.type,bigFood.side1,bigFood.side2)
+            createCartItem(request.user,item.name,item.cost,item.type,bigFood.side1,bigFood.side2)
 
     elif request.POST.get("form_type") == 'small':
         smallFood = createSmall(request.POST)
         if smallFood.is_valid():
             smallFood.save()
             print(smallFood)
-            createCartItem(newID,request.user,item.name,item.cost,item.type,bigFood.side1,"none")
+            createCartItem(request.user,item.name,item.cost,item.type,bigFood.side1,"none")
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})

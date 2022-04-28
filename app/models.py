@@ -60,11 +60,10 @@ def create_isActive(isActive):
     return noOrdersButton
 
 class Cart(models.Model):
-    id = models.IntegerField(primary_key=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
 
-def createCart(id, user):
-    new_cart = Cart(id=id, user=user)
+def createCart(user):
+    new_cart = Cart(user=user)
     new_cart.save()
     return new_cart
 
@@ -79,30 +78,9 @@ class cartItem(models.Model):
     ('loaded baked potato', 'Loaded Baked Potato'),
     ('side salad', 'Side Salad'),
     ),)]
-    id = models.IntegerField(primary_key=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
     name = models.CharField(max_length=100, null=True)
     type = models.CharField(max_length=20, null=True)
     side1 = models.CharField(max_length=20, null=True,choices=SIDES)
     side2 = models.CharField(max_length=20, null=True,choices=SIDES)
-
-def createCartItem(id, user, cost, name, type,side1,side2):
-    new_cart = cartItem(id=id, user=user,name=name,cost=cost, type=type,side1=side1,side2=side2)
-    new_cart.save()
-    return new_cart
-
-# class sideModel(models.Model):
-#     SIDES = [('--Choose a Side--',
-#     (
-#     ('corn nuggets', 'Corn Nuggets'),
-#     ('tater tots', 'Tater Tots'),
-#     ('french fries', 'French Fries'),
-#     ('onion rings', 'Onion Rings'),
-#     ('fried okra', 'Fried Okra'),
-#     ('loaded baked potato', 'Loaded Baked Potato'),
-#     ('side salad', 'Side Salad'),
-#     ),)]
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-#     cartItem = models.ForeignKey(menuItem, on_delete=models.CASCADE, null=True)
-#     option = models.CharField(max_length=200, null=True,choices=SIDES)
