@@ -121,7 +121,7 @@ def populateMenu(request):
 
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
-    new_cart_item = cartItem(cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
+    new_cart_item = cartItem((Cart.objects.get(user=request.user)),cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
     new_cart_item.save()
     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
