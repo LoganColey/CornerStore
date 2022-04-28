@@ -166,6 +166,11 @@ def itemPage(request, itemname):
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
+            if new_cart_item.side1 == "Side Salad" or new_cart_item.side1 == "Loaded Baked Potato":
+                new_cart_item.cost += 2.50
+            if new_cart_item.side2 == "Side Salad" or new_cart_item.side2 == "Loaded Baked Potato":
+                new_cart_item.cost += 2.50
+            new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
     elif request.POST.get("form_type") == 'small':
@@ -175,5 +180,8 @@ def itemPage(request, itemname):
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
+            if new_cart_item.side1 == "Side Salad" or new_cart_item.side1 == "Loaded Baked Potato":
+                new_cart_item.cost += 2.50
+                new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})
