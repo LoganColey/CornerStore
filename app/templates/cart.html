@@ -21,10 +21,10 @@
         <div class="ticketItem">
           <h2 class="itemName">{{item.name}}</h2>
           {% if item.type == "big"%}
-          <button>add in the dropdown</button><button>add in the dropdown</button>
+          <p>{{item.side1}}</p><p>{{item.side2}}</p>
           {% endif %}
           {% if item.type == "small"%}
-          <button>add in the dropdown</button>
+          <p>{{item.side1}}</p>
           {% endif %}
           <h2 class="itemPrice">{{item.cost}}</h2>
           <button>

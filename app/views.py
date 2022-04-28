@@ -162,14 +162,18 @@ def itemPage(request, itemname):
     if request.POST.get("form_type") == 'big':
         bigFood = createBig(request.POST)
         if bigFood.is_valid():
-            bigFood.save()
-            print(bigFood)
-            createCartItem(request.user,item.name,item.cost,item.type,bigFood.side1,bigFood.side2)
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=bigFood.cleaned_data['side1'],side2=bigFood.cleaned_data['side2'])
+            new_cart_item.save()
+            new_cart_item.cart = Cart.objects.get(user=request.user)
+            new_cart_item.save()
+            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
     elif request.POST.get("form_type") == 'small':
         smallFood = createSmall(request.POST)
-        if smallFood.is_valid():
-            smallFood.save()
-            print(smallFood)
-            createCartItem(request.user,item.name,item.cost,item.type,bigFood.side1,"none")
+        if smallFood.is_valid(): 
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=smallFood.cleaned_data['side1'])
+            new_cart_item.save()
+            new_cart_item.cart = Cart.objects.get(user=request.user)
+            new_cart_item.save()
+            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})
