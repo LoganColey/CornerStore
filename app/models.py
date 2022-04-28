@@ -62,11 +62,6 @@ def create_isActive(isActive):
 class Cart(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
 
-def createCart(user):
-    new_cart = Cart(user=user)
-    new_cart.save()
-    return new_cart
-
 class cartItem(models.Model):
     SIDES = [('--Choose a Side--',
     (
@@ -78,6 +73,7 @@ class cartItem(models.Model):
     ('loaded baked potato', 'Loaded Baked Potato'),
     ('side salad', 'Side Salad'),
     ),)]
+    id = models.IntegerField(null=False, primary_key=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
     name = models.CharField(max_length=100, null=True)

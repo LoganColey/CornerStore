@@ -45,7 +45,8 @@ def signup(request):
             group = Group.objects.get(name="user")
             user.groups.add(group)
             messages.success(request, 'Account was created for ' + username)
-            createCart( user)
+            new_cart = Cart(user=user)
+            new_cart.save()
             return redirect('login')
     context = {'form':form}
     return render(request, 'signup.html', context)
@@ -122,7 +123,9 @@ def populateMenu(request):
 def addToCart(request, itemname):
     itemFromMenu = menuItem.objects.get(name=itemname)
     cart = Cart.objects.get(user=request.user)
-    new_cart_item = cartItem(cart.id,cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
+    new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
+    new_cart_item.save()
+    new_cart_item.cart = cart
     new_cart_item.save()
     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
