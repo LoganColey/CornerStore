@@ -35,6 +35,7 @@
       <div id="content">
         {% for item in menu %}
           <div id="itemBox" class="{{item.type}}"><a  href="{% url 'item' item.name %}">
+            <img src="{{item.image.url}}">
             <h2 class="itemName">{{item.name}}</h2>
             <p class="itemDesc">{{item.description}}</p>
             <h2 class="itemPrice">$ {{item.cost}}</h2>

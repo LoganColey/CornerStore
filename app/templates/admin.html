@@ -21,10 +21,9 @@
       <h1>Welcome Susan</h1>
     </nav>
     <div id="pageContentDiv">
-      <div class="adminOption" id="ordersView">View placed orders.</div>
-      {% for order in paidOrders %}
-      <h1>:P</h1>
-      {% endfor %}
+      <div class="adminOption">
+        <button><a href="{% url 'orderAdmin' %}">View placed orders.</a></button>
+      </div>
       <div class="adminOption" id="dailyLunchForm">
         <h1>Online Orders:</h1>
         <button class="noOrdersBtn">
@@ -41,7 +40,7 @@
       </div>
       <div class="adminOption" id="inputNewFoodForm">
         <h1>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %} {{newFood.as_p}}
           <input type="submit" name="form_type" value="Add Item" />
         </form>

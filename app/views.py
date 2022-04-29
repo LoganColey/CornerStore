@@ -68,7 +68,7 @@ def paymentComplete(request):
     print("its hitting here")
         # print('BODY:', body)
         # return JsonResponse('Payment completed!', safe=False)
-    return redirect('home')
+    return redirect('home ')
 
 @login_required(login_url='login')
 @admin_only
@@ -87,7 +87,7 @@ def admin(request):
             if till.is_valid():
                 till.save()
         elif request.POST.get("form_type") == 'Add Item':
-            newFood = AddToMenu(request.POST)
+            newFood = AddToMenu(request.POST, request.FILES)
             if newFood.is_valid():
                 newFood.save()
         elif request.POST.get("form_type") == "Event":
@@ -160,7 +160,8 @@ def cart(request) :
     total = 0
     for item in cart:
         total += item.cost
-    return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(total), "isActive": noOrdersButton})
+    totalTax = total + (total * Decimal(.07))
+    return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(totalTax), "isActive": noOrdersButton})
 
 def checkout(request) :
     cart = cartItem.objects.filter(cart=Cart.objects.get(user=request.user))
@@ -169,26 +170,26 @@ def checkout(request) :
     cartid = userCart.id
     for item in cart:
         total += item.cost
+    totalTax = total + (total * Decimal(.07))
+    print(cart)
     if request.method == "POST":
         cart = Cart.objects.get(user=request.user)
         cart.status = "paid"
         cart.save()
-        return redirect('home')
-    context = {"total":total,"cartid":cartid}
+        return redirect('checkout')
+    context = {"total":"{:.2f}".format(totalTax),"cartid":cartid,"userCart": userCart}
     return render(request, "checkout.html",context)
-
-
-
-
 
 def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
     bigFood = createBig()
     smallFood = createSmall()
-    if request.POST.get("form_type") == 'big':
+    food = createCartItem()
+    cart = Cart.objects.get(user=request.user)
+    if request.POST.get("form_type") == 'Add to Cart ':
         bigFood = createBig(request.POST)
         if bigFood.is_valid():
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=bigFood.cleaned_data['side1'],side2=bigFood.cleaned_data['side2'])
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=bigFood.cleaned_data['side1'],side2=bigFood.cleaned_data['side2'],comment=bigFood.cleaned_data['comment'])
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
@@ -198,22 +199,38 @@ def itemPage(request, itemname):
             if new_cart_item.side2 == "Side Salad" or new_cart_item.side2 == "Loaded Baked Potato":
                 new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
-            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
+            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
 
-    elif request.POST.get("form_type") == 'small':
+    elif request.POST.get("form_type") == ' Add to Cart ':
         smallFood = createSmall(request.POST)
         if smallFood.is_valid(): 
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=smallFood.cleaned_data['side1'])
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=smallFood.cleaned_data['side1'],comment= smallFood.cleaned_data['comment'])
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
             if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
                 new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
-            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
-    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood})
+            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
+    
+    else:
+        food = createCartItem(request.POST)
+        if food.is_valid():
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,comment= food.cleaned_data['comment'])
+            new_cart_item.save()
+            new_cart_item.cart = Cart.objects.get(user=request.user)
+            new_cart_item.save()
+            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
+    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood, "cart":cart})
 
 def orderAdmin(request):
     carts = Cart.objects.filter(status="paid")
     context = {"carts": carts}
-    return render("orderadmin.html",context)
+    return render(request, "orderadmin.html",context)
+
+def finishOrder(request, cartId):
+    cart = Cart.objects.get(id=cartId)
+    cart.cartitem_set.all().delete()
+    cart.status = 'unpaid'
+    cart.save()
+    return redirect('orderAdmin')

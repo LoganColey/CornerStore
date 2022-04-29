@@ -10,8 +10,8 @@ class CreateUserForm(UserCreationForm):
         
 class createCartItem(ModelForm):
     class Meta:
-        model = menuItem
-        fields = ['name', 'cost', 'type']
+        model = cartItem
+        fields = ['comment']
 
 class CreateDailyLunch(ModelForm):
     class Meta:
@@ -26,7 +26,7 @@ class CreateClosingTill(ModelForm):
 class AddToMenu(ModelForm):
     class Meta:
         model = menuItem
-        fields = ['name', 'cost','description','type']
+        fields = '__all__'
 
 class CreateEvent(ModelForm):
     class Meta:
@@ -36,9 +36,9 @@ class CreateEvent(ModelForm):
 class createBig(ModelForm):
     class Meta:
         model = cartItem
-        fields = ['side1', 'side2']
+        fields = ['side1', 'side2', 'comment']
 
 class createSmall(ModelForm):
     class Meta:
         model = cartItem
-        fields = ['side1']
+        fields = ['side1', 'comment']

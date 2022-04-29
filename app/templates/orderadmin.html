@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <title>Food</title>
+  </head>
+  <body>
+    <nav class="sticky">
+      <a href="{% url 'home' %}" title="Home">Home</a>
+      <a class="Btn" name="all" href="{% url 'admin' %}">Admin Panel</a>
+    </nav>
+    <div class="mainpage">
+      {% for cart in carts %}
+      {% for item in cart.cartitem_set.all %}
+      <p>{{item.name}}</p>
+      {% if item.type == "big" %}
+      <p>{{item.side1}}</p><p>{{item.side2}}</p>
+      {% elif item.type == "small"%}
+      <p>{{item.side1}}</p>
+      {% endif %}
+      {% endfor %}
+      <button><a href="{% url 'finishOrder' cart.id %}">Finish order {{cart.id}}</a></button>
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    window.setTimeout(function () {
+        location.href = "{% url 'orderAdmin' %}";
+    }, 30000);
+  </script>
+</html>

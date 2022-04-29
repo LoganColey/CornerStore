@@ -27,14 +27,11 @@ class dailyLunch(models.Model):
     bread = models.CharField(max_length=100, null=True)
     dessert = models.CharField(max_length=100, null=True)
 
-    def __str__(self) -> str:
-           return self.name
-
 class menuItem(models.Model):
     name = models.CharField(max_length=100, null=False)
     cost = models.DecimalField(max_digits=6, decimal_places=2,null=False)
     description = models.CharField(max_length=400, null=False)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True,blank=True,upload_to="images/")
     type = models.CharField(max_length=20)
 
     def __str__(self) -> str:
@@ -73,3 +70,4 @@ class cartItem(models.Model):
     type = models.CharField(max_length=20, null=True)
     side1 = models.CharField(max_length=20, null=True,choices=SIDES)
     side2 = models.CharField(max_length=20, null=True,choices=SIDES)
+    comment = models.CharField(max_length=1000, null=True)

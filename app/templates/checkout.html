@@ -15,13 +15,18 @@
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
     </nav>
+    {% if userCart.status == "unpaid" %}
     <div id="checkoutBox">
       <h1 id="totalBox">${{total}}</h1>
-      <h1>Your order will be ready in about 45 minutes!</h1>
+
       <div id="paypal-button-container"></div>
       <!-- Include the PayPal JavaScript SDK -->
       <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     </div>
+    {% elif userCart.status == "paid" %}
+      <h1>Your order will be ready in about 45 minutes!</h1>
+      <button><a href="{% url 'home'%}">Home</a></button>
+    {% endif %}
     <script>
         const total = document.getElementById("totalBox").innerHTML;
 
@@ -79,6 +84,9 @@
                        // Show a success message to the buyer
                        completeOrder()
                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                       window.setTimeout(function () {
+                        location.href = "{% url 'checkout' %}";
+                    }, 1000);
                    });
                }
    

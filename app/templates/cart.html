@@ -11,6 +11,19 @@
     />
     <title>Cart</title>
   </head>
+  <style>
+    .show {
+        display: block !important;
+    }
+
+    .storeHours {
+      display: none;
+    }
+
+    .notStoreHours {
+      display: none;
+    }
+  </style>
   <body>
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
@@ -26,20 +39,23 @@
           {% if item.type == "small"%}
           <p>{{item.side1}}</p>
           {% endif %}
-          <h2 class="itemPrice">{{item.cost}}</h2>
+          <h2 class="itemPrice">${{item.cost}}</h2>
           <button>
             <a href="{% url 'removeFromCart' item.id %}">Remove</a>
           </button>
         </div>
         {% endfor %}
       </div>
-      <div>
+      <div class="storeHours">
         <h2 id="total">Total: ${{total}}</h2>
         {% if isActive.isActive == False %}
         <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
         {% else %}
         <p>Sorry, we are not taking online orders at this time.</p>
         {% endif %}
+      </div>
+      <div class="notStoreHours">
+        <p>Sorry, we are not taking online orders at this time.</p>
       </div>
     </div>
   </body>
@@ -56,6 +72,15 @@
           `
         );
       }
+      checkHours()
     }
+
+    function checkHours() {
+      if (dt.getHours() * 100 + dt.getMinutes() >= 1630 && dt.getHours() < 19) {
+        document.getElementById("storeHours").classList.toggle("show");
+      } else {
+        document.querySelector(".notStoreHours").classList.toggle("show");
+        }
+      }
   </script>
 </html>
