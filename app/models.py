@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from email.policy import default
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -60,14 +60,14 @@ class cartItem(models.Model):
     ('french fries', 'French Fries'),
     ('onion rings', 'Onion Rings'),
     ('fried okra', 'Fried Okra'),
-    ('loaded baked potato', 'Loaded Baked Potato'),
-    ('side salad', 'Side Salad'),
+    ('loaded baked potato', 'Loaded Baked Potato + $2.50'),
+    ('side salad', 'Side Salad + $2.50'),
     ),)]
     id = models.IntegerField(null=False, primary_key=True)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
-    name = models.CharField(max_length=100, null=True)
-    type = models.CharField(max_length=20, null=True)
-    side1 = models.CharField(max_length=20, null=True,choices=SIDES)
-    side2 = models.CharField(max_length=20, null=True,choices=SIDES)
-    comment = models.CharField(max_length=1000, null=True)
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=20)
+    side1 = models.CharField(max_length=20, blank=True,choices=SIDES)
+    side2 = models.CharField(max_length=20, blank=True,choices=SIDES)
+    comment = models.CharField(max_length=1000, blank=True)

@@ -25,21 +25,24 @@
           <p class="itemDesc">{{item.description}}</p>
           <h2 class="itemPrice">$ {{item.cost}}</h2>
           {% if cart.status == "paid" %}
-          <p>You have a pending order.  You cannot place another order until it is complete</p>
+            <p>You have a pending order.  You cannot place another order until it is complete</p>
           {% elif cart.status == "unpaid" %}
-          <form action="" method="POST">
             {% if item.type == "small" %}
-              {% csrf_token %} {{smallFood.as_p}}
-              <input type="submit" name="form_type" value=" Add to Cart " />
-          </form>
-          <form action="" method="POST">
+            <form action="" method="POST">
+                {% csrf_token %} {{smallFood.as_p}}
+                <input type="submit" name="form_type" value=" Add to Cart " />
+            </form>
             {% elif item.type == "big"%}
-              {% csrf_token %} {{bigFood.as_p}}
-              <input type="submit" name="form_type" value="Add to Cart " />
-          </form>
-          {% else %}
-          <a href="{% url 'addToCart' item.name %}">Add to Cart</a>
-          {% endif %}
+            <form action="" method="POST">
+                {% csrf_token %} {{bigFood.as_p}}
+                <input type="submit" name="form_type" value="Add to Cart " />
+            </form>
+            {% else %}
+            <form action="" method="POST">
+                {% csrf_token %} {{food.as_p}}
+                <input type="submit" name="form_type" value="Add to Cart" />
+            </form>
+            {% endif %}
           {% endif %}
         </div>
       </div>

@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from app.models import *
+from django import forms
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -9,6 +10,7 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         
 class createCartItem(ModelForm):
+
     class Meta:
         model = cartItem
         fields = ['comment']
@@ -34,11 +36,13 @@ class CreateEvent(ModelForm):
         fields = '__all__'
 
 class createBig(ModelForm):
+    
     class Meta:
         model = cartItem
         fields = ['side1', 'side2', 'comment']
 
 class createSmall(ModelForm):
+
     class Meta:
         model = cartItem
         fields = ['side1', 'comment']

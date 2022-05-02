@@ -12,9 +12,11 @@ import json
 import datetime
 from decimal import *
 
+
 #important variables
 currentDate = datetime.datetime.now()
 noOrdersButton = noOrdersModel.objects.get(id=1)
+
 
 # basic user login.  takes the normal user to the home page and the admin to our custom admin panel
 @unauthenticated_user
@@ -34,10 +36,12 @@ def login_page(request):
         context = {}
         return render(request, 'login.html', context)
     
+
 # logs the user out
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
 
 # user account creation.  also creates an empty cart for the user and redirects to the login
 @unauthenticated_user
@@ -57,6 +61,7 @@ def signup(request):
     context = {'form':form}
     return render(request, 'signup.html', context)
 
+
 # home page, displays the planned events
 @login_required(login_url='login')
 def home(request):
@@ -64,18 +69,17 @@ def home(request):
     context ={"events": events}
     return render(request,'index.html',context)
 
+
 # custom admin panel.  only for internal business use.
 @login_required(login_url='login')
 @admin_only
 def admin(request):
-
     # grabbing empty forms
     form = CreateDailyLunch()
     till = CreateClosingTill()
     createEvent = CreateEvent()
     newFood = AddToMenu()
     if request.method == 'POST':
-
         #checks what form is used and submits/saves it
         if request.POST.get("form_type") == 'Change Lunch':
             form = CreateDailyLunch(request.POST)
@@ -93,10 +97,10 @@ def admin(request):
             createEvent = CreateEvent(request.POST)
             if createEvent.is_valid():
                 createEvent.save()
-    
     # puts all needed variables in context and returns to the page after the submit
     context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent, 'noOrdersButton': noOrdersButton, 'paidOrders': Cart.objects.filter(status="paid")}
     return render(request,'admin.html',context)
+
 
 # grabs the previous tills and renders the till page
 def tillView(request):
@@ -104,12 +108,14 @@ def tillView(request):
     context = {'tills': tills}
     return render(request, "till.html", context)
 
+
 # deletes all events
 @admin_only
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
     return redirect(request,'admin')
+
 
 # toggles noOrdersButton.isActive.  Mrs. Coley can manually decide if she wants to stop taking online orders from the custom admin panel
 @admin_only
@@ -123,16 +129,17 @@ def turnOffOrders(request):
     else:
         noOrdersButton.isActive = True
     noOrdersButton.save()
-
     #needed forms are grabbed and returned to the admin panel
     context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
     return render(request,'admin.html',context)
+
 
 # Mrs Coley's view of the orders that have been paid.  She clicks a button that clears the cart once she is finished making the order
 def orderAdmin(request):
     carts = Cart.objects.filter(status="paid")
     context = {"carts": carts}
     return render(request, "orderadmin.html",context)
+
 
 # once Mrs Coley finishes making an order, she clicks a button that uses this view to clear out the user's cart so they can make another order
 def finishOrder(request, cartId):
@@ -142,9 +149,11 @@ def finishOrder(request, cartId):
     cart.save()
     return redirect('orderAdmin')
 
+
 # populates menu, calls on the checkDate() function to see if it should include seafood or not
 def populateMenu(request):
     return render(request, "food.html",{"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
+
 
 # seafood is only available on friday and saturday, so it checks the date to determine if its included or not
 def checkDate() :
@@ -154,9 +163,11 @@ def checkDate() :
         menu = menuItem.objects.all()
     return menu
 
+
 # upon choosing an item filter, only items of that type are sent to the menu from the menuItem model
 def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
+
 
 # grabs the users cart and adds the selected item to it by adding a new item to the cartItem model and adding that item to the Cart model for the user
 def addToCart(request, itemname):
@@ -168,6 +179,7 @@ def addToCart(request, itemname):
     new_cart_item.save()
     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
+
 # displays the individual item, allows the user to pick sides if the food is a certain type, and allows for special comments on orders
 def itemPage(request, itemname):
     item = menuItem.objects.get(name=itemname)
@@ -175,7 +187,6 @@ def itemPage(request, itemname):
     smallFood = createSmall()
     food = createCartItem()
     cart = Cart.objects.get(user=request.user)
-
 # if the food is of type big then it gives two sides to be chosen
     if request.POST.get("form_type") == 'Add to Cart ':
         bigFood = createBig(request.POST)
@@ -184,10 +195,10 @@ def itemPage(request, itemname):
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
-            if new_cart_item.side1 == "Side Salad" or new_cart_item.side1 == "Loaded Baked Potato":
+            if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
                 new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
-            if new_cart_item.side2 == "Side Salad" or new_cart_item.side2 == "Loaded Baked Potato":
+            if new_cart_item.side2 == "side salad" or new_cart_item.side2 == "loaded baked potato":
                 new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
@@ -203,17 +214,17 @@ def itemPage(request, itemname):
                 new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
                 new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
-
 # if the food has any other type it only gives a comment field
     else:
         food = createCartItem(request.POST)
         if food.is_valid():
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,comment= food.cleaned_data['comment'])
+            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,comment=food.cleaned_data['comment'])
             new_cart_item.save()
             new_cart_item.cart = Cart.objects.get(user=request.user)
             new_cart_item.save()
             return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
-    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood, "cart":cart})
+    return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood, "food": food, "cart":cart})
+
 
 # gets the users cart and removes the item
 def removeFromCart(request, itemid):
@@ -223,6 +234,7 @@ def removeFromCart(request, itemid):
     for item in cart:
         total += item.cost
     return render(request, 'cart.html', {"cart": cart, "total": total})
+
 
 # gets the users cart and displays each item, as well as calculates the total with tax and see if the time is in range for online orders
 def cart(request) :
@@ -237,6 +249,7 @@ def cart(request) :
         storeHours = False
     return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours})
 
+
 # displays the total with tax and gives button options for payment.  Payment is handled through PayPal's code.  Cart status is changed to paid
 def checkout(request) :
     cart = cartItem.objects.filter(cart=Cart.objects.get(user=request.user))
@@ -246,7 +259,6 @@ def checkout(request) :
     for item in cart:
         total += item.cost
     totalTax = total + (total * Decimal(.07))
-    print(cart)
     if request.method == "POST":
         cart = Cart.objects.get(user=request.user)
         cart.status = "paid"
@@ -255,9 +267,10 @@ def checkout(request) :
     context = {"total":"{:.2f}".format(totalTax), "cartid":cartid, "userCart": userCart}
     return render(request, "checkout.html", context)
 
+
 # called by PayPal code, refreshes the page so that they are not prompted to pay twice, returns to home
 def paymentComplete(request):
     cart = Cart.objects.get(user=request.user)
     cart.status = "paid"
     cart.save()
-    return redirect('home ')
+    return redirect('home')
