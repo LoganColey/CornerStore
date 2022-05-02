@@ -6,6 +6,11 @@ body {
   padding: 0;
 }
 
+a{
+  text-decoration: none;
+  color: #000;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 66% 34%;
