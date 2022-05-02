@@ -17,40 +17,35 @@
       <a href="{% url 'home' %}" title="Home">Home</a>
       <a href="{% url 'deleteEvent' %}">Delete Events</a>
       <a href="{% url 'tillView' %}">View Tills</a>
+      <a href="{% url 'orderAdmin' %}">Orders</a>
+      {% if noOrdersButton.isActive == True %}
+      <a href="{% url 'turnOffOrders' %}">Turn Off Orders</a>
+      {% else %}
+      <a href="{% url 'turnOffOrders' %}">Turn On Orders</a>
+      {%endif%}
 
       <h1>Welcome Susan</h1>
     </nav>
-    <div id="pageContentDiv">
-      <div class="adminOption">
-        <button><a href="{% url 'orderAdmin' %}">View placed orders.</a></button>
-      </div>
-      <div class="adminOption" id="dailyLunchForm">
-        <h1>Online Orders:</h1>
-        <button class="noOrdersBtn">
-          {% if noOrdersButton.isActive == True %}
-          <a href="{% url 'turnOffOrders' %}">Not taking online orders</a>
-          {% else %}
-          <a href="{% url 'turnOffOrders' %}">Taking online orders</a>
-          {%endif%}
-        </button>
+      <div class="formBox" id="dailyLunchForm">
+        <h1>Create Event:</h1>
         <form action="" method="POST">
           {% csrf_token %} {{createEvent.as_p}}
           <input type="submit" name="form_type" value="Event" />
         </form>
       </div>
-      <div class="adminOption" id="inputNewFoodForm">
-        <h1>
+      <div class="formBox" id="inputNewFoodForm">
+        <h1>Add a new Food:</h1>
         <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %} {{newFood.as_p}}
           <input type="submit" name="form_type" value="Add Item" />
         </form>
       </div>
-      <div class="adminOption" id="countTillForm">
-        <h1>Closing Till</h1>
+      <div class="formBox" id="countTillForm">
+        <h1>Closing Till:</h1>
         <form action="" method="POST">
-        {% csrf_token %} {{till.as_p}}
-        <input type="submit" name="form_type" value="Till Out" />
-      </form></div>
-    </div>
+          {% csrf_token %} {{till.as_p}}
+          <input type="submit" name="form_type" value="Till Out" />
+        </form>
+      </div>
   </body>
 </html>
