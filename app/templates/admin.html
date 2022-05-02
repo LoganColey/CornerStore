@@ -19,33 +19,33 @@
       <a href="{% url 'tillView' %}">View Tills</a>
       <a href="{% url 'orderAdmin' %}">Orders</a>
       {% if noOrdersButton.isActive == True %}
-      <a href="{% url 'turnOffOrders' %}">Turn Off Orders</a>
+        <a href="{% url 'turnOffOrders' %}" style="background-color: red; width: 170px;">Not Taking Orders</a>
       {% else %}
-      <a href="{% url 'turnOffOrders' %}">Turn On Orders</a>
+      <a href="{% url 'turnOffOrders' %}" style="background-color: green; width: 170px;">Taking Orders</a>
       {%endif%}
-
-      <h1>Welcome Susan</h1>
     </nav>
+    <div class="main-content">
       <div class="formBox" id="dailyLunchForm">
         <h1>Create Event:</h1>
         <form action="" method="POST">
           {% csrf_token %} {{createEvent.as_p}}
-          <input type="submit" name="form_type" value="Event" />
+          <input type="submit" name="form_type" value="Add an Event" style="height: 40px; width: 120px; font-size: 17px;"/>
         </form>
       </div>
       <div class="formBox" id="inputNewFoodForm">
         <h1>Add a new Food:</h1>
         <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %} {{newFood.as_p}}
-          <input type="submit" name="form_type" value="Add Item" />
+          <input type="submit" name="form_type" value="Add New Menu Item" style="height: 40px; width: 180px; font-size: 17px;"/>
         </form>
       </div>
       <div class="formBox" id="countTillForm">
         <h1>Closing Till:</h1>
         <form action="" method="POST">
           {% csrf_token %} {{till.as_p}}
-          <input type="submit" name="form_type" value="Till Out" />
+          <input type="submit" name="form_type" value="Till Out" style="height: 40px; width: 80px; font-size: 17px;"/>
         </form>
       </div>
+    </div>
   </body>
 </html>

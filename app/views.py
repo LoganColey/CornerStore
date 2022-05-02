@@ -74,6 +74,7 @@ def home(request):
 @login_required(login_url='login')
 @admin_only
 def admin(request):
+    print(noOrdersButton.isActive)
     # grabbing empty forms
     form = CreateDailyLunch()
     till = CreateClosingTill()
@@ -98,7 +99,7 @@ def admin(request):
             if createEvent.is_valid():
                 createEvent.save()
     # puts all needed variables in context and returns to the page after the submit
-    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent, 'noOrdersButton': noOrdersButton, 'paidOrders': Cart.objects.filter(status="paid")}
+    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent, 'noOrdersButton': noOrdersButton}
     return render(request,'admin.html',context)
 
 
@@ -120,18 +121,12 @@ def deleteEvent(request):
 # toggles noOrdersButton.isActive.  Mrs. Coley can manually decide if she wants to stop taking online orders from the custom admin panel
 @admin_only
 def turnOffOrders(request):
-    form = CreateDailyLunch()
-    till = CreateClosingTill()
-    createEvent = CreateEvent()
-    newFood = AddToMenu()
     if noOrdersButton.isActive == True:
         noOrdersButton.isActive = False
     else:
         noOrdersButton.isActive = True
     noOrdersButton.save()
-    #needed forms are grabbed and returned to the admin panel
-    context = {'form': form, 'till': till, 'newFood': newFood,'createEvent': createEvent}
-    return render(request,'admin.html',context)
+    return redirect('admin')
 
 
 # Mrs Coley's view of the orders that have been paid.  She clicks a button that clears the cart once she is finished making the order
@@ -244,7 +239,7 @@ def cart(request) :
     for item in cart:
         total += item.cost
     totalTax = total + (total * Decimal(.07))
-    if (currentDate.hour * 100 + currentDate.minute >= 1630 and currentDate.hour < 19):
+    if (currentDate.hour * 100 + currentDate.minute >= 130 and currentDate.hour < 19):
         storeHours = True
     else :
         storeHours = False
