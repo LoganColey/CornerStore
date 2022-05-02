@@ -169,15 +169,15 @@ def sortMenu(request, type):
     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
 
 
-# grabs the users cart and adds the selected item to it by adding a new item to the cartItem model and adding that item to the Cart model for the user
-def addToCart(request, itemname):
-    itemFromMenu = menuItem.objects.get(name=itemname)
-    cart = Cart.objects.get(user=request.user)
-    new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
-    new_cart_item.save()
-    new_cart_item.cart = cart
-    new_cart_item.save()
-    return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
+# # grabs the users cart and adds the selected item to it by adding a new item to the cartItem model and adding that item to the Cart model for the user
+# def addToCart(request, itemname):
+#     itemFromMenu = menuItem.objects.get(name=itemname)
+#     cart = Cart.objects.get(user=request.user)
+#     new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
+#     new_cart_item.save()
+#     new_cart_item.cart = cart
+#     new_cart_item.save()
+#     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
 
 
 # displays the individual item, allows the user to pick sides if the food is a certain type, and allows for special comments on orders
@@ -188,41 +188,42 @@ def itemPage(request, itemname):
     food = createCartItem()
     cart = Cart.objects.get(user=request.user)
 # if the food is of type big then it gives two sides to be chosen
-    if request.POST.get("form_type") == 'Add to Cart ':
-        bigFood = createBig(request.POST)
-        if bigFood.is_valid():
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=bigFood.cleaned_data['side1'],side2=bigFood.cleaned_data['side2'],comment=bigFood.cleaned_data['comment'])
-            new_cart_item.save()
-            new_cart_item.cart = Cart.objects.get(user=request.user)
-            new_cart_item.save()
-            if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
-                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+    if request.method == 'POST':
+        if request.POST.get("form_type") == 'Add to Cart ':
+            bigFood = createBig(request.POST)
+            if bigFood.is_valid():
+                new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=bigFood.cleaned_data['side1'],side2=bigFood.cleaned_data['side2'],comment=bigFood.cleaned_data['comment'])
                 new_cart_item.save()
-            if new_cart_item.side2 == "side salad" or new_cart_item.side2 == "loaded baked potato":
-                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                new_cart_item.cart = Cart.objects.get(user=request.user)
                 new_cart_item.save()
-            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
+                if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
+                    new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                    new_cart_item.save()
+                if new_cart_item.side2 == "side salad" or new_cart_item.side2 == "loaded baked potato":
+                    new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                    new_cart_item.save()
+                return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
 # if the food is of type small then it gives one side to be chosen
-    elif request.POST.get("form_type") == ' Add to Cart ':
-        smallFood = createSmall(request.POST)
-        if smallFood.is_valid(): 
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=smallFood.cleaned_data['side1'],comment= smallFood.cleaned_data['comment'])
-            new_cart_item.save()
-            new_cart_item.cart = Cart.objects.get(user=request.user)
-            new_cart_item.save()
-            if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
-                new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+        elif request.POST.get("form_type") == ' Add to Cart ':
+            smallFood = createSmall(request.POST)
+            if smallFood.is_valid():
+                new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,side1=smallFood.cleaned_data['side1'],comment= smallFood.cleaned_data['comment'])
                 new_cart_item.save()
-            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
+                new_cart_item.cart = Cart.objects.get(user=request.user)
+                new_cart_item.save()
+                if new_cart_item.side1 == "side salad" or new_cart_item.side1 == "loaded baked potato":
+                    new_cart_item.cost = new_cart_item.cost + Decimal(2.5)
+                    new_cart_item.save()
+                return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
 # if the food has any other type it only gives a comment field
-    else:
-        food = createCartItem(request.POST)
-        if food.is_valid():
-            new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,comment=food.cleaned_data['comment'])
-            new_cart_item.save()
-            new_cart_item.cart = Cart.objects.get(user=request.user)
-            new_cart_item.save()
-            return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
+        else:
+            food = createCartItem(request.POST)
+            if food.is_valid():
+                new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=item.cost,name=item.name, type=item.type,comment=food.cleaned_data['comment'])
+                new_cart_item.save()
+                new_cart_item.cart = Cart.objects.get(user=request.user)
+                new_cart_item.save()
+                return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count(), "cart":cart})
     return render(request, 'item.html', {"item": item, "cartNum": cartItem.objects.all().count(),"bigFood": bigFood,"smallFood":smallFood, "food": food, "cart":cart})
 
 

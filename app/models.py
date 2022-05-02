@@ -1,4 +1,5 @@
 from email.policy import default
+from logging import PlaceHolder
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -52,7 +53,7 @@ class Cart(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=1000, null=True,default="unpaid")
 
-class cartItem(models.Model):
+class cartItem(models.Model): 
     SIDES = [('--Choose a Side--',
     (
     ('corn nuggets', 'Corn Nuggets'),
@@ -64,10 +65,10 @@ class cartItem(models.Model):
     ('side salad', 'Side Salad + $2.50'),
     ),)]
     id = models.IntegerField(null=False, primary_key=True)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=14)
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=20)
-    side1 = models.CharField(max_length=20, blank=True,choices=SIDES)
-    side2 = models.CharField(max_length=20, blank=True,choices=SIDES)
+    name = models.CharField(max_length=100, default="no name")
+    type = models.CharField(max_length=20, default="no type")
+    side1 = models.CharField(max_length=20,choices=SIDES, blank=False)
+    side2 = models.CharField(max_length=20,choices=SIDES, blank=False)
     comment = models.CharField(max_length=1000, blank=True)
