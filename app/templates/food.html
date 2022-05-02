@@ -15,24 +15,18 @@
   <body onload="checkDateTime()">
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a class="dropbtn" onclick="myFunction()">Menu
-        <i class="fa fa-caret-down"></i>
-      </a>
       {% if cartNum > 0 %}
       <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
       {% endif %}
     </nav>
-    <div class="dropdown-content" id="myDropdown">
-      <a class="Btn" name="all" href="{% url 'food' %}">Full Menu</a>
+    <div class="mainpage">
       <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}">Burgers and More</a>
       <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
       <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
       <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
       <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
       <a class="Btn" name="sandwiches" href="{% url 'sortmenu' "sandwich" %}">Sandwiches</a>
-    </div>
-    <div class="mainpage">
-      <div id="content">
+      {% comment %} <div id="content">
         {% for item in menu %}
           <div id="itemBox" class="{{item.type}}"><a  href="{% url 'item' item.name %}">
             <img src="{{item.image.url}}">
@@ -42,7 +36,7 @@
             <button></a>
           </div>
         {% endfor %}
-      </div>
+      </div> {% endcomment %}
     </div>
     <script>
       const foodbox = document.getElementById("content");
@@ -51,10 +45,11 @@
       let total = 0;
       const totalText = document.getElementById("total");
       var dt = new Date();
-      const sidesNames = [];
+      console.log(dt.getDay())
+      
       
       function checkDateTime() {
-        if (dt.getDay() != 5 && dt.getDay() != 6) {
+        if (dt.getDay() == 5 || dt.getDay() == 6) {
           document.getElementById("myDropdown").insertAdjacentHTML(
             "beforeend",
             `
