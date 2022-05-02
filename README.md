@@ -8,7 +8,7 @@ the store.  The website will also host a management system for inventory, keep t
 Mariann Mccord, Logan Todrick Coley, Rylee Chisholm
 
 ##Business:
-Logan's mother's store
+The CornerStore
 
 ##Languages:
 Python,HTML,CSS,JS
