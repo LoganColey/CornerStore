@@ -4,17 +4,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-SIDES = [('--Choose a Side--',
-    (
-    ('corn nuggets', 'Corn Nuggets'),
-    ('tater tots', 'Tater Tots'),
-    ('french fries', 'French Fries'),
-    ('onion rings', 'Onion Rings'),
-    ('fried okra', 'Fried Okra'),
-    ('loaded baked potato', 'Loaded Baked Potato'),
-    ('side salad', 'Side Salad'),
-    ),)]
-
 class closingTill(models.Model):
     date = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
