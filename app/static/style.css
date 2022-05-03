@@ -5,7 +5,7 @@ body {
     line-height: 1.3;
     font-family: arial, sans-serif;
     color: white;
-    background-color: black;
+    background-color: #1f1f1f;
     min-width: 1023px;
 }
 p{
@@ -36,29 +36,28 @@ a img { border: 0; }
 .notext { font-size: 0; line-height: 0; text-indent: -4000px; }
 .left, .alignleft { float: left; display: inline; }
 .right, .alignright { float: right; display: inline; }
-.last { padding-right: 0 !important; margin-right: 0 !important; }
-.shell { width: 959px; margin: 0 auto; padding: 0 32px; }
+.last { padding-right: 0 !important; margin-right: 0 !important;}
+.shell { width: 959px; margin: 0 auto; padding: 0 32px;}
 div{ display: block;}
 
-input, textarea, select { font-size: 12px; font-family: arial, sans-serif; }
+input, textarea, select { font-size: 12px; font-family: arial, sans-serif;}
 textarea { overflow: auto; }
 
-
-#wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -45px; }
+#wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -45px;}
 
 #header { width: 100%; font-family: 'Trebuchet MS', Arial, serif; text-align: center; text-transform: uppercase; padding: 31px 0 45px 0; }
 
-#logo { font-weight: normal; padding: 0 0 0 5px; font-family: 'Handwritten', Arial, serif;}
-#logo a { color: #ebebeb; font-size: 41px; line-height: 41px;  list-style: none;}
-#logo a span { display: block; font-size: 11px; line-height: 11px; color: #e01e27; padding-top: 4px; }
-#logo a:hover { text-decoration: none; }
+#logo { font-weight: normal; padding: 0 0 0 10px; font-family: 'Handwritten', Arial, serif;}
+#logo a { color: #ebebeb; font-size: 41px; line-height: 10vh;  list-style: none; font-size: 9vh;}
+#logo a span { display: block; font-size: 11px; line-height: 11px; color: #950740; padding-top: 4px; font-size: 3vh;}
+#logo a:hover { text-decoration: none;}
 
-#navigation { padding-bottom: 15px; height: 38px; }
-#navigation ul li { float: left; list-style: none; padding: 0 3px 0 0; }
-#navigation ul li a { float: left; height: 38px; padding-left: 27px; }
-#navigation ul li a span { float: left; line-height: 38px; font-family: 'Trebuchet MS', Arial, serif; font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; padding-right: 27px; }
+#navigation { padding-bottom: 15px; height: 38px;}
+#navigation ul li { float: left; list-style: none; padding: 0 3px 0 0;}
+#navigation ul li a { float: left; height: 38px; padding-left: 27px;}
+#navigation ul li a span { float: left; line-height: 38px; font-family: 'Trebuchet MS', Arial, serif; font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; padding-right: 27px;}
 #navigation ul li a.active, 
-#navigation ul li a.hover {text-decoration: none; }
+#navigation ul li a.hover {text-decoration: none; color:#991600;}
 
 #main { padding: 0 0 0 4px; width: 955px; }
 #main p { line-height: 18px; color: #9da1aa; padding-bottom: 5px; }
@@ -97,7 +96,11 @@ textarea { overflow: auto; }
   
 } */
 
-
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
 
 .home-sections{
   padding-top: 10px;
@@ -124,3 +127,29 @@ textarea { overflow: auto; }
   .foodname {
       color: white;
     }
+
+#checknav {
+  overflow: hidden;
+  background-color: #1f1f1f;
+  margin: 0;
+  padding: 0;
+}
+
+#checknav a {
+  float: left;
+  font-size: 4vh;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#checknav a:hover {
+  background-color:#991600;
+}
+    
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}

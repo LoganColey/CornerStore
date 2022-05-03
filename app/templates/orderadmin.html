@@ -12,9 +12,16 @@
     <title>Food</title>
   </head>
   <body>
-    <nav class="sticky">
+    <nav>
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a class="Btn" name="all" href="{% url 'admin' %}">Admin Panel</a>
+      <a href="{% url 'deleteEvent' %}">Delete Events</a>
+      <a href="{% url 'tillView' %}">View Tills</a>
+      <a href="{% url 'orderAdmin' %}">Orders</a>
+      {% if noOrdersButton.isActive == True %}
+      <a href="{% url 'turnOffOrders' %}" style="background-color: red; width: 164px; border: 3px solid black;">Not Taking Orders</a>
+      {% else %}
+      <a href="{% url 'turnOffOrders' %}" style="background-color: green; width: 164px; border: 3px solid black;">Taking Orders</a>
+      {%endif%}
     </nav>
     <div class="mainpage">
       {% for cart in carts %}

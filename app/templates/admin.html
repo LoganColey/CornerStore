@@ -19,9 +19,9 @@
       <a href="{% url 'tillView' %}">View Tills</a>
       <a href="{% url 'orderAdmin' %}">Orders</a>
       {% if noOrdersButton.isActive == True %}
-        <a href="{% url 'turnOffOrders' %}" style="background-color: red; width: 170px;">Not Taking Orders</a>
+        <a href="{% url 'turnOffOrders' %}" style="background-color: red; width: 164px; border: 3px solid black;">Not Taking Orders</a>
       {% else %}
-      <a href="{% url 'turnOffOrders' %}" style="background-color: green; width: 170px;">Taking Orders</a>
+      <a href="{% url 'turnOffOrders' %}" style="background-color: green; width: 164px; border: 3px solid black;">Taking Orders</a>
       {%endif%}
     </nav>
     <div class="main-content">

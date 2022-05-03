@@ -19,13 +19,16 @@
       <div class="shell">
   
         <div id="header">
-          <h1 id="logo"><a href="#" title="">CornerStore<span>Susan Coley</span></a></h1>
+          <h1 id="logo"><a target="blank" href="https://www.facebook.com/thecornerstore7938/" title="" style=" margin-bottom: 50px;">CornerStore</a></h1>
         </div>
   
         <nav id="navigation">
           <ul>
-            <li><a href="{% url 'food' %}" title="Food"><span>Food</span></a></li>
+            <li><a href="{% url 'food' %}" title="Food"><span>Menu</span></a></li>
             <li><a href="{% url 'logout' %}" title ="Login"><span>Logout</span></a> </li>
+            {% if is_admin == True%}
+            <li><a href="{% url 'admin' %}"><span>Admin</spam></a></li>
+            {% endif %}
           </ul>
         </nav>
         <hr class="nav-underline">

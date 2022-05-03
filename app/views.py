@@ -65,8 +65,9 @@ def signup(request):
 # home page, displays the planned events
 @login_required(login_url='login')
 def home(request):
+    is_admin = request.user.groups.filter(name='admin').exists()
     events = event.objects.all()
-    context ={"events": events}
+    context ={"events": events,'is_admin': is_admin}
     return render(request,'index.html',context)
 
 
@@ -159,9 +160,9 @@ def checkDate() :
     return menu
 
 
-# upon choosing an item filter, only items of that type are sent to the menu from the menuItem model
-def sortMenu(request, type):
-    return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
+# # upon choosing an item filter, only items of that type are sent to the menu from the menuItem model
+# def sortMenu(request, type):
+#     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
 
 
 # # grabs the users cart and adds the selected item to it by adding a new item to the cartItem model and adding that item to the Cart model for the user

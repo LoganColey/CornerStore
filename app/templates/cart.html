@@ -43,17 +43,4 @@
       </div>
     </div>
   </body>
-  <script>
-    var dt = new Date();
-    function checkDateTime() {
-      if (dt.getDay() != 5 && dt.getDay() != 6) {
-        document.getElementById("myDropdown").insertAdjacentHTML(
-          "beforeend",
-          `
-            <a class="Btn" name="seafood" href="{% url 'sortmenu' "seafood" %}">Seafood</a>
-          `
-        );
-      }
-    }
-  </script>
 </html>

@@ -20,49 +20,124 @@
       {% endif %}
     </nav>
     <div class="mainpage">
-      <a class="Btn" name="small" href="{% url 'sortmenu' "small" %}">Burgers and More</a>
-      <a class="Btn" name="big" href="{% url 'sortmenu' "big" %}">Plates</a>
-      <a class="Btn" name="sides" href="{% url 'sortmenu' "side" %}">Sides</a>
-      <a class="Btn" name="salads" href="{% url 'sortmenu' "salad" %}">Salads</a>
-      <a class="Btn" name="starters" href="{% url 'sortmenu' "starter" %}">Starters</a>
-      <a class="Btn" name="sandwiches" href="{% url 'sortmenu' "sandwich" %}">Sandwiches</a>
-      {% comment %} <div id="content">
-        {% for item in menu %}
-          <div id="itemBox" class="{{item.type}}"><a  href="{% url 'item' item.name %}">
-            <img src="{{item.image.url}}">
-            <h2 class="itemName">{{item.name}}</h2>
-            <p class="itemDesc">{{item.description}}</p>
-            <h2 class="itemPrice">${{item.cost}}</h2>
-            <button></a>
-          </div>
-        {% endfor %}
-      </div> {% endcomment %}
+      <a class="Btn" name="starters" onclick="showItems(starters)">Starters</a>
+        <div class="gridBox show" id="starters">
+          {% for item in menu %}
+          {% if item.type == "starter" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      <a class="Btn" name="small" onclick="showItems(small)">Burgers and More</a>
+        <div class="gridBox show" id="small">
+          {% for item in menu %}
+          {% if item.type == "small" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      <a class="Btn" name="big" onclick="showItems(big)">Plates</a>
+        <div class="gridBox show" id="big">
+          {% for item in menu %}
+          {% if item.type == "big" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      <a class="Btn" name="sides" onclick="showItems(sides)">Sides</a>
+        <div class="gridBox show" id="sides">
+          {% for item in menu %}
+          {% if item.type == "side" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      <a class="Btn" name="salads" onclick="showItems(salads)">Salads</a>
+        <div class="gridBox show" id="salads">
+          {% for item in menu %}
+          {% if item.type == "salad" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      <a class="Btn" name="sandwiches" onclick="showItems(sandwiches)">Sandwiches</a>
+        <div class="gridBox show" id="sandwiches">
+          {% for item in menu %}
+          {% if item.type == "sandwich" %}
+              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                <img src="{{item.image.url}}">
+                <h2 class="itemName">{{item.name}}</h2>
+                <p class="itemDesc">{{item.description}}</p>
+                <h2 class="itemPrice">$ {{item.cost}}</h2>
+                </a>
+              </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
     <script>
-      const foodbox = document.getElementById("content");
-      const ticketDisplay = document.getElementById("ticketDisplay");
-      const options = document.querySelectorAll(".Btn");
-      let total = 0;
-      const totalText = document.getElementById("total");
       var dt = new Date();
-      console.log(dt.getDay())
-      
       
       function checkDateTime() {
         if (dt.getDay() == 5 || dt.getDay() == 6) {
           document.getElementById("myDropdown").insertAdjacentHTML(
             "beforeend",
             `
-              <a class="Btn" name="seafood" href="{% url 'sortmenu' "seafood" %}">Seafood</a>
+              <a class="Btn" name="seafood" onclick="showItems(seafood)">Seafood</a>
+              <div class="gridBox show" id="seafood">
+                {% for item in menu %}
+                {% if item.type == "seafood" %}
+                    <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                      <img src="{{item.image.url}}">
+                      <h2 class="itemName">{{item.name}}</h2>
+                      <p class="itemDesc">{{item.description}}</p>
+                      <h2 class="itemPrice">$ {{item.cost}}</h2>
+                      </a>
+                    </div>
+                {% endif %}
+                {% endfor %}
+              </div>
             `
           );
         }
       }
-      
-      //toggle menu
-      function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-      }
     </script>
   </body>
+  <script>
+    
+    function showItems(type) {
+      type.classList.toggle("show");
+    }
+  </script>
 </html>
