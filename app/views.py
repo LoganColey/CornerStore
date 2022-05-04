@@ -58,6 +58,8 @@ def signup(request):
             new_cart = Cart(user=user)
             new_cart.save()
             return redirect('login')
+        else:
+            print(form.errors.as_data())
     context = {'form':form}
     return render(request, 'signup.html', context)
 

@@ -42,7 +42,8 @@
         </form>
       </div>
     </div>
-    <div class="ordersButton" style="height: 40vh;">
+    <div style="display: flex;">
+    <div class="ordersButton" style="height: 40vh; justify-content: space-around;">
       {% if noOrdersButton.isActive == True %}
       <a href="{% url 'turnOffOrders' %}">
         <div class="NOB" style="background-color: red;">Not Taking Orders</div></a>
