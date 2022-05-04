@@ -18,6 +18,11 @@
       <a href="{% url 'deleteEvent' %}">Delete Events</a>
       <a href="{% url 'tillView' %}">View Tills</a>
       <a href="{% url 'orderAdmin' %}">Orders</a>
+      {% if noOrdersButton.isActive == True %}
+      <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: red;">Not Taking Orders</a>
+      {% else %}
+      <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: green;">Taking Orders</a>
+      {%endif%}
     </nav>
     <div class="main-content">
       <div class="formBox" id="dailyLunchForm">
@@ -41,15 +46,6 @@
           <input type="submit" name="form_type" value="Till Out" style="height: 40px; width: 80px; font-size: 17px;"/>
         </form>
       </div>
-    </div>
-    <div style="display: flex;">
-    <div class="ordersButton" style="height: 40vh; justify-content: space-around;">
-      {% if noOrdersButton.isActive == True %}
-      <a href="{% url 'turnOffOrders' %}">
-        <div class="NOB" style="background-color: red;">Not Taking Orders</div></a>
-      {% else %}
-      <a href="{% url 'turnOffOrders' %}"><div class="NOB" style="background-color: green;">Taking Orders</div></a>
-      {%endif%}
     </div>
   </body>
 </html>

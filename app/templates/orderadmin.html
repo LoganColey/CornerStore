@@ -19,22 +19,26 @@
       <a href="{% url 'tillView' %}">View Tills</a>
       <a href="{% url 'orderAdmin' %}">Orders</a>
       {% if noOrdersButton.isActive == True %}
-      <a href="{% url 'turnOffOrders' %}" style="background-color: red; width: 164px; border: 3px solid black;">Not Taking Orders</a>
+      <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: red;">Not Taking Orders</a>
       {% else %}
-      <a href="{% url 'turnOffOrders' %}" style="background-color: green; width: 164px; border: 3px solid black;">Taking Orders</a>
+      <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: green;">Taking Orders</a>
       {%endif%}
     </nav>
-    <div class="mainpage">
+    <div class="main-content">
       {% for cart in carts %}
-      {% for item in cart.cartitem_set.all %}
-      <p>{{item.name}}</p>
-      {% if item.type == "big" %}
-      <p>{{item.side1}}</p><p>{{item.side2}}</p>
-      {% elif item.type == "small"%}
-      <p>{{item.side1}}</p>
-      {% endif %}
-      {% endfor %}
-      <button><a href="{% url 'finishOrder' cart.id %}">Finish order {{cart.id}}</a></button>
+      <div class="formBox">
+        <p>{{cart.user}}</p>
+        <p>-----------</p>
+        {% for item in cart.cartitem_set.all %}
+          <h3>{{item.name}}</h3>
+          {% if item.type == "big" %}
+          <p>--{{item.side1}}</p><p>--{{item.side2}}</p>
+          {% elif item.type == "small"%}
+          <p>--{{item.side1}}</p>
+          {% endif %}
+        {% endfor %}
+        <button><a href="{% url 'finishOrder' cart.id %}">Finish order {{cart.id}}</a></button>
+      </div>
       {% endfor %}
     </div>
   </body>

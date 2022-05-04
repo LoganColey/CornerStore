@@ -8,24 +8,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'admin.css' %}"/>
+    <link rel="stylesheet" href="{% static 'admin.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   </head>
     <body>
       <nav>
         <a href="{% url 'home' %}" title="Home">Home</a>
-        <a href="{% url 'admin' %}">Admin Page</a>
-        <a href="{% url 'tillView' %}">View Tills</a>
+        <a href="{% url 'deleteEvent' %}">Delete Events</a>
+        <a href="{% url 'orderAdmin' %}">Orders</a>
+        {% if noOrdersButton.isActive == True %}
+        <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: red;">Not Taking Orders</a>
+        {% else %}
+        <a class="NOB" href="{% url 'turnOffOrders' %}" style="background-color: green;">Taking Orders</a>
+        {%endif%}
       </nav>
-      {% for till in tills%}
-        <div class="formBox">
-            <div id="itemBox" class="{{item.type}}">
-              <h2 class="itemName">{{till.date}}</h2>
-              <h2 class="itemPrice">$ {{till.amount}}</h2>
-            </div>
-        </div>
-      {% endfor %}
-
+      <div class="main-content">
+        {% for till in tills%}
+          <div class="formBox">
+              <div id="itemBox" class="{{item.type}}">
+                <h2 class="itemName">{{till.date}}</h2>
+                <h2 class="itemPrice">$ {{till.amount}}</h2>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
     </body>
 </html>

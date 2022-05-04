@@ -200,7 +200,7 @@ textarea {
 }
 
 .testimonials {
-  padding: 100px 20px;
+  padding: 100px 30px;
 }
 .testimonials h3 {
   margin-bottom: 20px;
@@ -210,6 +210,7 @@ textarea {
   transition: 0.5s;
   margin-top: 60px;
   height: 100px;
+  padding-top: 1%;
 }
 .testimonials .card i {
   background-color: #731010;
@@ -244,4 +245,12 @@ textarea {
 
 .foodname {
   color: white;
+}
+
+@media only screen and (min-width: 200px) and (max-width: 1000px) {
+
+  .testimonials .card {
+    margin-top: 40px;
+    padding-top: 15%;
+  }
 }
