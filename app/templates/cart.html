@@ -16,31 +16,30 @@
       <a href="{% url 'home' %}" title="Home">Home</a>
       <a href="{% url 'food' %}">Menu</a>
     </nav>
-      <div class="ticket-content" id="ticketDisplay">
-        {% for item in cart %}
-        <div class="ticketItem">
-          <h2 class="itemName">{{item.name}}</h2>
-          {% if item.type == "big"%}
-          <p>{{item.side1}}</p><p>{{item.side2}}</p>
-          {% endif %}
-          {% if item.type == "small"%}
-          <p>{{item.side1}}</p>
-          {% endif %}
-          <h2 class="itemPrice">${{item.cost}}</h2>
-          <button>
-            <a href="{% url 'removeFromCart' item.id %}">Remove</a>
-          </button>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="storeHours">
-        <h2 id="total">Total: ${{total}}</h2>
-        {% if isActive.isActive == False and storeHours == True %}
-        <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
-        {% else %}
-        <p>Sorry, we are not taking online orders at this time.</p>
+    <div class="ticket-content" id="ticketDisplay">
+      {% for item in cart %}
+      <div class="ticketItem">
+        <h2 class="itemName">{{item.name}}</h2>
+        {% if item.type == "big"%}
+        <p>{{item.side1}}</p><p>{{item.side2}}</p>
         {% endif %}
+        {% if item.type == "small"%}
+        <p>{{item.side1}}</p>
+        {% endif %}
+        <h2 class="itemPrice">${{item.cost}}</h2>
+        <button>
+          <a href="{% url 'removeFromCart' item.id %}">Remove</a>
+        </button>
       </div>
+      {% endfor %}
+    </div>
+    <div class="storeHours">
+      <h2 id="total">Total: ${{total}}</h2>
+      {% if isActive.isActive == False and storeHours == True %}
+      <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
+      {% else %}
+      <p>Sorry, we are not taking online orders at this time.</p>
+      {% endif %}
     </div>
   </body>
 </html>

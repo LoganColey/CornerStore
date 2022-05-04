@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.template import context
 from app.decorators import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -7,8 +6,6 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
-from django.http import JsonResponse
-import json
 import datetime
 from decimal import *
 
@@ -85,7 +82,9 @@ def admin(request):
     newFood = AddToMenu()
     if request.method == 'POST':
         #checks what form is used and submits/saves it
-        if request.POST.get("form_type") == 'Change Lunch':
+        if request.POST.get("form_type") == 'Daily Lunch':
+            lunches = dailyLunch.objects.all()
+            lunches.delete()
             form = CreateDailyLunch(request.POST)
             if form.is_valid():
                 form.save()
@@ -93,11 +92,13 @@ def admin(request):
             till = CreateClosingTill(request.POST)
             if till.is_valid():
                 till.save()
-        elif request.POST.get("form_type") == 'Add Item':
+        elif request.POST.get("form_type") == 'Add New Menu Item':
             newFood = AddToMenu(request.POST, request.FILES)
             if newFood.is_valid():
                 newFood.save()
-        elif request.POST.get("form_type") == "Event":
+        elif request.POST.get("form_type") == "Add an Event":
+            events = event.objects.all()
+            events.delete()
             createEvent = CreateEvent(request.POST)
             if createEvent.is_valid():
                 createEvent.save()
@@ -160,23 +161,6 @@ def checkDate() :
     else: 
         menu = menuItem.objects.all()
     return menu
-
-
-# # upon choosing an item filter, only items of that type are sent to the menu from the menuItem model
-# def sortMenu(request, type):
-#     return render(request, 'food.html', {'menu': menuItem.objects.filter(type=type)})
-
-
-# # grabs the users cart and adds the selected item to it by adding a new item to the cartItem model and adding that item to the Cart model for the user
-# def addToCart(request, itemname):
-#     itemFromMenu = menuItem.objects.get(name=itemname)
-#     cart = Cart.objects.get(user=request.user)
-#     new_cart_item = cartItem(cartItem.objects.all().count()+1,cost=itemFromMenu.cost,name=itemFromMenu.name, type=itemFromMenu.type)
-#     new_cart_item.save()
-#     new_cart_item.cart = cart
-#     new_cart_item.save()
-#     return render(request, 'food.html', {"menu": checkDate(), "cartNum": cartItem.objects.all().count()})
-
 
 # displays the individual item, allows the user to pick sides if the food is a certain type, and allows for special comments on orders
 def itemPage(request, itemname):
@@ -246,6 +230,9 @@ def cart(request) :
         storeHours = True
     else :
         storeHours = False
+    userCart = Cart.objects.get(user=request.user)
+    if userCart.status == "paid":
+        return render(request, 'paidTicket.html', {"total": "{:.2f}".format(totalTax), "cart": userCart})
     return render(request, 'cart.html', {"cart": cart, "total": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours})
 
 

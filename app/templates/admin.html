@@ -13,7 +13,7 @@
     <title>Admin</title>
   </head>
   <body>
-    <nav>
+    <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
       <a href="{% url 'deleteEvent' %}">Delete Events</a>
       <a href="{% url 'tillView' %}">View Tills</a>
@@ -26,6 +26,13 @@
     </nav>
     <div class="main-content">
       <div class="formBox" id="dailyLunchForm">
+        <h1>Daily Lunch:</h1>
+        <form action="" method="POST">
+          {% csrf_token %} {{form.as_p}}
+          <input type="submit" name="form_type" value="Daily Lunch" style="height: 40px; width: 120px; font-size: 17px;"/>
+        </form>
+      </div>
+      <div class="formBox" id ="createEventForm">
         <h1>Create Event:</h1>
         <form action="" method="POST">
           {% csrf_token %} {{createEvent.as_p}}

@@ -25,6 +25,7 @@ nav {
   background-color: #1a1a1d;
   margin: 0;
   padding: 0;
+  box-shadow: 0px 10px 12px gray;
 }
 
 nav a {
@@ -40,12 +41,20 @@ nav a:hover {
   background-color: #991600;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 .cartbtn {
   cursor: pointer;
   font-size: 4vh;
   margin: 0;
   float: right;
 }
+
+
 
 /* Menu Display */
 .full-width {
@@ -63,6 +72,7 @@ nav a:hover {
 .itemBox {
   background-color: white;
   margin: 2em;
+  margin-right: 0;
   padding: 3em;
   border: solid 4px #991600;
   text-align: center;
@@ -82,17 +92,20 @@ img {
 .gridBox {
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  background-color: #4E4E50;
+  background-color: #c4c4cb;
 }
 
 .Btn {
+  
+  padding-top: 5%;
   font-size: 11vh;
-  color: rgb(73, 4, 4);
+  color: black;
   text-align: center;
+  border-bottom: 12px solid white;
 }
 
 .Btn:hover {
-  border-bottom: 12px solid #4E4E50;
+  border-bottom: 12px solid #b60404;
 }
 
 .mainpage {

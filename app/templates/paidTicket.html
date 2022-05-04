@@ -10,20 +10,14 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'admin.css' %}" />
-    <title>Food</title>
+    <title>Ticket</title>
   </head>
   <body>
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
-      <a href="{% url 'deleteEvent' %}">Delete Events</a>
-      <a href="{% url 'tillView' %}">View Tills</a>
-      <a href="{% url 'admin' %}">Admin</a>
+      <a href="{% url 'food' %}">Menu</a>
     </nav>
-    <div class="main-content">
-      {% for cart in carts %}
-      <div class="formBox">
-        <p>{{cart.user}}</p>
-        <p>-----------</p>
+      <div class="ticket-content" id="ticketDisplay" style="color: white;">
         {% for item in cart.cartitem_set.all %}
           <h3>{{item.name}}</h3>
           {% if item.type == "big" %}
@@ -35,14 +29,10 @@
           <p>--{{item.comment}}</p>
           {% endif %}
         {% endfor %}
-        <button><a href="{% url 'finishOrder' cart.id %}">Finish order {{cart.id}}</a></button>
       </div>
-      {% endfor %}
+      <div class="storeHours">
+        <h2 id="total" style="color: white;">Total: ${{total}}</h2>
+      </div>
     </div>
   </body>
-  <script>
-    window.setTimeout(function () {
-        location.href = "{% url 'orderAdmin' %}";
-    }, 30000);
-  </script>
 </html>
