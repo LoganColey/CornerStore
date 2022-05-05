@@ -223,6 +223,12 @@ def removeFromCart(request, itemid):
 
 # gets the users cart and displays each item, as well as calculates the total with tax and see if the time is in range for online orders
 def cart(request) :
+    userCart = Cart.objects.get(user=request.user)
+    # this if statement may cause problems later, we shall see
+    if currentDate.weekday() != 4 and currentDate.weekday() != 5:
+        for item in userCart.cartitem_set.all():
+            if item.type == "seafood":
+                userCart.objects.delete(id=item.id)
     cart = cartItem.objects.filter(cart=Cart.objects.get(user=request.user))
     total = 0
     for item in cart:
@@ -233,7 +239,6 @@ def cart(request) :
         storeHours = True
     else :
         storeHours = False
-    userCart = Cart.objects.get(user=request.user)
     if userCart.status == "paid":
         return render(request, 'paidTicket.html', {"totalTax": "{:.2f}".format(totalTax),"total": "{:.2f}".format(total), "cart": userCart})
     return render(request, 'cart.html', {"cart": cart,"total": "{:.2f}".format(total), "totalTax": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours})
