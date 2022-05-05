@@ -177,18 +177,21 @@ textarea {
 
 .large-col {
   margin: 0;
-  float: left;
-  width: 466px;
+  margin-right: 0;
+  float: center;
   padding: 0 10px 0 0;
   justify-content: center;
-  padding-left: 100px;
+  margin: 1em;
+  padding: .5em;
+  margin-bottom: 0;
 }
 .large-col-last {
   float: right;
-  width: 466px;
-  padding: 0 10px 0 0;
+  padding: 0;
   justify-content: center;
-  padding-left: 100px;
+  margin: 1em;
+  padding: .5em;
+  margin-bottom: 0;
 }
 .large-col .a-link {
   padding-top: 7px;
@@ -199,18 +202,26 @@ textarea {
   text-align: center;
 }
 
-.testimonials {
-  padding: 100px 30px;
+.containter {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }
+
 .testimonials h3 {
-  margin-bottom: 20px;
+  padding: 2em;
+  margin: 1em;
 }
+
 .testimonials .card {
   border-bottom: 3px #731010 solid !important;
   transition: 0.5s;
   margin-top: 60px;
   height: 100px;
   padding-top: 1%;
+  width: 30vw;
+  margin: 3vw;
+  float: center;
 }
 .testimonials .card i {
   background-color: #731010;
@@ -230,6 +241,8 @@ textarea {
   float: left;
   padding: 0 10px;
   width: 30%;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 .family {
@@ -247,10 +260,34 @@ textarea {
   color: white;
 }
 
+.blockquote-footer {
+  margin-top: 30px
+}
+
+.card-text {
+  height: 3vh;
+  width: 28vw;
+  text-align: center;
+  float: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
 @media only screen and (min-width: 200px) and (max-width: 1000px) {
 
   .testimonials .card {
     margin-top: 40px;
+    margin-left: 0;
+    margin-right: ;
     padding-top: 15%;
   }
 }
+
+/* @media only screen and (min-width: 200px) and (max-width: 1000px) {
+
+} */

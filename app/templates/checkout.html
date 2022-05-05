@@ -16,10 +16,14 @@
     <nav id="checknav" class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
     </nav>
+    {% if userCart.status == "unpaid"%}
     <div id="checkoutBox">
         <div id="paypal-button-container" class="center"></div>
         <h1 id="totalBox">Your total is:${{total}}</h1>
       <!-- Include the PayPal JavaScript SDK -->
+    {% elif userCart.status == "paid"%}
+      <p>Your order will be ready in 45 mins.</p>
+    {% endif%}
       <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     </div>
     <script>
@@ -46,7 +50,6 @@
    
         function completeOrder(){
           var url = "{% url 'complete' %}"
-          console.log("ya ma")
    
           fetch(url, {
             method:'POST',

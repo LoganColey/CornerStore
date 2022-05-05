@@ -63,10 +63,11 @@ def signup(request):
 
 # home page, displays the planned events
 @login_required(login_url='login')
-def home(request):
+def home(request):          
     is_admin = request.user.groups.filter(name='admin').exists()
     events = event.objects.all()
-    context ={"events": events,'is_admin': is_admin}
+    lunch = dailyLunch.objects.all()
+    context ={"events": events,'is_admin': is_admin,"lunch": lunch}
     return render(request,'index.html',context)
 
 
