@@ -21,7 +21,6 @@
     <div class="mainpage">
       <div class="ticket-content" id="ticketDisplay">
         {% for item in cart %}
-        {% if item.type == "seafood"%}
           <div class="ticketItem">
             <h2 class="itemName">{{item.name}}---${{item.cost}}</h2>
             {% if item.type == "big"%}
@@ -37,7 +36,6 @@
               <a href="{% url 'removeFromCart' item.id %}">Remove</a>
             </button>
           </div>
-        {% endif %}
         {% endfor %}
       </div>
       <h3 id="tax">Tax: ${{totalTax}}</h3>
