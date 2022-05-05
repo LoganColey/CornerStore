@@ -119,7 +119,7 @@ def tillView(request):
 def deleteEvent(request):
     events = event.objects.all()
     events.delete()
-    return redirect(request,'admin')
+    return redirect('admin')
 
 
 # toggles noOrdersButton.isActive.  Mrs. Coley can manually decide if she wants to stop taking online orders from the custom admin panel

@@ -1,0 +1,50 @@
+
+   
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'admin.css' %}" />
+    <title>Food</title>
+  </head>
+  <body>
+    <nav class="sticky">
+      <a href="{% url 'home' %}" title="Home">Home</a>
+      <a href="{% url 'deleteEvent' %}">Delete Events</a>
+      <a href="{% url 'tillView' %}">View Tills</a>
+      <a href="{% url 'admin' %}">Admin</a>
+    </nav>
+    <div class="main-content">
+      {% for cart in carts %}
+      <div class="formBox">
+        <p>{{cart.user}}</p>
+        <p>-----------</p>
+        {% for item in cart.cartitem_set.all %}
+          <h3>{{item.name}}</h3>
+          {% if item.type == "big" %}
+          <p>--{{item.side1}}</p><p>--{{item.side2}}</p>
+          {% elif item.type == "small"%}
+          <p>--{{item.side1}}</p>
+          {% endif %}
+          {% if item.comment != "" %}
+          <p>--{{item.comment}}</p>
+          {% endif %}
+        {% endfor %}
+        <button><a href="{% url 'finishOrder' cart.id %}">Finish order {{cart.id}}</a></button>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    window.setTimeout(function () {
+        location.href = "{% url 'orderAdmin' %}";
+    }, 30000);
+  </script>
+</html>

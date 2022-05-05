@@ -22,7 +22,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('item/<itemname>/', views.itemPage, name="item"),
     path('viewOrders/', views.orderAdmin, name='orderAdmin'),
-    path('finishOrder/<int:cartId>/', views.finishOrder, name='finishOrder')
+    path('finishOrder/<int:cartId>/', views.finishOrder, name='finishOrder'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
