@@ -19,12 +19,12 @@
       <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
       {% endif %}
     </nav>
-    <div class="mainpage">
+    <div class="menu">
       <a class="Btn" name="starters" onclick="showItems(starters)">Starters</a>
         <div class="gridBox show" id="starters">
           {% for item in menu %}
           {% if item.type == "starter" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -38,7 +38,7 @@
         <div class="gridBox show" id="small">
           {% for item in menu %}
           {% if item.type == "small" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -52,7 +52,7 @@
         <div class="gridBox show" id="big">
           {% for item in menu %}
           {% if item.type == "big" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -66,7 +66,7 @@
         <div class="gridBox show" id="sides">
           {% for item in menu %}
           {% if item.type == "side" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -80,7 +80,7 @@
         <div class="gridBox show" id="salads">
           {% for item in menu %}
           {% if item.type == "salad" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -94,7 +94,7 @@
         <div class="gridBox show" id="sandwiches">
           {% for item in menu %}
           {% if item.type == "sandwich" %}
-              <div class="itemBox"><a  href="{% url 'item' item.name %}">
+              <div class="mainpage"><a  href="{% url 'item' item.name %}">
                 <img src="{{item.image.url}}">
                 <h2 class="itemName">{{item.name}}</h2>
                 <p class="itemDesc">{{item.description}}</p>
@@ -118,7 +118,7 @@
               <div class="gridBox show" id="seafood">
                 {% for item in menu %}
                 {% if item.type == "seafood" %}
-                    <div class="itemBox"><a  href="{% url 'item' item.name %}">
+                    <div class="mainpage"><a  href="{% url 'item' item.name %}">
                       <img src="{{item.image.url}}">
                       <h2 class="itemName">{{item.name}}</h2>
                       <p class="itemDesc">{{item.description}}</p>

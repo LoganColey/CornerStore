@@ -9,24 +9,19 @@
       integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'food-style.css' %}"/>
     <title>Checkout</title>
   </head>
-  <body style="background-color: black;">
+  <body style="background-color: white;">
     <nav id="checknav" class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
     </nav>
-    {% if userCart.status == "unpaid" %}
     <div id="checkoutBox">
         <div id="paypal-button-container" class="center"></div>
-        <h1 id="totalBox" class="center">Your total is:${{total}}</h1>
+        <h1 id="totalBox">Your total is:${{total}}</h1>
       <!-- Include the PayPal JavaScript SDK -->
       <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     </div>
-    {% elif userCart.status == "paid" %}
-      <h1>Your order will be ready in about 45 minutes!</h1>
-      <button><a href="{% url 'home'%}">Home</a></button>
-    {% endif %}
     <script>
         const total = document.getElementById("totalBox").innerHTML;
 

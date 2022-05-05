@@ -38,7 +38,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #991600;
+  background-color: #b20101;
 }
 
 .sticky {
@@ -92,13 +92,12 @@ img {
 .gridBox {
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  background-color: #c4c4cb;
+  background-color: #e8e8ec;
 }
 
-.Btn {
-  
+.Btn {  
   padding-top: 5%;
-  font-size: 11vh;
+  font-size: 7vh;
   color: black;
   text-align: center;
   border-bottom: 12px solid white;
@@ -108,7 +107,32 @@ img {
   border-bottom: 12px solid #b60404;
 }
 
-.mainpage {
+.menu {
   display: grid;
   grid-template-columns: 100%;
+}
+
+#checkoutBox {
+  margin: auto;
+  padding-top: 3vh;
+  text-align: center;
+}
+
+#totalBox {
+  text-align: center;
+  color: black;
+}
+
+.mainpage {
+  margin: 1.5em;
+  border-radius: 25px;
+  box-shadow: 0px 10px 12px gray;
+  padding: 1em;
+  padding-top: .5em;
+  text-align: center;
+  background-color: white;
+}
+
+.itemName {
+  float: center;
 }

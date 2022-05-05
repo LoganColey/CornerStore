@@ -16,12 +16,15 @@
     <nav class="sticky">
       <a href="{% url 'home' %}" title="Home">Home</a>
       <a name="all" href="{% url 'food' %}">Menu</a>
+      {% if cartNum > 0 %}
       <a class="cartbtn" href="{% url 'cart' %}">Cart: {{cartNum}}</a>
+      {% endif %}
     </nav>
+
     <div class="mainpage">
       <div id="content">
         <div id="itemBox" class="{{item.type}}">
-          <h2 class="itemName">{{item.name}}</h2>
+          <h1 class="itemName">{{item.name}}</h1>
           <p class="itemDesc">{{item.description}}</p>
           <h2 class="itemPrice">$ {{item.cost}}</h2>
           {% if cart.status == "paid" %}
