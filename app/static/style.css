@@ -11,6 +11,7 @@ body {
   color: white;
   background-color: black;
   min-width: 1023px;
+  overflow-x:hidden;
 }
 p {
   display: block;
@@ -187,7 +188,7 @@ textarea {
 }
 .large-col-last {
   float: right;
-  padding: 0;
+  padding-right: 0px;
   justify-content: center;
   margin: 1em;
   padding: .5em;
@@ -202,11 +203,11 @@ textarea {
   text-align: center;
 }
 
-.containter {
+/* .container {
   display: flex;
   justify-content: space-between;
   text-align: center;
-}
+} */
 
 .testimonials h3 {
   padding: 2em;
@@ -222,12 +223,13 @@ textarea {
   width: 30vw;
   margin: 3vw;
   float: center;
+  padding-left: 0%;
 }
 .testimonials .card i {
   background-color: #731010;
   color: #ffffff;
   width: 75px;
-  height: 75px;
+  height: 85px;
   line-height: 75px;
   margin: -40px auto 0 auto;
 }
@@ -247,6 +249,7 @@ textarea {
 
 .family {
   width: 25%;
+
 }
 
 .carousel-inner > .item > img,
@@ -283,7 +286,6 @@ textarea {
   .testimonials .card {
     margin-top: 40px;
     margin-left: 0;
-    margin-right: ;
     padding-top: 15%;
   }
 }
