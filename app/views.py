@@ -3,11 +3,13 @@ from app.decorators import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import *
 from .models import *
 from .forms import *
 from django.contrib.auth.models import Group
 import datetime
 from decimal import *
+from .models import noOrdersModel
 
 
 #important variables
@@ -236,10 +238,14 @@ def cart(request) :
         total += item.cost
     totalTax = (total * Decimal(.07))
     total = total + totalTax
-    if (currentDate.hour * 100 + currentDate.minute >= 130 and currentDate.hour < 19):
-        storeHours = True
-    else :
-        storeHours = False
+    #
+    #remove the below line and uncomment the if statement
+    #
+    storeHours = True
+    # if (currentDate.hour * 100 + currentDate.minute >= 130 and currentDate.hour < 19):
+    #     storeHours = True
+    # else :
+    #     storeHours = False
     if userCart.status == "paid":
         return render(request, 'paidTicket.html', {"totalTax": "{:.2f}".format(totalTax),"total": "{:.2f}".format(total), "cart": userCart})
     return render(request, 'cart.html', {"cart": cart,"total": "{:.2f}".format(total), "totalTax": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours})

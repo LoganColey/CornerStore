@@ -193,6 +193,7 @@ textarea {
   margin: 1em;
   padding: .5em;
   margin-bottom: 0;
+  border-image: url("images/");
 }
 .large-col .a-link {
   padding-top: 7px;
@@ -208,6 +209,10 @@ textarea {
   justify-content: space-between;
   text-align: center;
 } */
+
+.testimonials{
+  padding: 100px 0; 
+}
 
 .testimonials h3 {
   padding: 2em;
@@ -229,11 +234,15 @@ textarea {
   background-color: #731010;
   color: #ffffff;
   width: 75px;
-  height: 85px;
+  height: 75px;
   line-height: 75px;
   margin: -40px auto 0 auto;
 }
 
+
+.contact{
+  -ms-flex-align: center;
+}
 .home-sections {
   padding-top: 10px;
 }
@@ -279,6 +288,11 @@ textarea {
   justify-content: space-between;
   padding: 0;
   margin: 0;
+}
+
+.facebook{
+  text-decoration: none;
+  color: d4d4d4;
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1000px) {

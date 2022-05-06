@@ -90,7 +90,7 @@
           {% endif %}
           {% endfor %}
         </div>
-      <a class="Btn" name="sandwiches" onclick="showItems(sandwiches)">Sandwiches</a>
+      {% comment %} <a class="Btn" name="sandwiches" onclick="showItems(sandwiches)">Sandwiches</a>
         <div class="gridBox show" id="sandwiches">
           {% for item in menu %}
           {% if item.type == "sandwich" %}
@@ -103,7 +103,7 @@
               </div>
           {% endif %}
           {% endfor %}
-        </div>
+        </div> {% endcomment %}
       </div>
     </div>
     <script>
@@ -111,7 +111,7 @@
       
       function checkDateTime() {
         if (dt.getDay() == 5 || dt.getDay() == 6) {
-          document.getElementById("myDropdown").insertAdjacentHTML(
+          document.querySelector(".menu").insertAdjacentHTML(
             "beforeend",
             `
               <a class="Btn" name="seafood" onclick="showItems(seafood)">Seafood</a>
