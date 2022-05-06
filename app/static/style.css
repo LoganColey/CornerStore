@@ -3,6 +3,13 @@
   padding: 0;
   outline: 0;
 }
+.nav-underline{
+  background-color: #731010;
+}
+
+footer{
+  text-align: center;
+}
 
 body {
   font-size: 16px;
@@ -174,6 +181,7 @@ textarea {
 #main .items {
   padding: 21px 0 45px 0;
   width: 100%;
+  margin: 10%;
 }
 
 .large-col {
@@ -185,16 +193,18 @@ textarea {
   margin: 1em;
   padding: .5em;
   margin-bottom: 0;
+  /* border: 30px solid ;
+  border-image: url("images/border-image.webp") 15% round; */
 }
 .large-col-last {
   float: right;
-  padding-right: 0px;
+  /* padding-right: 0px; */
   justify-content: center;
   margin: 1em;
-  padding: .5em;
+
   margin-bottom: 0;
-  border: 30px solid transparent ;
-  border-image: url("images/border-image.webp") 30% round;
+  border: 30px solid ;
+  border-image: url("images/border-image.webp") 15% round;
 }
 .large-col .a-link {
   padding-top: 7px;
@@ -221,7 +231,6 @@ textarea {
 }
 
 .testimonials .card {
-  border-bottom: 3px #731010 solid !important;
   transition: 0.5s;
   margin-top: 60px;
   height: 100px;
@@ -237,7 +246,11 @@ textarea {
   width: 75px;
   height: 75px;
   line-height: 75px;
-  margin: -40px auto 0 auto;
+  margin: -40px auto 0 -175px;
+}
+
+.testimonials .col-md-6{
+  border-bottom: 3px #731010 solid !important;
 }
 
 
@@ -261,6 +274,16 @@ textarea {
   width: 25%;
 
 }
+
+.testimonials .card-text{
+  margin-left: -25%;
+}
+
+.testimonials .card-body .blockquote{
+  padding-left: 20%;
+}
+
+
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
@@ -293,7 +316,7 @@ textarea {
 
 .facebook{
   text-decoration: none;
-  color: d4d4d4;
+  color: #d4d4d4;
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1000px) {

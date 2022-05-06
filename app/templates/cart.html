@@ -41,7 +41,7 @@
       <h3 id="tax">Tax: ${{totalTax}}</h3>
       <h1 id="total">Total: ${{total}}</h1>
       <div class="storeHours">
-        {% if isActive.isActive == False and storeHours == True and total > 0 %}
+        {% if isActive.isActive == True and storeHours == True and isOver0 == True %}
         <div class="placeBtn"><a href="{% url 'checkout' %}">Place Order</a></div>
         {% else %}
         <p>Sorry, we are not taking online orders at this time.</p>

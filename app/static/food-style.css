@@ -38,7 +38,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #b20101;
+  background-color: #731010;
 }
 
 .sticky {
@@ -68,6 +68,8 @@ nav a:hover {
   grid-template-columns: 25% 25% 25% 25%;
   z-index: 10;
   overflow:hidden;
+  word-wrap: break-word;
+  margin: 0;
 }
 
 .itemBox {
@@ -94,6 +96,7 @@ img {
   display: grid;
   grid-template-columns: 33% 33% 33%;
   background-color: #e8e8ec;
+  margin-right: 0%;
 }
 
 .Btn {  
@@ -105,7 +108,7 @@ img {
 }
 
 .Btn:hover {
-  border-bottom: 12px solid #b60404;
+  border-bottom: 12px solid #731010;
 }
 
 .menu {

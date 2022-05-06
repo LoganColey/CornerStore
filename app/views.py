@@ -246,9 +246,13 @@ def cart(request) :
     #     storeHours = True
     # else :
     #     storeHours = False
+    if total > 0:
+        isOver0 = True
+    else: 
+        isOver0 = False
     if userCart.status == "paid":
         return render(request, 'paidTicket.html', {"totalTax": "{:.2f}".format(totalTax),"total": "{:.2f}".format(total), "cart": userCart})
-    return render(request, 'cart.html', {"cart": cart,"total": "{:.2f}".format(total), "totalTax": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours})
+    return render(request, 'cart.html', {"cart": cart,"total": "{:.2f}".format(total), "totalTax": "{:.2f}".format(totalTax), "isActive": noOrdersButton, "storeHours": storeHours, "isOver0": isOver0})
 
 
 # displays the total with tax and gives button options for payment.  Payment is handled through PayPal's code.  Cart status is changed to paid
