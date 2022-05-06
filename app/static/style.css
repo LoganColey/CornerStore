@@ -193,7 +193,7 @@ textarea {
   margin: 1em;
   padding: .5em;
   margin-bottom: 0;
-  border: 30px solid transparent;
+  border: 30px solid transparent ;
   border-image: url("images/border-image.webp") 30% round;
 }
 .large-col .a-link {
